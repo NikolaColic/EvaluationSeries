@@ -5788,11 +5788,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Actors\\EvaluationSeries.Services.Actors.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Actors\\EvaluationSeries.Services.Actors.csproj",
       "projectName": "EvaluationSeries.Services.Actors",
-      "projectPath": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Actors\\EvaluationSeries.Services.Actors.csproj",
+      "projectPath": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Actors\\EvaluationSeries.Services.Actors.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Actors\\obj\\",
+      "outputPath": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Actors\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

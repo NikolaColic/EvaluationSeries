@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Gateway\\EvaluationSeries.Services.Gateway.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Gateway\\EvaluationSeries.Services.Gateway.csproj",
       "projectName": "EvaluationSeries.Services.Gateway",
-      "projectPath": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Gateway\\EvaluationSeries.Services.Gateway.csproj",
+      "projectPath": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Gateway\\EvaluationSeries.Services.Gateway.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Gateway\\obj\\",
+      "outputPath": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Gateway\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

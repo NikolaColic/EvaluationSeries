@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Authentication\\EvaluationSeries.Services.Authentication.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Authentication\\EvaluationSeries.Services.Authentication.csproj",
       "projectName": "EvaluationSeries.Services.Authentication",
-      "projectPath": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Authentication\\EvaluationSeries.Services.Authentication.csproj",
+      "projectPath": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Authentication\\EvaluationSeries.Services.Authentication.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\source\\repos\\EvaluationSeries\\EvaluationSeries.Services.Authentication\\obj\\",
+      "outputPath": "C:\\Users\\PC\\source\\repos\\FpisProjekat\\EvaluationSeries\\EvaluationSeries.Services.Authentication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
