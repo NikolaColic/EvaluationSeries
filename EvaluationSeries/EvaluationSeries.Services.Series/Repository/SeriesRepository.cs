@@ -187,6 +187,7 @@ namespace EvaluationSeries.Services.Series.Repository
                         .Include(r => r.Series)
                         .Where((r) => r.Series.Id == id)
                         .ToListAsync();
+                if (roles.Count() == 0) return null;
                 return roles;
             }
             catch (Exception)
