@@ -19,7 +19,6 @@ C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Gateway\obj\
 C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Gateway\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Gateway.genruntimeconfig.cache
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Gateway.exe
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Gateway.deps.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Gateway.runtimeconfig.json
@@ -37,3 +36,4 @@ C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Gateway.dll
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Gateway.pdb
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Gateway.genruntimeconfig.cache
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Gateway\obj\Debug\netcoreapp3.1\scopedcss\bundle\EvaluationSeries.Services.Gateway.styles.css

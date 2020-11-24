@@ -63,7 +63,6 @@ C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Actors\obj\D
 C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.genruntimeconfig.cache
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.exe
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.deps.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.runtimeconfig.json
@@ -124,3 +123,4 @@ C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.dll
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.pdb
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.genruntimeconfig.cache
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\scopedcss\bundle\EvaluationSeries.Services.Actors.styles.css

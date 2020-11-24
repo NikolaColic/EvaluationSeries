@@ -20,7 +20,6 @@ C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Evaluation\o
 C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Evaluation\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Evaluation.genruntimeconfig.cache
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Evaluation.exe
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Evaluation.deps.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Evaluation.runtimeconfig.json
@@ -38,3 +37,4 @@ C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Evaluation.dll
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Evaluation.pdb
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Evaluation.genruntimeconfig.cache
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Evaluation\obj\Debug\netcoreapp3.1\scopedcss\bundle\EvaluationSeries.Services.Evaluation.styles.css

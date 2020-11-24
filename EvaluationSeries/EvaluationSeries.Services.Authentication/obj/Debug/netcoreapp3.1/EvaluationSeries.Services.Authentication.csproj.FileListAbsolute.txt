@@ -20,7 +20,6 @@ C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Authenticati
 C:\Users\PC\source\repos\EvaluationSeries\EvaluationSeries.Services.Authentication\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Authentication.genruntimeconfig.cache
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Authentication.exe
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Authentication.deps.json
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\bin\Debug\netcoreapp3.1\EvaluationSeries.Services.Authentication.runtimeconfig.json
@@ -38,3 +37,4 @@ C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Authentication.dll
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Authentication.pdb
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Authentication.genruntimeconfig.cache
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Authentication\obj\Debug\netcoreapp3.1\scopedcss\bundle\EvaluationSeries.Services.Authentication.styles.css

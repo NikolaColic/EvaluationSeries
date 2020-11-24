@@ -9,11 +9,7 @@ namespace EvaluationSeries.Services.Series.Repository
     public interface ISeriesRepository
     {
         //Actor 
-        //Task<IEnumerable<Actor>> GetAllActors();
-        //Task<Actor> GellActorById(int id);
-        //Task<bool> AddActor(Actor a);
-        //Task<bool> UpdateActor(Actor a);
-        //Task<bool> DeleteActor(int i);
+
         //Series 
         Task<IEnumerable<Series2>> GetAllSeries();
         Task<Series2> GetSeriesById(int id);

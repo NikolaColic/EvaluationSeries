@@ -38,7 +38,7 @@ namespace EvaluationSeries.Services.Actors.Controllers
         [HttpPost]
         public async Task<ActionResult> AddActor([FromBody] Actor actor)
         {
-            if (await _actors.AddActor(actor)) return RedirectToRoute("GetAll");
+            if (await _actors.AddActor(actor)) return Ok();
             return NotFound();
         }
 
@@ -46,7 +46,7 @@ namespace EvaluationSeries.Services.Actors.Controllers
         public async Task<ActionResult> Put(int id, [FromBody] Actor actor)
         {
             actor.ActorId = id; 
-            if (await _actors.UpdateActor(actor)) return RedirectToRoute("GetAll");
+            if (await _actors.UpdateActor(actor)) return Ok();
             return NotFound();
         }
 

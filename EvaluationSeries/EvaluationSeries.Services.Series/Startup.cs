@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EvaluationSeries.Services.Series.Context;
 using EvaluationSeries.Services.Series.Repository;
+using EvaluationSeries.Services.Series.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,9 @@ namespace EvaluationSeries.Services.Series
         {
             services.AddControllers();
             services.AddScoped<ISeriesRepository, SeriesRepository>();
+            services.AddScoped<IActorRepository, ActorRepository>();
+            services.AddHttpClient<IActorServices, ActorServices>(c =>
+               c.BaseAddress = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
             services.AddDbContext<SeriesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
         }
