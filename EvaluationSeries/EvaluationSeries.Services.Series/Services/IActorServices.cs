@@ -9,8 +9,9 @@ namespace EvaluationSeries.Services.Series.Services
     public interface IActorServices
     {
         Task<IEnumerable<ActorCreate>> GetAll();
+        Task<ActorCreate> GetActorById(int id); 
         Task<bool> PostActor(ActorCreate actor);
-        Task<bool> PutActor(int id, ActorCreate actor);
+        Task<bool> PutActor(ActorCreate actor);
         Task<bool> DeleteActor(int id);
 
     }

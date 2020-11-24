@@ -1,5 +1,6 @@
 ﻿using EvaluationSeries.Services.Series.Context;
 using EvaluationSeries.Services.Series.Entities;
+using EvaluationSeries.Services.Series.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -72,13 +73,14 @@ namespace EvaluationSeries.Services.Series.Repository
             }
         }
 
-        public async Task<bool> UpdateActor(Actor a)
+        public async Task<bool> UpdateActor(ActorCreate oldActor,Actor a)
         {
             try
             {
 
-                var actorUpdate = await GetActorById(a.ActorId);
+                var actorUpdate = await GetActorByName(oldActor.Name, oldActor.Surname);
                 if (actorUpdate is null) return false;
+                a.ActorId = actorUpdate.ActorId;
                 _db.Entry(actorUpdate).CurrentValues.SetValues(a);
                 await _db.SaveChangesAsync();
                 return true;
@@ -86,6 +88,18 @@ namespace EvaluationSeries.Services.Series.Repository
             catch (Exception)
             {
                 return false; 
+            }
+        }
+        private async Task<Actor> GetActorByName(string name, string surname)
+        {
+            try
+            {
+                var actor = await _db.Actor.SingleOrDefaultAsync((a) => a.Name == name && a.Surname == surname);
+                return actor;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }

@@ -24,6 +24,22 @@ namespace EvaluationSeries.Services.Series.Services
             throw new NotImplementedException();
         }
 
+        public async Task<ActorCreate> GetActorById(int id)
+        {
+            try
+            {
+                var response = await client.GetAsync($"services/actors/{id}");
+                if (!response.IsSuccessStatusCode) return null;
+                var dataAsString = await response.Content.ReadAsStringAsync();
+                var actors = JsonConvert.DeserializeObject<ActorCreate>(dataAsString);
+                return actors;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public async Task<IEnumerable<ActorCreate>> GetAll()
         {
             try
@@ -57,9 +73,19 @@ namespace EvaluationSeries.Services.Series.Services
 
         }
 
-        public Task<bool> PutActor(int id, ActorCreate actor)
+        public async Task<bool> PutActor(ActorCreate actor)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = new System.Net.Http.StringContent(JsonConvert.SerializeObject(actor), Encoding.UTF8, "application/json");
+                var response = await client.PutAsync($"services/actors/{actor.ActorId}", data);
+                if (response.IsSuccessStatusCode) return true;
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

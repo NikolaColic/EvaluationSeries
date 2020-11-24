@@ -58,9 +58,12 @@ namespace EvaluationSeries.Services.Series.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<IEnumerable<Series2>>> UpdateSeries([FromBody] Actor actor)
+        public async Task<ActionResult<IEnumerable<Series2>>> UpdateSeries([FromBody] ActorCreate actor)
         {
-            if (await _actor.UpdateActor(actor)) return RedirectToAction("GetAllActors");
+            var actorUpdate = await _service.GetActorById(actor.ActorId);
+            if (actorUpdate is null) return NotFound();
+            if (!await _service.PutActor(actor)) return NotFound();
+            if (await _actor.UpdateActor(actorUpdate, CreateActor(actor))) return RedirectToAction("GetAllActors");
             return NotFound();
         }
 
