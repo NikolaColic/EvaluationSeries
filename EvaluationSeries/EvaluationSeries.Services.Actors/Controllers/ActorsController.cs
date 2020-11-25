@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using EvaluationSeries.Services.Actors.Entities;
 using EvaluationSeries.Services.Actors.Repository;
@@ -19,6 +20,7 @@ namespace EvaluationSeries.Services.Actors.Controllers
         {
             _actors = actors;
         }
+        
         [HttpGet(Name ="GetAll")]
         public async Task<ActionResult<IEnumerable<Actor>>> GetActors()
         {

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -32,6 +33,7 @@ namespace EvaluationSeries.Services.Series.Controllers
             this.actorServices = new ActorServices(new ActorsGrpc.ActorsGrpcClient(channel));
         }
         [HttpGet(Name = "GetAllActors")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<IEnumerable<Actor>>> GetAllActors()
         {
             //var actors = await _service.GetAll();
@@ -39,15 +41,15 @@ namespace EvaluationSeries.Services.Series.Controllers
             //return Ok(actors);
             var actors = await actorServices.GetAll();
             return null;
-        }            
+        }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Series2>> GetSeriesById(int id)
-        //{
-        //    var actor = await _actor.GetActorById(id);
-        //    if (actor is null) return NotFound();
-        //    return Ok(actor);
-        //}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Series2>> GetActorsById(int id)
+        {
+            var actor = await actorServices.GetActorById(id);
+            if (actor is null) return NotFound();
+            return Ok(actor);
+        }
 
         //[HttpPost]
         //public async Task<ActionResult<IEnumerable<Series2>>> AddSeries([FromBody] ActorCreate actor)

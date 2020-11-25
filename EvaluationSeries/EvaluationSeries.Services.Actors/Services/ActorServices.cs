@@ -22,9 +22,38 @@ namespace EvaluationSeries.Services.Actors.Services
             var actors = await _actor.GetAll();
             GetActorsResponse response = new GetActorsResponse();
             List<ActorAdd> actorsAdd = new List<ActorAdd>();
-
+            foreach(var actor in actors)
+            {
+                ActorAdd act = new ActorAdd()
+                {
+                    ActorId = actor.ActorId,
+                    Biography = actor.Biography,
+                    ImageUrl = actor.ImageUrl,
+                    Name = actor.Name,
+                    Surname = actor.Surname,
+                    WikiUrl = actor.WikiUrl
+                };
+                actorsAdd.Add(act);
+            }
             
-            response.Actors.Add((List<ActorAdd>)actors);
+            response.Actors.AddRange(actorsAdd);
+            return response;
+        }
+
+        public override async Task<GetActorByIdResponse> GetActorsId(ActorId actorId, ServerCallContext context)
+        {
+            var actor = await _actor.GetActorId(actorId.Id);
+            GetActorByIdResponse response = new GetActorByIdResponse();
+            ActorAdd a = new ActorAdd()
+            {
+                ActorId = actor.ActorId,
+                Biography = actor.Biography,
+                ImageUrl = actor.ImageUrl,
+                Name = actor.Name,
+                Surname = actor.Surname,
+                WikiUrl = actor.WikiUrl
+            };
+            response.Actor = a;
             return response;
         }
     }

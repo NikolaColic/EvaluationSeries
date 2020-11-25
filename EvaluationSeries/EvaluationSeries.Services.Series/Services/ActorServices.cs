@@ -40,11 +40,15 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var response = await client.GetAsync($"services/actors/{id}");
-                if (!response.IsSuccessStatusCode) return null;
-                var dataAsString = await response.Content.ReadAsStringAsync();
-                var actors = JsonConvert.DeserializeObject<ActorCreate>(dataAsString);
-                return actors;
+                //var response = await client.GetAsync($"services/actors/{id}");
+                //if (!response.IsSuccessStatusCode) return null;
+                //var dataAsString = await response.Content.ReadAsStringAsync();
+                //var actors = JsonConvert.DeserializeObject<ActorCreate>(dataAsString);
+                //return actors;
+                GetActorByIdResponse actor = await _actorService.GetActorsIdAsync(new ActorId() { Id = id });
+                var nik = 5;
+                return null;
+
             }
             catch (Exception)
             {
@@ -61,7 +65,7 @@ namespace EvaluationSeries.Services.Series.Services
                 //var dataAsString = await response.Content.ReadAsStringAsync();
                 //var actors = JsonConvert.DeserializeObject<List<ActorCreate>>(dataAsString);
                 //return actors;
-                var response = await _actorService.GetActorsAsync(new ActorEmpty());
+                GetActorsResponse response = await _actorService.GetActorsAsync(new ActorEmpty());
                 var nik = 5;
                 return null;
             }
