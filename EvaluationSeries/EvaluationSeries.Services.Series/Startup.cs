@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Series.Context;
 using EvaluationSeries.Services.Series.Repository;
 using EvaluationSeries.Services.Series.Services;
@@ -32,8 +33,10 @@ namespace EvaluationSeries.Services.Series
             services.AddControllers();
             services.AddScoped<ISeriesRepository, SeriesRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
-            services.AddHttpClient<IActorServices, ActorServices>(c =>
-               c.BaseAddress = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
+            //services.AddHttpClient<IActorServices, ActorServices>(c =>
+            //   c.BaseAddress = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
+            services.AddGrpcClient<ActorsGrpc.ActorsGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
+
             services.AddDbContext<SeriesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
         }

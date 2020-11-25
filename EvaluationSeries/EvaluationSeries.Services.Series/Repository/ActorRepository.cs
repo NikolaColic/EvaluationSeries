@@ -30,12 +30,12 @@ namespace EvaluationSeries.Services.Series.Repository
             }
         }
 
-        public async Task<bool> DeleteActor(int id)
+        public async Task<bool> DeleteActor(ActorCreate oldActor)
         {
             try
             {
 
-                var actor = await GetActorById(id);
+                var actor = await GetActorByName(oldActor.Name,oldActor.Surname);
                 if (actor is null) return false;
                 _db.Entry(actor).State = EntityState.Deleted;
                 await _db.SaveChangesAsync();

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace = "EvaluationSeries.Grpc";
+
+
+
+service ActorsGrpc {
+	rpc GetActors (ActorEmpty) returns (GetActorsResponse) {}
+	rpc PostActor (ActorAdd) returns (ActorsMessageResponse) {}
+	rpc PutActor (ActorAdd) returns (ActorsMessageResponse) {}
+	rpc DeleteActor (ActorId) returns (ActorsMessageResponse){}
+	rpc GetActorsId(ActorId) returns (GetActorByIdResponse) {}
+}
+
+message ActorEmpty {}
+message ActorsMessageResponse {
+	bool signal = 1; 
+	string poruka = 2;
+}
+message GetActorsResponse {
+	
+	repeated ActorAdd actors = 1;
+}
+message GetActorByIdResponse {
+	ActorAdd actor = 1;
+}
+message ActorId {
+	int32 id = 1;
+}
+message ActorAdd {
+	  int32 ActorId =1;
+      string Name =2;
+      string Surname =3;
+      string Biography =4;
+      string WikiUrl =5;
+      string ImageUrl =6;
+}

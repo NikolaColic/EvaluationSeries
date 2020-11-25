@@ -13,6 +13,6 @@ namespace EvaluationSeries.Services.Series.Repository
         Task<Actor> GetActorById(int id);
         Task<bool> AddActor(Actor a);
         Task<bool> UpdateActor(ActorCreate oldActor,Actor a);
-        Task<bool> DeleteActor(int i);
+        Task<bool> DeleteActor(ActorCreate oldActor);
     }
 }

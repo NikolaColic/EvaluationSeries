@@ -1,4 +1,5 @@
-﻿using EvaluationSeries.Services.Series.Models;
+﻿using EvaluationSeries.Grpc;
+using EvaluationSeries.Services.Series.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,26 @@ namespace EvaluationSeries.Services.Series.Services
     public class ActorServices : IActorServices
     {
         private readonly HttpClient client;
+        private ActorsGrpc.ActorsGrpcClient _actorService;
 
-        public ActorServices(HttpClient client)
+        public ActorServices(ActorsGrpc.ActorsGrpcClient actorService)
         {
-            this.client = client;
+            _actorService = actorService;
+            //this.client = client;
         }
 
-        public Task<bool> DeleteActor(int id)
+        public async Task<bool> DeleteActor(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await client.DeleteAsync($"services/actors/{id}");
+                if (!response.IsSuccessStatusCode) return false;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<ActorCreate> GetActorById(int id)
@@ -44,11 +56,14 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var response = await client.GetAsync($"services/actors");
-                if (!response.IsSuccessStatusCode) return null;
-                var dataAsString = await response.Content.ReadAsStringAsync();
-                var actors = JsonConvert.DeserializeObject<List<ActorCreate>>(dataAsString);
-                return actors;
+                //var response = await client.GetAsync($"services/actors");
+                //if (!response.IsSuccessStatusCode) return null;
+                //var dataAsString = await response.Content.ReadAsStringAsync();
+                //var actors = JsonConvert.DeserializeObject<List<ActorCreate>>(dataAsString);
+                //return actors;
+                var response = await _actorService.GetActorsAsync(new ActorEmpty());
+                var nik = 5;
+                return null;
             }
             catch (Exception)
             {

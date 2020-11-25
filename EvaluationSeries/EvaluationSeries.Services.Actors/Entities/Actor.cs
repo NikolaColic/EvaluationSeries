@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvaluationSeries.Services.Actors.Entities
 {
-    public class Actor
+    public class Actor 
     {
         [Key]
         public int ActorId { get; set; }

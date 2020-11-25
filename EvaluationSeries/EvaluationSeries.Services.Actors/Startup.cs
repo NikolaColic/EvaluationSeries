@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EvaluationSeries.Services.Actors.Context;
 using EvaluationSeries.Services.Actors.Repository;
+using EvaluationSeries.Services.Actors.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,7 @@ namespace EvaluationSeries.Services.Actors
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddGrpc();
             services.AddScoped<IActorsRepository, ActorsRepository>(); 
             services.AddDbContext<ActorsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -51,6 +53,8 @@ namespace EvaluationSeries.Services.Actors
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<ActorServices>();
+
             });
         }
     }

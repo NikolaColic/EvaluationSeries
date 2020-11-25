@@ -81,3 +81,10 @@ C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Series.csproj.CoreCompileInputs.cache
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Series.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\obj\Debug\netcoreapp3.1\scopedcss\bundle\EvaluationSeries.Services.Series.styles.css
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\bin\Debug\netcoreapp3.1\Grpc.AspNetCore.Server.dll
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\bin\Debug\netcoreapp3.1\Grpc.AspNetCore.Server.ClientFactory.dll
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\bin\Debug\netcoreapp3.1\Grpc.Core.Api.dll
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\bin\Debug\netcoreapp3.1\Grpc.Net.Client.dll
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\bin\Debug\netcoreapp3.1\Grpc.Net.ClientFactory.dll
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Series\bin\Debug\netcoreapp3.1\Grpc.Net.Common.dll
