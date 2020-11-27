@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,7 +20,7 @@ namespace EvaluationSeries.Services.Series.Controllers
     [ApiController]
     public class ActorController : ControllerBase
     {
-        private ActorServices actorServices;
+        //private ActorServices actorServices;
         //private IActorRepository _actor;
         //private IActorServices _service;
         //public ActorController(IActorRepository actor, IActorServices service)
@@ -29,8 +30,8 @@ namespace EvaluationSeries.Services.Series.Controllers
         //}
         public ActorController()
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:44344/");
-            this.actorServices = new ActorServices(new ActorsGrpc.ActorsGrpcClient(channel));
+            //var channel = GrpcChannel.ForAddress("https://localhost:44344/");
+            //this.actorServices = new ActorServices(new ActorsGrpc.ActorsGrpcClient(channel));
         }
         [HttpGet(Name = "GetAllActors")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -39,6 +40,15 @@ namespace EvaluationSeries.Services.Series.Controllers
             //var actors = await _service.GetAll();
             //if (actors is null) return NotFound();
             //return Ok(actors);
+            AppContext.SetSwitch(
+                "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            var httpHandler = new HttpClientHandler();
+            // Return `true` to allow certificates that are untrusted/invalid
+            httpHandler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
+            var channel = GrpcChannel.ForAddress("http://localhost:5001");
+            ActorServices actorServices = new ActorServices(new ActorsGrpc.ActorsGrpcClient(channel));
             var actors = await actorServices.GetAll();
             return null;
         }
@@ -46,6 +56,17 @@ namespace EvaluationSeries.Services.Series.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Series2>> GetActorsById(int id)
         {
+            AppContext.SetSwitch(
+                "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            
+
+            var httpHandler = new HttpClientHandler();
+            // Return `true` to allow certificates that are untrusted/invalid
+            httpHandler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            ActorServices actorServices = new ActorServices(new ActorsGrpc.ActorsGrpcClient(channel));
+
             var actor = await actorServices.GetActorById(id);
             if (actor is null) return NotFound();
             return Ok(actor);

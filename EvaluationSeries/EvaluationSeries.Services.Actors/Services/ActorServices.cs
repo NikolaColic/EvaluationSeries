@@ -37,7 +37,7 @@ namespace EvaluationSeries.Services.Actors.Services
             }
             
             response.Actors.AddRange(actorsAdd);
-            return response;
+            return new GetActorsResponse() { Actors = {actorsAdd } };
         }
 
         public override async Task<GetActorByIdResponse> GetActorsId(ActorId actorId, ServerCallContext context)
