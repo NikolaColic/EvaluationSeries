@@ -1,5 +1,6 @@
 ﻿using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Actors.Entities;
+using EvaluationSeries.Services.Actors.Help;
 using EvaluationSeries.Services.Actors.Repository;
 using Grpc.Core;
 using System;
@@ -19,42 +20,78 @@ namespace EvaluationSeries.Services.Actors.Services
         }
         public override async Task<GetActorsResponse> GetActors(ActorEmpty a, ServerCallContext context)
         {
-            var actors = await _actor.GetAll();
-            GetActorsResponse response = new GetActorsResponse();
-            List<ActorAdd> actorsAdd = new List<ActorAdd>();
-            foreach(var actor in actors)
+            try
             {
-                ActorAdd act = new ActorAdd()
+                var actors = await _actor.GetAll();
+                List<ActorAdd> actorsAdd = new List<ActorAdd>();
+                foreach (var actor in actors)
                 {
-                    ActorId = actor.ActorId,
-                    Biography = actor.Biography,
-                    ImageUrl = actor.ImageUrl,
-                    Name = actor.Name,
-                    Surname = actor.Surname,
-                    WikiUrl = actor.WikiUrl
-                };
-                actorsAdd.Add(act);
+                    ActorAdd act = ConvertObject.Instance.CreateActorAdd(actor);
+                    actorsAdd.Add(act);
+                }
+                return new GetActorsResponse() { Actors = { actorsAdd } };
             }
-            
-            response.Actors.AddRange(actorsAdd);
-            return new GetActorsResponse() { Actors = {actorsAdd } };
+            catch (Exception)
+            {
+                List<ActorAdd> actorsException = null;
+                return new GetActorsResponse() { Actors = { actorsException } };
+
+            }
         }
 
         public override async Task<GetActorByIdResponse> GetActorsId(ActorId actorId, ServerCallContext context)
         {
-            var actor = await _actor.GetActorId(actorId.Id);
-            GetActorByIdResponse response = new GetActorByIdResponse();
-            ActorAdd a = new ActorAdd()
+            try
             {
-                ActorId = actor.ActorId,
-                Biography = actor.Biography,
-                ImageUrl = actor.ImageUrl,
-                Name = actor.Name,
-                Surname = actor.Surname,
-                WikiUrl = actor.WikiUrl
-            };
-            response.Actor = a;
-            return response;
+                var actor = await _actor.GetActorId(actorId.Id);
+                ActorAdd a = ConvertObject.Instance.CreateActorAdd(actor);
+                return new GetActorByIdResponse() { Actor = a };
+            }
+            catch (Exception)
+            {
+                return new GetActorByIdResponse() { Actor = null };
+            }
+        }
+        public override async Task<ActorsMessageResponse> PostActor(ActorAdd request, ServerCallContext context)
+        {
+
+            try
+            {
+                var response = await _actor.AddActor(ConvertObject.Instance.CreateActor(request));
+                return response ? new ActorsMessageResponse() { Poruka = "Uspesno dodato", Signal = true } :
+                    new ActorsMessageResponse() { Poruka = "Neuspesno dodato", Signal = false };
+            }
+            catch (Exception)
+            {
+                return new ActorsMessageResponse() { Poruka = "Doslo je do greske", Signal = false };
+            }
+
+        }
+        public override async Task<ActorsMessageResponse> PutActor(ActorAdd request, ServerCallContext context)
+        {
+            try
+            {
+                var response = await _actor.UpdateActor(ConvertObject.Instance.CreateActor(request));
+                return response ? new ActorsMessageResponse() { Poruka = "Uspesno izmenjeno", Signal = true } :
+                    new ActorsMessageResponse() { Poruka = "Neuspesno izmenjeno", Signal = false };
+            }
+            catch (Exception)
+            {
+                return new ActorsMessageResponse() { Poruka = "Doslo je do greske", Signal = false };
+            }
+        }
+        public override async Task<ActorsMessageResponse> DeleteActor(ActorId request, ServerCallContext context)
+        {
+            try
+            {
+                var response = await _actor.DeleteActor(request.Id);
+                return response ? new ActorsMessageResponse() { Poruka = "Uspesno obrisano", Signal = true } :
+                    new ActorsMessageResponse() { Poruka = "Neuspesno obrisano", Signal = false };
+            }
+            catch (Exception)
+            {
+                return new ActorsMessageResponse() { Poruka = "Doslo je do greske", Signal = false };
+            }
         }
     }
 }

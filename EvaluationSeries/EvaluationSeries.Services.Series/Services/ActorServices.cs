@@ -1,4 +1,5 @@
 ﻿using EvaluationSeries.Grpc;
+using EvaluationSeries.Services.Series.Help;
 using EvaluationSeries.Services.Series.Models;
 using Newtonsoft.Json;
 using System;
@@ -22,13 +23,14 @@ namespace EvaluationSeries.Services.Series.Services
             //this.client = client;
         }
 
+
         public async Task<bool> DeleteActor(int id)
         {
             try
             {
-                var response = await client.DeleteAsync($"services/actors/{id}");
-                if (!response.IsSuccessStatusCode) return false;
-                return true;
+                ActorsMessageResponse response = await _actorService.DeleteActorAsync(new ActorId() { Id = id });
+                var signal = (bool)response.Signal;
+                return signal;
             }
             catch (Exception)
             {
@@ -40,14 +42,9 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                //var response = await client.GetAsync($"services/actors/{id}");
-                //if (!response.IsSuccessStatusCode) return null;
-                //var dataAsString = await response.Content.ReadAsStringAsync();
-                //var actors = JsonConvert.DeserializeObject<ActorCreate>(dataAsString);
-                //return actors;
                 GetActorByIdResponse actor = await _actorService.GetActorsIdAsync(new ActorId() { Id = id });
-                var nik = 5;
-                return null;
+                ActorCreate actorCreate = ConvertObject.Instance.CreateActorCreate(actor.Actor);          
+                return actorCreate;
 
             }
             catch (Exception)
@@ -61,14 +58,14 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                //var response = await client.GetAsync($"services/actors");
-                //if (!response.IsSuccessStatusCode) return null;
-                //var dataAsString = await response.Content.ReadAsStringAsync();
-                //var actors = JsonConvert.DeserializeObject<List<ActorCreate>>(dataAsString);
-                //return actors;
                 GetActorsResponse response = await _actorService.GetActorsAsync(new ActorEmpty());
-                var nik = 5;
-                return null;
+                List<ActorCreate> listaActora = new List<ActorCreate>();
+                response.Actors.ToList().ForEach(actor =>
+                {
+                    ActorCreate actorCreate = ConvertObject.Instance.CreateActorCreate(actor);
+                    listaActora.Add(actorCreate);
+                });
+                return listaActora;
             }
             catch (Exception)
             {
@@ -80,10 +77,11 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var data = new System.Net.Http.StringContent(JsonConvert.SerializeObject(actor), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync($"services/actors", data);
-                if (response.IsSuccessStatusCode) return true;
-                return false;
+                ActorAdd act = ConvertObject.Instance.CreateActorAdd(actor);
+                ActorsMessageResponse response = await _actorService.PostActorAsync(act);
+                var signal = (bool)response.Signal;
+                return signal;
+
             }
             catch (Exception)
             {
@@ -97,15 +95,17 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var data = new System.Net.Http.StringContent(JsonConvert.SerializeObject(actor), Encoding.UTF8, "application/json");
-                var response = await client.PutAsync($"services/actors/{actor.ActorId}", data);
-                if (response.IsSuccessStatusCode) return true;
-                return false;
+                ActorAdd act = ConvertObject.Instance.CreateActorAdd(actor);
+                ActorsMessageResponse response = await _actorService.PutActorAsync(act);
+                var signal = (bool)response.Signal;
+                return signal;
+
             }
             catch (Exception)
             {
                 return false;
             }
+
         }
     }
 }
