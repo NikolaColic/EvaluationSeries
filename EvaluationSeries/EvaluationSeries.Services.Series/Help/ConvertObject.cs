@@ -63,8 +63,59 @@ namespace EvaluationSeries.Services.Series.Help
                 return null;
             }
         }
+        public ActorAddSeries CreateActorAddSeries(ActorCreate actor)
+        {
+            try
+            {
+                return new ActorAddSeries()
+                {
+                    ActorId = actor.ActorId,
+                    Biography = actor.Biography,
+                    ImageUrl = actor.ImageUrl,
+                    Name = actor.Name,
+                    Surname = actor.Surname,
+                    WikiUrl = actor.WikiUrl
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public ActorSeries CreateActorSeries(Actor actor)
+        {
+            try
+            {
+                return new ActorSeries()
+                {
+                    ActorId = actor.ActorId,
+                    Name = actor.Name,
+                    Surname = actor.Surname,
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         public Actor CreateActor(ActorCreate a)
+        {
+            try
+            {
+                return new Actor()
+                {
+                    ActorId = a.ActorId,
+                    Name = a.Name,
+                    Surname = a.Surname
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public Actor CreateActor2(ActorSeries a)
         {
             try
             {
@@ -88,10 +139,10 @@ namespace EvaluationSeries.Services.Series.Help
                 return new Series2()
                 {
                     Id = ser.Id,
-                    Country = new Country() { CountryId = ser.Country.CountryId },
+                    Country = new Country() { CountryId = ser.Country.CountryId, Name = ser.Country.Name },
                     Description = ser.Description,
                     EpisodeDuration = ser.EpisodeDuration,
-                    Genre = new Genre() { GenreId = ser.Genre.GenreId },
+                    Genre = new Genre() { GenreId = ser.Genre.GenreId, GenreName = ser.Genre.GenreName },
                     LogoUrl = ser.LogoUrl,
                     Name = ser.Name,
                     NumberSeason = ser.NumberSeason,
@@ -135,5 +186,45 @@ namespace EvaluationSeries.Services.Series.Help
                 return null;
             }
         }
+
+        public RoleAdd CreateRoleAdd(Role role)
+        {
+            try
+            {
+                return new RoleAdd()
+                {
+                    Actor = CreateActorSeries(role.Actor),
+                    Series = CreateSeriesFull(role.Series),
+                    RoleId = role.RoleId,
+                    RoleDescription = role.RoleDescription,
+                    RoleName = role.RoleName
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+        public Role CreateRole(RoleAdd role)
+        {
+            try
+            {
+                return new Role()
+                {
+                    Actor = CreateActor2(role.Actor),
+                    Series = CreateSeries(role.Series),
+                    RoleId = role.RoleId,
+                    RoleDescription = role.RoleDescription,
+                    RoleName = role.RoleName
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
     }
 }

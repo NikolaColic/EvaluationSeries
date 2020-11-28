@@ -1,0 +1,2 @@
+obj\Debug\netcoreapp3.1/Series.cs \
+obj\Debug\netcoreapp3.1/SeriesGrpc.cs: ../series.proto

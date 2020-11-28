@@ -13,6 +13,11 @@ service SeriesGrpc {
 	rpc GerRolesSeries(SeriesId) returns (GetRolesResponse) {}
 	rpc PostRole(RoleAdd) returns (SeriesMessageResponse) {}
 	rpc DeleteRole(SeriesRoleId) returns (SeriesMessageResponse) {}
+	rpc PostActorSeries(ActorAddSeries) returns (SeriesMessageResponse) {}
+	rpc PutActorSeries(ActorAddSeries) returns (SeriesMessageResponse) {}
+	rpc DeleteActorSeries(SeriesId) returns (SeriesMessageResponse) {}
+	rpc GetAllActors(SeriesEmpty) returns (GetActorsSeriesResponse) {}
+	
 }
 
 message SeriesEmpty {}
@@ -22,8 +27,8 @@ message SeriesId {
 }
 message RoleAdd {
 	int32 RoleId = 1;
-    int32 ActorId = 2;
-    int32 SeriesId = 3;
+    ActorSeries Actor = 2;
+    SeriesFull Series = 3;
     string RoleName = 4;
     string RoleDescription = 5;
 }
@@ -73,6 +78,26 @@ message GetRolesResponse {
 	bool signal = 2;
 }
 
+
+
+message ActorSeries {
+	int32 ActorId = 1;
+    string Name = 2;
+    string Surname =3;
+}
+
+message ActorAddSeries {
+	int32 ActorId =1;
+    string Name =2;
+    string Surname =3;
+    string Biography =4;
+    string WikiUrl =5;
+    string ImageUrl =6;
+}
+
+message GetActorsSeriesResponse {
+	repeated ActorAddSeries Actors= 1;
+}
 
 
 

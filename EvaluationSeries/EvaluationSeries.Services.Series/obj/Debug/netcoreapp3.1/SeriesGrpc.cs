@@ -51,6 +51,8 @@ namespace EvaluationSeries.Grpc {
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetRolesResponse> __Marshaller_GetRolesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetRolesResponse.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.RoleAdd> __Marshaller_RoleAdd = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.RoleAdd.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesRoleId> __Marshaller_SeriesRoleId = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesRoleId.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.ActorAddSeries> __Marshaller_ActorAddSeries = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.ActorAddSeries.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> __Marshaller_GetActorsSeriesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetActorsSeriesResponse.Parser));
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetSeriesResponse> __Method_GetAllSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetSeriesResponse>(
         grpc::MethodType.Unary,
@@ -108,6 +110,34 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_SeriesRoleId,
         __Marshaller_SeriesMessageResponse);
 
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_PostActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "PostActorSeries",
+        __Marshaller_ActorAddSeries,
+        __Marshaller_SeriesMessageResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_PutActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "PutActorSeries",
+        __Marshaller_ActorAddSeries,
+        __Marshaller_SeriesMessageResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesId, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_DeleteActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesId, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "DeleteActorSeries",
+        __Marshaller_SeriesId,
+        __Marshaller_SeriesMessageResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetActorsSeriesResponse> __Method_GetAllActors = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetActorsSeriesResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllActors",
+        __Marshaller_SeriesEmpty,
+        __Marshaller_GetActorsSeriesResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -158,6 +188,26 @@ namespace EvaluationSeries.Grpc {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.SeriesMessageResponse> PostActorSeries(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.SeriesMessageResponse> PutActorSeries(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.SeriesMessageResponse> DeleteActorSeries(global::EvaluationSeries.Grpc.SeriesId request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> GetAllActors(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -172,7 +222,11 @@ namespace EvaluationSeries.Grpc {
           .AddMethod(__Method_GetSeriesById, serviceImpl.GetSeriesById)
           .AddMethod(__Method_GerRolesSeries, serviceImpl.GerRolesSeries)
           .AddMethod(__Method_PostRole, serviceImpl.PostRole)
-          .AddMethod(__Method_DeleteRole, serviceImpl.DeleteRole).Build();
+          .AddMethod(__Method_DeleteRole, serviceImpl.DeleteRole)
+          .AddMethod(__Method_PostActorSeries, serviceImpl.PostActorSeries)
+          .AddMethod(__Method_PutActorSeries, serviceImpl.PutActorSeries)
+          .AddMethod(__Method_DeleteActorSeries, serviceImpl.DeleteActorSeries)
+          .AddMethod(__Method_GetAllActors, serviceImpl.GetAllActors).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -189,6 +243,10 @@ namespace EvaluationSeries.Grpc {
       serviceBinder.AddMethod(__Method_GerRolesSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesId, global::EvaluationSeries.Grpc.GetRolesResponse>(serviceImpl.GerRolesSeries));
       serviceBinder.AddMethod(__Method_PostRole, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.RoleAdd, global::EvaluationSeries.Grpc.SeriesMessageResponse>(serviceImpl.PostRole));
       serviceBinder.AddMethod(__Method_DeleteRole, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesRoleId, global::EvaluationSeries.Grpc.SeriesMessageResponse>(serviceImpl.DeleteRole));
+      serviceBinder.AddMethod(__Method_PostActorSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(serviceImpl.PostActorSeries));
+      serviceBinder.AddMethod(__Method_PutActorSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(serviceImpl.PutActorSeries));
+      serviceBinder.AddMethod(__Method_DeleteActorSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesId, global::EvaluationSeries.Grpc.SeriesMessageResponse>(serviceImpl.DeleteActorSeries));
+      serviceBinder.AddMethod(__Method_GetAllActors, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetActorsSeriesResponse>(serviceImpl.GetAllActors));
     }
 
   }
