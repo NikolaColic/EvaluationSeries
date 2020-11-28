@@ -1,5 +1,6 @@
 ﻿using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Series.Entities;
+using EvaluationSeries.Services.Series.Help;
 using EvaluationSeries.Services.Series.Models;
 using EvaluationSeries.Services.Series.Repository;
 using EvaluationSeries.Services.Series.Services;
@@ -34,6 +35,7 @@ namespace EvaluationSeries.Services.Series.Controllers
             this.actorServices = new ActorServices(new ActorsGrpc.ActorsGrpcClient(channel));
 
         }
+
         [HttpGet(Name = "GetAllActors")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<IEnumerable<Actor>>> GetAllActors()
@@ -57,26 +59,17 @@ namespace EvaluationSeries.Services.Series.Controllers
         {
             if (!await actorServices.PostActor(actor)) return NotFound();
 
-            if (await _actor.AddActor(CreateActor(actor))) return RedirectToAction("GetAllActors");
+            if (await _actor.AddActor(ConvertObject.Instance.CreateActor(actor))) return RedirectToAction("GetAllActors");
             return NotFound();
         }
-        private Actor CreateActor(ActorCreate actor)
-        {
-            Actor a = new Actor()
-            {
-                Name = actor.Name,
-                Surname = actor.Surname
-            };
-            return a;
-        }
-
+       
         [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<Series2>>> UpdateSeries([FromBody] ActorCreate actor)
         {
             var actorUpdate = await actorServices.GetActorById(actor.ActorId);
             if (actorUpdate is null) return NotFound();
             if (!await actorServices.PutActor(actor)) return NotFound();
-            if (await _actor.UpdateActor(actorUpdate, CreateActor(actor))) return RedirectToAction("GetAllActors");
+            if (await _actor.UpdateActor(actorUpdate, ConvertObject.Instance.CreateActor(actor))) return RedirectToAction("GetAllActors");
             return NotFound();
         }
 

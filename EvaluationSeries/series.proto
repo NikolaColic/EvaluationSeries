@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+option csharp_namespace = "EvaluationSeries.Grpc";
+
+
+
+service SeriesGrpc {
+	rpc GetAllSeries(SeriesEmpty) returns (GetSeriesResponse) {}
+	rpc PostSeries(SeriesFull) returns (SeriesMessageResponse) {}
+	rpc PutSeries (SeriesFull) returns (SeriesMessageResponse) {}
+	rpc DeleteSeries (SeriesId) returns (SeriesMessageResponse){}
+	rpc GetSeriesById(SeriesId) returns (GetSeriesByIdResponse) {}
+	rpc GerRolesSeries(SeriesId) returns (GetRolesResponse) {}
+	rpc PostRole(RoleAdd) returns (SeriesMessageResponse) {}
+	rpc DeleteRole(SeriesRoleId) returns (SeriesMessageResponse) {}
+}
+
+message SeriesEmpty {}
+
+message SeriesId {
+	int32 Id =1;
+}
+message RoleAdd {
+	int32 RoleId = 1;
+    int32 ActorId = 2;
+    int32 SeriesId = 3;
+    string RoleName = 4;
+    string RoleDescription = 5;
+}
+message SeriesRoleId {
+	int32 SeriesId = 1; 
+	int32 RoleId = 2;
+}
+
+message SeriesMessageResponse {
+	bool signal = 1; 
+	string poruka = 2;
+}
+message GetSeriesResponse{
+	repeated SeriesFull Series =1;
+	bool signal = 2;
+}
+
+message SeriesFull {
+	int32 Id = 1;
+    string Name = 2;
+    string Description = 3;
+    int32 NumberSeason = 4;
+	int32 EpisodeDuration = 5;
+    string WebSiteUrl = 6;
+    string LogoUrl = 7;
+    int32 Year = 8;
+    CountryFull Country = 9;
+    GenreFull Genre = 10;
+}
+
+message CountryFull {
+	int32 CountryId = 1;
+	string Name = 2;
+}
+message GenreFull {
+	int32 GenreId = 1;
+	string GenreName = 2;
+}
+
+message GetSeriesByIdResponse {
+	SeriesFull Series = 1;
+	bool signal = 2;
+}
+
+message GetRolesResponse {
+	repeated RoleAdd Roles =1;
+	bool signal = 2;
+}
+
+
+
+
+

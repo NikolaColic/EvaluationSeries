@@ -33,6 +33,8 @@ namespace EvaluationSeries.Services.Series
             services.AddControllers();
             services.AddScoped<ISeriesRepository, SeriesRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
+            services.AddGrpc();
+
             //services.AddHttpClient<IActorServices, ActorServices>(c =>
             //   c.BaseAddress = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
             services.AddGrpcClient<ActorsGrpc.ActorsGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
@@ -58,6 +60,8 @@ namespace EvaluationSeries.Services.Series
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<SeriesServices>();
+
             });
         }
     }

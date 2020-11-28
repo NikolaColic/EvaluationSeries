@@ -14,13 +14,11 @@ namespace EvaluationSeries.Services.Series.Services
 {
     public class ActorServices : IActorServices
     {
-        private readonly HttpClient client;
         private ActorsGrpc.ActorsGrpcClient _actorService;
 
         public ActorServices(ActorsGrpc.ActorsGrpcClient actorService)
         {
             _actorService = actorService;
-            //this.client = client;
         }
 
 

@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "proto", "proto", "{8AA38A72-D464-4C91-91D7-CDE883C8690A}"
 	ProjectSection(SolutionItems) = preProject
 		actor.proto = actor.proto
+		series.proto = series.proto
 	EndProjectSection
 EndProject
 Global
