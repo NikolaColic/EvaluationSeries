@@ -64,8 +64,33 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         public async Task<ActionResult> DeleteSeries(int id)
         {
             var response = await _series.DeleteSeries(id);
-            if (response) return RedirectToRoute("GetSeries");
+            if (response) return NoContent();
             return NotFound();
         }
+
+        [HttpGet("{id}/roles", Name ="GetRoles")]
+        public async Task<ActionResult<IEnumerable<Role>>> GetRoles(int id)
+        {
+            var roles = await _series.GetRoles(id);
+            if (roles is null) return NotFound();
+            return Ok(roles);
+        }
+        
+        [HttpPost("{id}/roles")]
+        public async Task<ActionResult<IEnumerable<Role>>> AddRole(int id, [FromBody] Role role)
+        {
+            var response = await _series.AddRole(role);
+            if (!response ) return NotFound();
+            return RedirectToRoute("GetRoles", new { id = $"{id}" });
+        }
+
+        [HttpDelete("{id}/roles/{roleId}")]
+        public async Task<ActionResult<IEnumerable<Role>>> DeleteRole(int id, int roleId)
+        {
+            var response = await _series.DeleteRole(id, roleId); 
+            if (!response) return NotFound();
+            return NoContent();
+        }
+
     }
 }

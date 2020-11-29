@@ -185,6 +185,8 @@ namespace EvaluationSeries.Services.Series.Repository
                 var roles = await _db.Role
                         .Include((r) => r.Actor)
                         .Include(r => r.Series)
+                        .Include(r => r.Series.Country)
+                        .Include(r => r.Series.Genre)
                         .Where((r) => r.Series.Id == id)
                         .ToListAsync();
                 if (roles.Count() == 0) return null;

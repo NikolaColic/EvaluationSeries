@@ -18,6 +18,16 @@ namespace EvaluationSeries.Services.Gateway.Services
         Task<bool> AddRole(Role role);
         Task<bool> DeleteRole(int seriesId, int roleId);
 
+        Task<IEnumerable<Actor>> GetActors();
+        Task<bool> AddActor(Actor actor);
+        Task<bool> UpdateActor(Actor actor);
+        Task<bool> DeleteActor(int actorId);
+
+
+
+
+
+
 
     }
 }

@@ -76,5 +76,116 @@ namespace EvaluationSeries.Services.Gateway.Helper
                 return null;
             }
         }
+        public RoleAdd CreateRoleAdd(Role role)
+        {
+            try
+            {
+                return new RoleAdd()
+                {
+                    Actor = CreateActorSeries(role.Actor),
+                    Series = CreateSeriesFull(role.Series),
+                    RoleId = role.RoleId,
+                    RoleDescription = role.RoleDescription,
+                    RoleName = role.RoleName
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+        public Role CreateRole(RoleAdd role)
+        {
+            try
+            {
+                return new Role()
+                {
+                    Actor = CreateActor2(role.Actor),
+                    Series = CreateSeries(role.Series),
+                    RoleId = role.RoleId,
+                    RoleDescription = role.RoleDescription,
+                    RoleName = role.RoleName
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+        public ActorSeries CreateActorSeries(Actor actor)
+        {
+            try
+            {
+                return new ActorSeries()
+                {
+                    ActorId = actor.ActorId,
+                    Name = actor.Name,
+                    Surname = actor.Surname,
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public Actor CreateActor2(ActorSeries a)
+        {
+            try
+            {
+                return new Actor()
+                {
+                    ActorId = a.ActorId,
+                    Name = a.Name,
+                    Surname = a.Surname
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public ActorAddSeries CreateActorAddSeries(Actor actor)
+        {
+            try
+            {
+                return new ActorAddSeries()
+                {
+                    ActorId = actor.ActorId,
+                    Biography = actor.Biography,
+                    ImageUrl = actor.ImageUrl,
+                    Name = actor.Name,
+                    Surname = actor.Surname,
+                    WikiUrl = actor.WikiUrl
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public Actor CreateActor(ActorAddSeries actor)
+        {
+            try
+            {
+                return new Actor()
+                {
+                    ActorId = actor.ActorId,
+                    Biography = actor.Biography,
+                    ImageUrl = actor.ImageUrl,
+                    Name = actor.Name,
+                    Surname = actor.Surname,
+                    WikiUrl = actor.WikiUrl
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
     }
 }

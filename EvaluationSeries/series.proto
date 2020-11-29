@@ -33,7 +33,7 @@ message RoleAdd {
     string RoleDescription = 5;
 }
 message SeriesRoleId {
-	int32 SeriesId = 1; 
+	int32 IdSeries = 1; 
 	int32 RoleId = 2;
 }
 

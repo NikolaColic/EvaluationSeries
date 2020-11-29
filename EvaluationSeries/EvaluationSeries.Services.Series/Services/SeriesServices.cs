@@ -150,7 +150,7 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var response = await _series.DeleteRole(request.SeriesId, request.RoleId);
+                var response = await _series.DeleteRole(request.IdSeries, request.RoleId);
                 return response ? new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true }
                     : new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
@@ -167,7 +167,7 @@ namespace EvaluationSeries.Services.Series.Services
             {
                 var response = await _actor.GetAll();
                 List<ActorAddSeries> actors = null;
-                if (actors is null) return new GetActorsSeriesResponse() { Actors = { actors } };
+                if (response is null) return new GetActorsSeriesResponse() { Actors = { actors } };
                 actors = new List<ActorAddSeries>();
                 response.ToList().ForEach((act) =>
                 {
@@ -178,6 +178,7 @@ namespace EvaluationSeries.Services.Series.Services
             }
             catch (Exception)
             {
+                throw;
                 List<ActorAddSeries> actorError = null;
                 return new GetActorsSeriesResponse() { Actors = { actorError } };
             }

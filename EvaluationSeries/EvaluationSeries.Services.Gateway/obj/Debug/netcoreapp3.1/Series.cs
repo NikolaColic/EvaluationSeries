@@ -28,7 +28,7 @@ namespace EvaluationSeries.Grpc {
             "SWQYASABKAUifgoHUm9sZUFkZBIOCgZSb2xlSWQYASABKAUSGwoFQWN0b3IY",
             "AiABKAsyDC5BY3RvclNlcmllcxIbCgZTZXJpZXMYAyABKAsyCy5TZXJpZXNG",
             "dWxsEhAKCFJvbGVOYW1lGAQgASgJEhcKD1JvbGVEZXNjcmlwdGlvbhgFIAEo",
-            "CSIwCgxTZXJpZXNSb2xlSWQSEAoIU2VyaWVzSWQYASABKAUSDgoGUm9sZUlk",
+            "CSIwCgxTZXJpZXNSb2xlSWQSEAoISWRTZXJpZXMYASABKAUSDgoGUm9sZUlk",
             "GAIgASgFIjcKFVNlcmllc01lc3NhZ2VSZXNwb25zZRIOCgZzaWduYWwYASAB",
             "KAgSDgoGcG9ydWthGAIgASgJIkAKEUdldFNlcmllc1Jlc3BvbnNlEhsKBlNl",
             "cmllcxgBIAMoCzILLlNlcmllc0Z1bGwSDgoGc2lnbmFsGAIgASgIItcBCgpT",
@@ -69,7 +69,7 @@ namespace EvaluationSeries.Grpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.SeriesEmpty), global::EvaluationSeries.Grpc.SeriesEmpty.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.SeriesId), global::EvaluationSeries.Grpc.SeriesId.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.RoleAdd), global::EvaluationSeries.Grpc.RoleAdd.Parser, new[]{ "RoleId", "Actor", "Series", "RoleName", "RoleDescription" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.SeriesRoleId), global::EvaluationSeries.Grpc.SeriesRoleId.Parser, new[]{ "SeriesId", "RoleId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.SeriesRoleId), global::EvaluationSeries.Grpc.SeriesRoleId.Parser, new[]{ "IdSeries", "RoleId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.SeriesMessageResponse), global::EvaluationSeries.Grpc.SeriesMessageResponse.Parser, new[]{ "Signal", "Poruka" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetSeriesResponse), global::EvaluationSeries.Grpc.GetSeriesResponse.Parser, new[]{ "Series", "Signal" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.SeriesFull), global::EvaluationSeries.Grpc.SeriesFull.Parser, new[]{ "Id", "Name", "Description", "NumberSeason", "EpisodeDuration", "WebSiteUrl", "LogoUrl", "Year", "Country", "Genre" }, null, null, null, null),
@@ -757,7 +757,7 @@ namespace EvaluationSeries.Grpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SeriesRoleId(SeriesRoleId other) : this() {
-      seriesId_ = other.seriesId_;
+      idSeries_ = other.idSeries_;
       roleId_ = other.roleId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -767,14 +767,14 @@ namespace EvaluationSeries.Grpc {
       return new SeriesRoleId(this);
     }
 
-    /// <summary>Field number for the "SeriesId" field.</summary>
-    public const int SeriesIdFieldNumber = 1;
-    private int seriesId_;
+    /// <summary>Field number for the "IdSeries" field.</summary>
+    public const int IdSeriesFieldNumber = 1;
+    private int idSeries_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int SeriesId {
-      get { return seriesId_; }
+    public int IdSeries {
+      get { return idSeries_; }
       set {
-        seriesId_ = value;
+        idSeries_ = value;
       }
     }
 
@@ -802,7 +802,7 @@ namespace EvaluationSeries.Grpc {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (SeriesId != other.SeriesId) return false;
+      if (IdSeries != other.IdSeries) return false;
       if (RoleId != other.RoleId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -810,7 +810,7 @@ namespace EvaluationSeries.Grpc {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (SeriesId != 0) hash ^= SeriesId.GetHashCode();
+      if (IdSeries != 0) hash ^= IdSeries.GetHashCode();
       if (RoleId != 0) hash ^= RoleId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -828,9 +828,9 @@ namespace EvaluationSeries.Grpc {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (SeriesId != 0) {
+      if (IdSeries != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(SeriesId);
+        output.WriteInt32(IdSeries);
       }
       if (RoleId != 0) {
         output.WriteRawTag(16);
@@ -845,9 +845,9 @@ namespace EvaluationSeries.Grpc {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (SeriesId != 0) {
+      if (IdSeries != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(SeriesId);
+        output.WriteInt32(IdSeries);
       }
       if (RoleId != 0) {
         output.WriteRawTag(16);
@@ -862,8 +862,8 @@ namespace EvaluationSeries.Grpc {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (SeriesId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SeriesId);
+      if (IdSeries != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(IdSeries);
       }
       if (RoleId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoleId);
@@ -879,8 +879,8 @@ namespace EvaluationSeries.Grpc {
       if (other == null) {
         return;
       }
-      if (other.SeriesId != 0) {
-        SeriesId = other.SeriesId;
+      if (other.IdSeries != 0) {
+        IdSeries = other.IdSeries;
       }
       if (other.RoleId != 0) {
         RoleId = other.RoleId;
@@ -900,7 +900,7 @@ namespace EvaluationSeries.Grpc {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            SeriesId = input.ReadInt32();
+            IdSeries = input.ReadInt32();
             break;
           }
           case 16: {
@@ -922,7 +922,7 @@ namespace EvaluationSeries.Grpc {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            SeriesId = input.ReadInt32();
+            IdSeries = input.ReadInt32();
             break;
           }
           case 16: {

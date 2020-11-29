@@ -66,6 +66,7 @@ namespace EvaluationSeries.Services.Series.Services
             }
             catch (Exception)
             {
+                throw;
                 return null;
             }
         }
