@@ -17,15 +17,17 @@ namespace EvaluationSeries.Services.Gateway.Controllers
     [ApiController]
     public class SeriesController : ControllerBase
     {
-        private SeriesServicesGateway _series;
+        //private SeriesServicesGateway _series;
+        private ISeriesServicesGateway _series;
 
-        public SeriesController()
+        public SeriesController(ISeriesServicesGateway series)
         {
-            var httpHandler = new HttpClientHandler();
-            httpHandler.ServerCertificateCustomValidationCallback =
-                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            var channel = GrpcChannel.ForAddress("https://localhost:5000");
-            this._series = new SeriesServicesGateway(new SeriesGrpc.SeriesGrpcClient(channel));
+            //var httpHandler = new HttpClientHandler();
+            //httpHandler.ServerCertificateCustomValidationCallback =
+            //    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            //var channel = GrpcChannel.ForAddress("https://localhost:5000");
+            //this._series = new SeriesServicesGateway(new SeriesGrpc.SeriesGrpcClient(channel));
+            this._series = series;
         }
 
         [HttpGet(Name = "GetSeries")]

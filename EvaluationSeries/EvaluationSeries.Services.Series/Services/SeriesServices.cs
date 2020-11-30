@@ -1,4 +1,6 @@
-﻿using EvaluationSeries.Grpc;
+﻿using AutoMapper;
+using EvaluationSeries.Grpc;
+using EvaluationSeries.Services.Series.Entities;
 using EvaluationSeries.Services.Series.Help;
 using EvaluationSeries.Services.Series.Models;
 using EvaluationSeries.Services.Series.Repository;
@@ -15,18 +17,18 @@ namespace EvaluationSeries.Services.Series.Services
     public class SeriesServices : SeriesGrpc.SeriesGrpcBase
     {
         private ISeriesRepository _series;
-        private ActorServices _actor;
+        private IActorServices _actor;
         private IActorRepository _actorRepository;
+        private IMapper _mapper;
 
-        public SeriesServices(ISeriesRepository series, IActorRepository actorRepository )
+        public SeriesServices(ISeriesRepository series, IActorRepository actorRepository,
+            IMapper mapper, IActorServices actor)
         {
             this._actorRepository = actorRepository;
             this._series = series;
-            var httpHandler = new HttpClientHandler();
-            httpHandler.ServerCertificateCustomValidationCallback =
-                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            this._actor = new ActorServices(new ActorsGrpc.ActorsGrpcClient(channel));
+            this._mapper = mapper;
+            this._actor = actor;
+
         }
         public override async Task<GetSeriesResponse> GetAllSeries(SeriesEmpty request, ServerCallContext context)
         {
@@ -37,7 +39,7 @@ namespace EvaluationSeries.Services.Series.Services
                 List<SeriesFull> seriesFull = new List<SeriesFull>();
                 series.ToList().ForEach((ser) =>
                 {
-                    var sFull = ConvertObject.Instance.CreateSeriesFull(ser);
+                    var sFull = _mapper.Map<Series2, SeriesFull>(ser);
                     seriesFull.Add(sFull);
                 });
                 return new GetSeriesResponse() { Series = { seriesFull }, Signal = true };
@@ -54,8 +56,8 @@ namespace EvaluationSeries.Services.Series.Services
             {
                 var series = await _series.GetSeriesById(request.Id);
                 if (series is null) return  new GetSeriesByIdResponse() { Series = null, Signal = false };
-                SeriesFull full = ConvertObject.Instance.CreateSeriesFull(series);
-                return new GetSeriesByIdResponse() { Series = full, Signal = true };
+                var seriesFull = _mapper.Map<Series2, SeriesFull>(series);
+                return new GetSeriesByIdResponse() { Series = seriesFull, Signal = true };
             }
             catch (Exception)
             {
@@ -68,7 +70,7 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var series = ConvertObject.Instance.CreateSeries(request);
+                var series = _mapper.Map<SeriesFull, Series2>(request);
                 var response = await _series.AddSeries(series);
                 return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno sacuvano" } :
                     new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno sacuvnao" };
@@ -82,7 +84,7 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var series = ConvertObject.Instance.CreateSeries(request);
+                var series = _mapper.Map<SeriesFull, Series2>(request);
                 var response = await _series.UpdateSeries(series);
                 return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno izmenjeno" } :
                     new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno azurirano" };
@@ -118,7 +120,7 @@ namespace EvaluationSeries.Services.Series.Services
                 {
                     roles.ToList().ForEach((role) =>
                     {
-                        RoleAdd ro = ConvertObject.Instance.CreateRoleAdd(role);
+                        var ro = _mapper.Map<Role, RoleAdd>(role);
                         rolesAdd.Add(ro);
                     });
                 });
@@ -135,7 +137,7 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var role = ConvertObject.Instance.CreateRole(request);
+                var role = _mapper.Map<RoleAdd, Role>(request);
                 var response = await _series.AddRole(role.Series.Id, role);
                 return response ? new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true }
                 : new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
@@ -171,14 +173,13 @@ namespace EvaluationSeries.Services.Series.Services
                 actors = new List<ActorAddSeries>();
                 response.ToList().ForEach((act) =>
                 {
-                    var nov = ConvertObject.Instance.CreateActorAddSeries(act);
+                    var nov = _mapper.Map<ActorCreate, ActorAddSeries>(act);
                     actors.Add(nov);
                 });
                 return new GetActorsSeriesResponse() { Actors = { actors } };
             }
             catch (Exception)
             {
-                throw;
                 List<ActorAddSeries> actorError = null;
                 return new GetActorsSeriesResponse() { Actors = { actorError } };
             }
@@ -188,10 +189,12 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                var actor = Create(request);
+                var actor = _mapper.Map<ActorAddSeries, ActorCreate>(request);
                 var response = await _actor.PostActor(actor);
                 if (!response) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-                if (await _actorRepository.AddActor(ConvertObject.Instance.CreateActor(actor))) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
+
+                var actorSeries = _mapper.Map<ActorCreate, Actor>(actor);
+                if (await _actorRepository.AddActor(actorSeries)) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
 
             }
@@ -207,11 +210,13 @@ namespace EvaluationSeries.Services.Series.Services
                 var actorUpdate = await _actor.GetActorById(request.ActorId);
                 if (actorUpdate is null) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
 
-                var actor = Create(request);
+                var actor = _mapper.Map<ActorAddSeries, ActorCreate>(request);
+
                 var response = await _actor.PutActor(actor);
                 if (!response) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
 
-                if (await _actorRepository.UpdateActor(actorUpdate, ConvertObject.Instance.CreateActor(actor))) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
+                var actorSeries = _mapper.Map<ActorCreate, Actor>(actor);
+                if (await _actorRepository.UpdateActor(actorUpdate, actorSeries)) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
 
             }
@@ -240,27 +245,7 @@ namespace EvaluationSeries.Services.Series.Services
             }
         }
 
-        private ActorCreate Create(ActorAddSeries actor)
-        {
-            try
-            {
-                return new ActorCreate()
-                {
-                    ActorId = actor.ActorId,
-                    Biography = actor.Biography,
-                    ImageUrl = actor.ImageUrl,
-                    Name = actor.Name,
-                    Surname = actor.Surname,
-                    WikiUrl = actor.WikiUrl
-
-                };
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-        }
+       
             
 
 

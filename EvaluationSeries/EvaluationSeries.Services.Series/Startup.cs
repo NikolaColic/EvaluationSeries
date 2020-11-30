@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Series.Context;
+using EvaluationSeries.Services.Series.Help;
 using EvaluationSeries.Services.Series.Repository;
 using EvaluationSeries.Services.Series.Services;
 using Microsoft.AspNetCore.Builder;
@@ -33,12 +35,10 @@ namespace EvaluationSeries.Services.Series
             services.AddControllers();
             services.AddScoped<ISeriesRepository, SeriesRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
+            services.AddScoped<IActorServices, ActorServices>();
             services.AddGrpc();
-
-            //services.AddHttpClient<IActorServices, ActorServices>(c =>
-            //   c.BaseAddress = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
+            services.AddAutoMapper(typeof(SeriesProfile));
             services.AddGrpcClient<ActorsGrpc.ActorsGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
-
             services.AddDbContext<SeriesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
         }

@@ -1,6 +1,8 @@
-﻿using EvaluationSeries.Grpc;
+﻿using AutoMapper;
+using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Series.Help;
 using EvaluationSeries.Services.Series.Models;
+using Grpc.Net.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,10 +17,16 @@ namespace EvaluationSeries.Services.Series.Services
     public class ActorServices : IActorServices
     {
         private ActorsGrpc.ActorsGrpcClient _actorService;
+        private IMapper _mapper;
 
-        public ActorServices(ActorsGrpc.ActorsGrpcClient actorService)
+        public ActorServices(IMapper mapper)
         {
-            _actorService = actorService;
+            var httpHandler = new HttpClientHandler();
+            httpHandler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            this._actorService = new ActorsGrpc.ActorsGrpcClient(channel);
+            _mapper = mapper;
         }
 
 
@@ -41,9 +49,8 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 GetActorByIdResponse actor = await _actorService.GetActorsIdAsync(new ActorId() { Id = id });
-                ActorCreate actorCreate = ConvertObject.Instance.CreateActorCreate(actor.Actor);          
+                ActorCreate actorCreate = _mapper.Map<ActorAdd, ActorCreate>(actor.Actor);
                 return actorCreate;
-
             }
             catch (Exception)
             {
@@ -59,14 +66,13 @@ namespace EvaluationSeries.Services.Series.Services
                 List<ActorCreate> listaActora = new List<ActorCreate>();
                 response.Actors.ToList().ForEach(actor =>
                 {
-                    ActorCreate actorCreate = ConvertObject.Instance.CreateActorCreate(actor);
+                    ActorCreate actorCreate = _mapper.Map<ActorAdd, ActorCreate>(actor);
                     listaActora.Add(actorCreate);
                 });
                 return listaActora;
             }
             catch (Exception)
             {
-                throw;
                 return null;
             }
         }
@@ -75,7 +81,7 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                ActorAdd act = ConvertObject.Instance.CreateActorAdd(actor);
+                ActorAdd act = _mapper.Map<ActorCreate, ActorAdd>(actor);
                 ActorsMessageResponse response = await _actorService.PostActorAsync(act);
                 var signal = (bool)response.Signal;
                 return signal;
@@ -93,7 +99,7 @@ namespace EvaluationSeries.Services.Series.Services
         {
             try
             {
-                ActorAdd act = ConvertObject.Instance.CreateActorAdd(actor);
+                ActorAdd act = _mapper.Map<ActorCreate, ActorAdd>(actor);
                 ActorsMessageResponse response = await _actorService.PutActorAsync(act);
                 var signal = (bool)response.Signal;
                 return signal;

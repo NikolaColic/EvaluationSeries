@@ -1,9 +1,12 @@
-﻿using EvaluationSeries.Grpc;
+﻿using AutoMapper;
+using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Gateway.Entities;
-using EvaluationSeries.Services.Gateway.Helper;
+using EvaluationSeries.Services.Gateway.Help;
+using Grpc.Net.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EvaluationSeries.Services.Gateway.Services
@@ -11,16 +14,23 @@ namespace EvaluationSeries.Services.Gateway.Services
     public class SeriesServicesGateway : ISeriesServicesGateway
     {
         private SeriesGrpc.SeriesGrpcClient _series;
-        public SeriesServicesGateway(SeriesGrpc.SeriesGrpcClient series)
+        
+        private IMapper _mapper;
+        public SeriesServicesGateway(IMapper mapper)
         {
-            this._series = series;
+            var httpHandler = new HttpClientHandler();
+            httpHandler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            var channel = GrpcChannel.ForAddress("https://localhost:5000");
+            this._series = new SeriesGrpc.SeriesGrpcClient(channel);
+            _mapper = mapper;
         }
 
         public async Task<bool> AddActor(Actor actor)
         {
             try
             {
-                ActorAddSeries actorAdd = ConvertObject.Instance.CreateActorAddSeries(actor);
+                ActorAddSeries actorAdd = _mapper.Map<Actor, ActorAddSeries>(actor);
                 var response = await _series.PostActorSeriesAsync(actorAdd);
                 return response.Signal;
             }
@@ -35,7 +45,7 @@ namespace EvaluationSeries.Services.Gateway.Services
         {
             try
             {
-                RoleAdd roleAdd = ConvertObject.Instance.CreateRoleAdd(role);
+                RoleAdd roleAdd = _mapper.Map<Role, RoleAdd>(role);
                 var response = await _series.PostRoleAsync(roleAdd);
                 return response.Signal;
             }
@@ -50,7 +60,8 @@ namespace EvaluationSeries.Services.Gateway.Services
         {
             try
             {
-                var response = await _series.PostSeriesAsync(ConvertObject.Instance.CreateSeriesFull(s));
+                var seriesFull = _mapper.Map<Series, SeriesFull>(s);
+                var response = await _series.PostSeriesAsync(seriesFull);
                 return response.Signal;
             }
             catch (Exception)
@@ -108,7 +119,7 @@ namespace EvaluationSeries.Services.Gateway.Services
                 List<Actor> actors = new List<Actor>();
                 response.Actors.ToList().ForEach((act) =>
                 {
-                    var actor = ConvertObject.Instance.CreateActor(act);
+                    var actor = _mapper.Map<ActorAddSeries, Actor>(act);
                     actors.Add(actor);
                 });
                 return actors;
@@ -129,7 +140,7 @@ namespace EvaluationSeries.Services.Gateway.Services
                 List<Series> series = new List<Series>();
                 response.Series.ToList().ForEach((ser) =>
                 {
-                    var seriesOne = ConvertObject.Instance.CreateSeries(ser);
+                    var seriesOne = _mapper.Map<SeriesFull, Series>(ser);
                     series.Add(seriesOne);
                 });
                 return series;
@@ -149,7 +160,7 @@ namespace EvaluationSeries.Services.Gateway.Services
                 List<Role> roles = new List<Role>();
                 response.Roles.ToList().ForEach((r) =>
                 {
-                    var role = ConvertObject.Instance.CreateRole(r);
+                    var role = _mapper.Map<RoleAdd, Role>(r);
                     roles.Add(role);
                 });
                 return roles;
@@ -166,7 +177,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             {
                 var response = await _series.GetSeriesByIdAsync(new SeriesId() { Id = id });
                 if (response is null) return null;
-                var series = ConvertObject.Instance.CreateSeries(response.Series);
+                var series = _mapper.Map<SeriesFull, Series>(response.Series);
                 return series;
             }
             catch (Exception)
@@ -179,7 +190,7 @@ namespace EvaluationSeries.Services.Gateway.Services
         {
             try
             {
-                ActorAddSeries actorAdd = ConvertObject.Instance.CreateActorAddSeries(actor);
+                var actorAdd = _mapper.Map<Actor, ActorAddSeries>(actor);
                 var response = await _series.PutActorSeriesAsync(actorAdd);
                 return response.Signal;
             }
@@ -193,8 +204,8 @@ namespace EvaluationSeries.Services.Gateway.Services
         {
             try
             {
-               
-                var response = await _series.PutSeriesAsync(ConvertObject.Instance.CreateSeriesFull(s));
+                var seriesFull = _mapper.Map<Series, SeriesFull>(s);
+                var response = await _series.PutSeriesAsync(seriesFull);
                 return response.Signal;
             }
             catch (Exception)

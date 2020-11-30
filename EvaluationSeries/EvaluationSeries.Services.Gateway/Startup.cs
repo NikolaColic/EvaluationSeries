@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EvaluationSeries.Grpc;
+using EvaluationSeries.Services.Gateway.Help;
+using EvaluationSeries.Services.Gateway.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +30,9 @@ namespace EvaluationSeries.Services.Gateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(typeof(GatewayProfile));
+            services.AddScoped<ISeriesServicesGateway, SeriesServicesGateway>();
+
             services.AddGrpcClient<SeriesGrpc.SeriesGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
         }
 

@@ -1,4 +1,5 @@
-﻿using EvaluationSeries.Grpc;
+﻿using AutoMapper;
+using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Actors.Entities;
 using EvaluationSeries.Services.Actors.Help;
 using EvaluationSeries.Services.Actors.Repository;
@@ -14,9 +15,11 @@ namespace EvaluationSeries.Services.Actors.Services
     public class ActorServices : ActorsGrpc.ActorsGrpcBase
     {
         private IActorsRepository _actor;
-        public ActorServices(IActorsRepository actor)
+        private IMapper _mapper;
+        public ActorServices(IActorsRepository actor, IMapper mapper)
         {
             _actor = actor;
+            this._mapper = mapper;
         }
         public override async Task<GetActorsResponse> GetActors(ActorEmpty a, ServerCallContext context)
         {
@@ -26,7 +29,7 @@ namespace EvaluationSeries.Services.Actors.Services
                 List<ActorAdd> actorsAdd = new List<ActorAdd>();
                 foreach (var actor in actors)
                 {
-                    ActorAdd act = ConvertObject.Instance.CreateActorAdd(actor);
+                    ActorAdd act = _mapper.Map<Actor, ActorAdd>(actor);
                     actorsAdd.Add(act);
                 }
                 return new GetActorsResponse() { Actors = { actorsAdd } };
@@ -44,8 +47,8 @@ namespace EvaluationSeries.Services.Actors.Services
             try
             {
                 var actor = await _actor.GetActorId(actorId.Id);
-                ActorAdd a = ConvertObject.Instance.CreateActorAdd(actor);
-                return new GetActorByIdResponse() { Actor = a };
+                ActorAdd act = _mapper.Map<Actor, ActorAdd>(actor);
+                return new GetActorByIdResponse() { Actor = act };
             }
             catch (Exception)
             {
@@ -57,7 +60,8 @@ namespace EvaluationSeries.Services.Actors.Services
 
             try
             {
-                var response = await _actor.AddActor(ConvertObject.Instance.CreateActor(request));
+                var actor = _mapper.Map<ActorAdd, Actor>(request);
+                var response = await _actor.AddActor(actor);
                 return response ? new ActorsMessageResponse() { Poruka = "Uspesno dodato", Signal = true } :
                     new ActorsMessageResponse() { Poruka = "Neuspesno dodato", Signal = false };
             }
@@ -71,7 +75,8 @@ namespace EvaluationSeries.Services.Actors.Services
         {
             try
             {
-                var response = await _actor.UpdateActor(ConvertObject.Instance.CreateActor(request));
+                var actor = _mapper.Map<ActorAdd, Actor>(request);
+                var response = await _actor.UpdateActor(actor);
                 return response ? new ActorsMessageResponse() { Poruka = "Uspesno izmenjeno", Signal = true } :
                     new ActorsMessageResponse() { Poruka = "Neuspesno izmenjeno", Signal = false };
             }

@@ -131,3 +131,5 @@ C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.dll
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.pdb
 C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\obj\Debug\netcoreapp3.1\EvaluationSeries.Services.Actors.genruntimeconfig.cache
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\PC\source\repos\FpisProjekat\EvaluationSeries\EvaluationSeries.Services.Actors\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EvaluationSeries.Services.Actors.Context;
+using EvaluationSeries.Services.Actors.Help;
 using EvaluationSeries.Services.Actors.Repository;
 using EvaluationSeries.Services.Actors.Services;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +33,7 @@ namespace EvaluationSeries.Services.Actors
         {
             services.AddControllers();
             services.AddGrpc();
+            services.AddAutoMapper(typeof(ActorProfile));
             services.AddScoped<IActorsRepository, ActorsRepository>(); 
             services.AddDbContext<ActorsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 

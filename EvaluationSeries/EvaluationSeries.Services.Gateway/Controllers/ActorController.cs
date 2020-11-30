@@ -17,15 +17,17 @@ namespace EvaluationSeries.Services.Gateway.Controllers
     [ApiController]
     public class ActorController : ControllerBase
     {
-        private SeriesServicesGateway _actor;
+        private ISeriesServicesGateway _actor;
 
-        public ActorController()
+        public ActorController(ISeriesServicesGateway actor)
         {
-            var httpHandler = new HttpClientHandler();
-            httpHandler.ServerCertificateCustomValidationCallback =
-                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            var channel = GrpcChannel.ForAddress("https://localhost:5000");
-            this._actor = new SeriesServicesGateway(new SeriesGrpc.SeriesGrpcClient(channel));
+            //var httpHandler = new HttpClientHandler();
+            //httpHandler.ServerCertificateCustomValidationCallback =
+            //    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            //var channel = GrpcChannel.ForAddress("https://localhost:5000");
+            //this._actor = new SeriesServicesGateway(new SeriesGrpc.SeriesGrpcClient(channel));
+            this._actor = actor;
+
         }
 
         [HttpGet(Name = "GetActors")]
