@@ -17,6 +17,9 @@ service SeriesGrpc {
 	rpc PutActorSeries(ActorAddSeries) returns (SeriesMessageResponse) {}
 	rpc DeleteActorSeries(SeriesId) returns (SeriesMessageResponse) {}
 	rpc GetAllActors(SeriesEmpty) returns (GetActorsSeriesResponse) {}
+	rpc GetAllGenre(SeriesEmpty) returns (GetGenresResponse) {}
+	rpc GetAllCountry(SeriesEmpty) returns (GetCountryResponse) {}
+	rpc GetAllRoles(SeriesEmpty) returns (GetRolesResponse) {}
 	
 }
 
@@ -99,6 +102,12 @@ message GetActorsSeriesResponse {
 	repeated ActorAddSeries Actors= 1;
 }
 
+message GetGenresResponse {
+	repeated GenreFull Genres = 1;
+}
 
+message GetCountryResponse {
+	repeated CountryFull Countries = 1;
+}
 
 

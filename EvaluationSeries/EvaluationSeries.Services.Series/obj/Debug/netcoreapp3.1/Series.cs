@@ -47,22 +47,28 @@ namespace EvaluationSeries.Grpc {
             "CgROYW1lGAIgASgJEg8KB1N1cm5hbWUYAyABKAkSEQoJQmlvZ3JhcGh5GAQg",
             "ASgJEg8KB1dpa2lVcmwYBSABKAkSEAoISW1hZ2VVcmwYBiABKAkiOgoXR2V0",
             "QWN0b3JzU2VyaWVzUmVzcG9uc2USHwoGQWN0b3JzGAEgAygLMg8uQWN0b3JB",
-            "ZGRTZXJpZXMynAUKClNlcmllc0dycGMSMgoMR2V0QWxsU2VyaWVzEgwuU2Vy",
-            "aWVzRW1wdHkaEi5HZXRTZXJpZXNSZXNwb25zZSIAEjMKClBvc3RTZXJpZXMS",
-            "Cy5TZXJpZXNGdWxsGhYuU2VyaWVzTWVzc2FnZVJlc3BvbnNlIgASMgoJUHV0",
-            "U2VyaWVzEgsuU2VyaWVzRnVsbBoWLlNlcmllc01lc3NhZ2VSZXNwb25zZSIA",
-            "EjMKDERlbGV0ZVNlcmllcxIJLlNlcmllc0lkGhYuU2VyaWVzTWVzc2FnZVJl",
-            "c3BvbnNlIgASNAoNR2V0U2VyaWVzQnlJZBIJLlNlcmllc0lkGhYuR2V0U2Vy",
-            "aWVzQnlJZFJlc3BvbnNlIgASMAoOR2VyUm9sZXNTZXJpZXMSCS5TZXJpZXNJ",
-            "ZBoRLkdldFJvbGVzUmVzcG9uc2UiABIuCghQb3N0Um9sZRIILlJvbGVBZGQa",
-            "Fi5TZXJpZXNNZXNzYWdlUmVzcG9uc2UiABI1CgpEZWxldGVSb2xlEg0uU2Vy",
-            "aWVzUm9sZUlkGhYuU2VyaWVzTWVzc2FnZVJlc3BvbnNlIgASPAoPUG9zdEFj",
-            "dG9yU2VyaWVzEg8uQWN0b3JBZGRTZXJpZXMaFi5TZXJpZXNNZXNzYWdlUmVz",
-            "cG9uc2UiABI7Cg5QdXRBY3RvclNlcmllcxIPLkFjdG9yQWRkU2VyaWVzGhYu",
-            "U2VyaWVzTWVzc2FnZVJlc3BvbnNlIgASOAoRRGVsZXRlQWN0b3JTZXJpZXMS",
-            "CS5TZXJpZXNJZBoWLlNlcmllc01lc3NhZ2VSZXNwb25zZSIAEjgKDEdldEFs",
-            "bEFjdG9ycxIMLlNlcmllc0VtcHR5GhguR2V0QWN0b3JzU2VyaWVzUmVzcG9u",
-            "c2UiAEIYqgIVRXZhbHVhdGlvblNlcmllcy5HcnBjYgZwcm90bzM="));
+            "ZGRTZXJpZXMiLwoRR2V0R2VucmVzUmVzcG9uc2USGgoGR2VucmVzGAEgAygL",
+            "MgouR2VucmVGdWxsIjUKEkdldENvdW50cnlSZXNwb25zZRIfCglDb3VudHJp",
+            "ZXMYASADKAsyDC5Db3VudHJ5RnVsbDK3BgoKU2VyaWVzR3JwYxIyCgxHZXRB",
+            "bGxTZXJpZXMSDC5TZXJpZXNFbXB0eRoSLkdldFNlcmllc1Jlc3BvbnNlIgAS",
+            "MwoKUG9zdFNlcmllcxILLlNlcmllc0Z1bGwaFi5TZXJpZXNNZXNzYWdlUmVz",
+            "cG9uc2UiABIyCglQdXRTZXJpZXMSCy5TZXJpZXNGdWxsGhYuU2VyaWVzTWVz",
+            "c2FnZVJlc3BvbnNlIgASMwoMRGVsZXRlU2VyaWVzEgkuU2VyaWVzSWQaFi5T",
+            "ZXJpZXNNZXNzYWdlUmVzcG9uc2UiABI0Cg1HZXRTZXJpZXNCeUlkEgkuU2Vy",
+            "aWVzSWQaFi5HZXRTZXJpZXNCeUlkUmVzcG9uc2UiABIwCg5HZXJSb2xlc1Nl",
+            "cmllcxIJLlNlcmllc0lkGhEuR2V0Um9sZXNSZXNwb25zZSIAEi4KCFBvc3RS",
+            "b2xlEgguUm9sZUFkZBoWLlNlcmllc01lc3NhZ2VSZXNwb25zZSIAEjUKCkRl",
+            "bGV0ZVJvbGUSDS5TZXJpZXNSb2xlSWQaFi5TZXJpZXNNZXNzYWdlUmVzcG9u",
+            "c2UiABI8Cg9Qb3N0QWN0b3JTZXJpZXMSDy5BY3RvckFkZFNlcmllcxoWLlNl",
+            "cmllc01lc3NhZ2VSZXNwb25zZSIAEjsKDlB1dEFjdG9yU2VyaWVzEg8uQWN0",
+            "b3JBZGRTZXJpZXMaFi5TZXJpZXNNZXNzYWdlUmVzcG9uc2UiABI4ChFEZWxl",
+            "dGVBY3RvclNlcmllcxIJLlNlcmllc0lkGhYuU2VyaWVzTWVzc2FnZVJlc3Bv",
+            "bnNlIgASOAoMR2V0QWxsQWN0b3JzEgwuU2VyaWVzRW1wdHkaGC5HZXRBY3Rv",
+            "cnNTZXJpZXNSZXNwb25zZSIAEjEKC0dldEFsbEdlbnJlEgwuU2VyaWVzRW1w",
+            "dHkaEi5HZXRHZW5yZXNSZXNwb25zZSIAEjQKDUdldEFsbENvdW50cnkSDC5T",
+            "ZXJpZXNFbXB0eRoTLkdldENvdW50cnlSZXNwb25zZSIAEjAKC0dldEFsbFJv",
+            "bGVzEgwuU2VyaWVzRW1wdHkaES5HZXRSb2xlc1Jlc3BvbnNlIgBCGKoCFUV2",
+            "YWx1YXRpb25TZXJpZXMuR3JwY2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -79,7 +85,9 @@ namespace EvaluationSeries.Grpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetRolesResponse), global::EvaluationSeries.Grpc.GetRolesResponse.Parser, new[]{ "Roles", "Signal" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.ActorSeries), global::EvaluationSeries.Grpc.ActorSeries.Parser, new[]{ "ActorId", "Name", "Surname" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.ActorAddSeries), global::EvaluationSeries.Grpc.ActorAddSeries.Parser, new[]{ "ActorId", "Name", "Surname", "Biography", "WikiUrl", "ImageUrl" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetActorsSeriesResponse), global::EvaluationSeries.Grpc.GetActorsSeriesResponse.Parser, new[]{ "Actors" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetActorsSeriesResponse), global::EvaluationSeries.Grpc.GetActorsSeriesResponse.Parser, new[]{ "Actors" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetGenresResponse), global::EvaluationSeries.Grpc.GetGenresResponse.Parser, new[]{ "Genres" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetCountryResponse), global::EvaluationSeries.Grpc.GetCountryResponse.Parser, new[]{ "Countries" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3433,6 +3441,328 @@ namespace EvaluationSeries.Grpc {
             break;
           case 10: {
             actors_.AddEntriesFrom(ref input, _repeated_actors_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class GetGenresResponse : pb::IMessage<GetGenresResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<GetGenresResponse> _parser = new pb::MessageParser<GetGenresResponse>(() => new GetGenresResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetGenresResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EvaluationSeries.Grpc.SeriesReflection.Descriptor.MessageTypes[14]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGenresResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGenresResponse(GetGenresResponse other) : this() {
+      genres_ = other.genres_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGenresResponse Clone() {
+      return new GetGenresResponse(this);
+    }
+
+    /// <summary>Field number for the "Genres" field.</summary>
+    public const int GenresFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::EvaluationSeries.Grpc.GenreFull> _repeated_genres_codec
+        = pb::FieldCodec.ForMessage(10, global::EvaluationSeries.Grpc.GenreFull.Parser);
+    private readonly pbc::RepeatedField<global::EvaluationSeries.Grpc.GenreFull> genres_ = new pbc::RepeatedField<global::EvaluationSeries.Grpc.GenreFull>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::EvaluationSeries.Grpc.GenreFull> Genres {
+      get { return genres_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetGenresResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetGenresResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!genres_.Equals(other.genres_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= genres_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      genres_.WriteTo(output, _repeated_genres_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      genres_.WriteTo(ref output, _repeated_genres_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += genres_.CalculateSize(_repeated_genres_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetGenresResponse other) {
+      if (other == null) {
+        return;
+      }
+      genres_.Add(other.genres_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            genres_.AddEntriesFrom(input, _repeated_genres_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            genres_.AddEntriesFrom(ref input, _repeated_genres_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class GetCountryResponse : pb::IMessage<GetCountryResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<GetCountryResponse> _parser = new pb::MessageParser<GetCountryResponse>(() => new GetCountryResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetCountryResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EvaluationSeries.Grpc.SeriesReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetCountryResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetCountryResponse(GetCountryResponse other) : this() {
+      countries_ = other.countries_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetCountryResponse Clone() {
+      return new GetCountryResponse(this);
+    }
+
+    /// <summary>Field number for the "Countries" field.</summary>
+    public const int CountriesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::EvaluationSeries.Grpc.CountryFull> _repeated_countries_codec
+        = pb::FieldCodec.ForMessage(10, global::EvaluationSeries.Grpc.CountryFull.Parser);
+    private readonly pbc::RepeatedField<global::EvaluationSeries.Grpc.CountryFull> countries_ = new pbc::RepeatedField<global::EvaluationSeries.Grpc.CountryFull>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::EvaluationSeries.Grpc.CountryFull> Countries {
+      get { return countries_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetCountryResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetCountryResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!countries_.Equals(other.countries_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= countries_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      countries_.WriteTo(output, _repeated_countries_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      countries_.WriteTo(ref output, _repeated_countries_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += countries_.CalculateSize(_repeated_countries_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetCountryResponse other) {
+      if (other == null) {
+        return;
+      }
+      countries_.Add(other.countries_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            countries_.AddEntriesFrom(input, _repeated_countries_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            countries_.AddEntriesFrom(ref input, _repeated_countries_codec);
             break;
           }
         }

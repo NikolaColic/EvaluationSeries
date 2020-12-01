@@ -54,10 +54,14 @@ namespace EvaluationSeries.Services.Gateway.Help
             CreateMap<RoleAdd, Role>()
                 .ForMember((dest) => dest.Actor,
                 opt => opt.MapFrom(s => s.Actor));
-
-
-
-
+            CreateMap<UserAdd, User>()
+              .ForMember((dest) => dest.Country,
+              opt => opt.MapFrom((s) => new Country() { CountryId = s.Country.CountryId, Name = s.Country.Name }));
+            CreateMap<User, UserAdd>()
+                .ForMember((dest) => dest.Country,
+                opt => opt.MapFrom((s) => new CountryAdd() { CountryId = s.Country.CountryId, Name = s.Country.Name }));
+            CreateMap<CountryFull, Country>();
+            CreateMap<GenreFull, Genre>();
         }
     }
 }

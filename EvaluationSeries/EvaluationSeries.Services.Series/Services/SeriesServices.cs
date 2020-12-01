@@ -245,8 +245,73 @@ namespace EvaluationSeries.Services.Series.Services
             }
         }
 
-       
-            
+        public override async Task<GetCountryResponse> GetAllCountry(SeriesEmpty request, ServerCallContext context)
+        {
+            try
+            {
+                var response = await _series.GetAllCountries();
+                List<CountryFull> full = null;
+                if (response is null) return new GetCountryResponse() { Countries = { full } };
+                full = new List<CountryFull>();
+                response.ToList().ForEach((country) =>
+                {
+                    var coun = _mapper.Map<Country, CountryFull>(country);
+                    full.Add(coun);
+                });
+                return new GetCountryResponse() { Countries = { full } };
+            }
+            catch (Exception)
+            {
+                List<CountryFull> full = null;
+                return new GetCountryResponse() { Countries = { full } };
+            }
+        }
+        public override async Task<GetGenresResponse> GetAllGenre(SeriesEmpty request, ServerCallContext context)
+        {
+            try
+            {
+                var response = await _series.GetAllGenre();
+                List<GenreFull> full = null;
+                if (response is null) return new GetGenresResponse() { Genres = { full } };
+                full = new List<GenreFull>();
+                response.ToList().ForEach((genre) =>
+                {
+                    var coun = _mapper.Map<Genre, GenreFull>(genre);
+                    full.Add(coun);
+                });
+                return new GetGenresResponse() { Genres = { full } };
+            }
+            catch (Exception)
+            {
+                List<GenreFull> full = null;
+                return new GetGenresResponse() { Genres = { full } };
+            }
+        }
+
+        public override async Task<GetRolesResponse> GetAllRoles(SeriesEmpty request, ServerCallContext context)
+        {
+            try
+            {
+                var response = await _series.GetAllRoles();
+                List<RoleAdd> full = null;
+                if (response is null) return new GetRolesResponse() { Roles = { full } };
+                full = new List<RoleAdd>();
+                response.ToList().ForEach((role) =>
+                {
+                    var r = _mapper.Map<Role, RoleAdd>(role);
+                    full.Add(r);
+                });
+                return new GetRolesResponse() { Roles = { full } };
+            }
+            catch (Exception)
+            {
+                List<RoleAdd> full = null;
+                return new GetRolesResponse() { Roles = { full } };
+            }
+        }
+
+
+
 
 
 

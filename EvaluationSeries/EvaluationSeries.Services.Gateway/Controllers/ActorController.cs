@@ -1,7 +1,9 @@
 ﻿using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Gateway.Entities;
+using EvaluationSeries.Services.Gateway.Models;
 using EvaluationSeries.Services.Gateway.Services;
 using Grpc.Net.Client;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,28 +17,25 @@ namespace EvaluationSeries.Services.Gateway.Controllers
 {
     [Route("gateway/series/actors")]
     [ApiController]
+    [Authorize]
     public class ActorController : ControllerBase
     {
         private ISeriesServicesGateway _actor;
 
         public ActorController(ISeriesServicesGateway actor)
         {
-            //var httpHandler = new HttpClientHandler();
-            //httpHandler.ServerCertificateCustomValidationCallback =
-            //    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            //var channel = GrpcChannel.ForAddress("https://localhost:5000");
-            //this._actor = new SeriesServicesGateway(new SeriesGrpc.SeriesGrpcClient(channel));
             this._actor = actor;
-
         }
 
         [HttpGet(Name = "GetActors")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Actor>>> GetAllActors()
         {
             var actors = await _actor.GetActors();
             if (actors is null) return NotFound();
             return Ok(actors);
         }
+
 
         [HttpPost]
         public async Task<ActionResult<IEnumerable<Actor>>> AddActor([FromBody] Actor actor)
@@ -45,6 +44,7 @@ namespace EvaluationSeries.Services.Gateway.Controllers
             if (response) return RedirectToRoute("GetActors");
             return NotFound();
         }
+        
 
         [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<Actor>>> UpdateActor(int id, [FromBody] Actor actor)

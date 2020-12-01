@@ -53,6 +53,8 @@ namespace EvaluationSeries.Grpc {
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesRoleId> __Marshaller_SeriesRoleId = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesRoleId.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.ActorAddSeries> __Marshaller_ActorAddSeries = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.ActorAddSeries.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> __Marshaller_GetActorsSeriesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetActorsSeriesResponse.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetGenresResponse> __Marshaller_GetGenresResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetGenresResponse.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetCountryResponse> __Marshaller_GetCountryResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetCountryResponse.Parser));
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetSeriesResponse> __Method_GetAllSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetSeriesResponse>(
         grpc::MethodType.Unary,
@@ -137,6 +139,27 @@ namespace EvaluationSeries.Grpc {
         "GetAllActors",
         __Marshaller_SeriesEmpty,
         __Marshaller_GetActorsSeriesResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetGenresResponse> __Method_GetAllGenre = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetGenresResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllGenre",
+        __Marshaller_SeriesEmpty,
+        __Marshaller_GetGenresResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetCountryResponse> __Method_GetAllCountry = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetCountryResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllCountry",
+        __Marshaller_SeriesEmpty,
+        __Marshaller_GetCountryResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetRolesResponse> __Method_GetAllRoles = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetRolesResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllRoles",
+        __Marshaller_SeriesEmpty,
+        __Marshaller_GetRolesResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -358,6 +381,54 @@ namespace EvaluationSeries.Grpc {
       public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> GetAllActorsAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetAllActors, null, options, request);
+      }
+      public virtual global::EvaluationSeries.Grpc.GetGenresResponse GetAllGenre(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllGenre(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::EvaluationSeries.Grpc.GetGenresResponse GetAllGenre(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAllGenre, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetGenresResponse> GetAllGenreAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllGenreAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetGenresResponse> GetAllGenreAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAllGenre, null, options, request);
+      }
+      public virtual global::EvaluationSeries.Grpc.GetCountryResponse GetAllCountry(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllCountry(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::EvaluationSeries.Grpc.GetCountryResponse GetAllCountry(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAllCountry, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetCountryResponse> GetAllCountryAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllCountryAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetCountryResponse> GetAllCountryAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAllCountry, null, options, request);
+      }
+      public virtual global::EvaluationSeries.Grpc.GetRolesResponse GetAllRoles(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllRoles(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::EvaluationSeries.Grpc.GetRolesResponse GetAllRoles(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAllRoles, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetRolesResponse> GetAllRolesAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllRolesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetRolesResponse> GetAllRolesAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAllRoles, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override SeriesGrpcClient NewInstance(ClientBaseConfiguration configuration)

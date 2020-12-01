@@ -130,6 +130,70 @@ namespace EvaluationSeries.Services.Gateway.Services
             }
         }
 
+        public async Task<IEnumerable<Country>> GetAllCountries()
+        {
+            try
+            {
+                var response = await _series.GetAllCountryAsync(new SeriesEmpty());
+
+                if (response is null) return null;
+                List<Country> countries = new List<Country>();
+                response.Countries.ToList().ForEach((country) =>
+                {
+                    var countryOne = _mapper.Map<CountryFull, Country>(country);
+                    countries.Add(countryOne);
+                });
+                return countries;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+        public async Task<IEnumerable<Genre>> GetAllGenres()
+        {
+            try
+            {
+                var response = await _series.GetAllGenreAsync(new SeriesEmpty());
+
+                if (response is null) return null;
+                List<Genre> genres = new List<Genre>();
+                response.Genres.ToList().ForEach((genre) =>
+                {
+                    var genreOne = _mapper.Map<GenreFull, Genre>(genre);
+                    genres.Add(genreOne);
+                });
+                return genres;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<Role>> GetAllRoles()
+        {
+            try
+            {
+                var response = await _series.GetAllRolesAsync(new SeriesEmpty());
+
+                if (response is null) return null;
+                List<Role> roles = new List<Role>();
+                response.Roles.ToList().ForEach((role) =>
+                {
+                    var roleOne = _mapper.Map<RoleAdd, Role>(role);
+                    roles.Add(roleOne);
+                });
+                return roles;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public async Task<IEnumerable<Series>> GetAllSeries()
         {
             try

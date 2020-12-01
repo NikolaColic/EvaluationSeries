@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "EvaluationSeries.Grpc";
+
+
+
+service UserGrpc {
+	rpc GetUsers(UserEmpty) returns (UsersResponse) {}
+	rpc PostUser(UserAdd) returns (UserMessageResponse) {}
+	rpc PutUser(UserAdd) returns (UserMessageResponse) {}
+	rpc DeleteUser(UserId) returns (UserMessageResponse) {}
+	rpc Authentication(UserAuthentication) returns (UserAuthenticationResponse) {}
+}
+
+message UserEmpty {}
+message UserAdd {
+    int32 Id =1;
+    string Name = 2;
+    string Surname = 3;
+    string Email = 4;
+    string Username = 5;
+    string Password = 6;
+    bool Administrator = 7;
+    string Role = 8;
+    CountryAdd Country = 9; 
+}
+message CountryAdd {
+     int32 CountryId = 1;
+     string Name = 2;
+}
+
+message UserId {
+    int32 Id = 1;
+}
+message UserAuthentication {
+    string Username = 1; 
+    string Password = 2;
+}
+
+message UsersResponse {
+    repeated UserAdd Users = 1;
+}
+
+message UserMessageResponse {
+    string Poruka = 1; 
+    bool Signal = 2;
+}
+message UserAuthenticationResponse{
+    UserAdd User = 1; 
+    bool Signal = 2;
+}

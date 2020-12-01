@@ -23,6 +23,11 @@ namespace EvaluationSeries.Services.Gateway.Services
         Task<bool> UpdateActor(Actor actor);
         Task<bool> DeleteActor(int actorId);
 
+        Task<IEnumerable<Country>> GetAllCountries();
+        Task<IEnumerable<Genre>> GetAllGenres();
+        Task<IEnumerable<Role>> GetAllRoles();
+
+
 
 
 

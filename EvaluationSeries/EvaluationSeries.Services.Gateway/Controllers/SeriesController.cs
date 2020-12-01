@@ -2,6 +2,7 @@
 using EvaluationSeries.Services.Gateway.Entities;
 using EvaluationSeries.Services.Gateway.Services;
 using Grpc.Net.Client;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,22 +16,18 @@ namespace EvaluationSeries.Services.Gateway.Controllers
 {
     [Route("gateway/series")]
     [ApiController]
+    [Authorize]
     public class SeriesController : ControllerBase
     {
-        //private SeriesServicesGateway _series;
         private ISeriesServicesGateway _series;
 
         public SeriesController(ISeriesServicesGateway series)
         {
-            //var httpHandler = new HttpClientHandler();
-            //httpHandler.ServerCertificateCustomValidationCallback =
-            //    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            //var channel = GrpcChannel.ForAddress("https://localhost:5000");
-            //this._series = new SeriesServicesGateway(new SeriesGrpc.SeriesGrpcClient(channel));
             this._series = series;
         }
 
         [HttpGet(Name = "GetSeries")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Series>>> GetAllSeries()
         {
             var series = await _series.GetAllSeries();
@@ -55,8 +52,9 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<IEnumerable<Series>>> UpdateSeries([FromBody] Series series)
+        public async Task<ActionResult<IEnumerable<Series>>> UpdateSeries(int id,[FromBody] Series series)
         {
+            series.Id = id;
             var response = await _series.UpdateSeries(series);
             if (response) return RedirectToRoute("GetSeries");
             return NotFound();

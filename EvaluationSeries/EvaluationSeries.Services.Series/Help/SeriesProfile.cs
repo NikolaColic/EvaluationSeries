@@ -48,6 +48,9 @@ namespace EvaluationSeries.Services.Series.Help
             CreateMap<ActorCreate, Actor>();
             CreateMap<ActorAdd, ActorCreate>();
             CreateMap<ActorCreate, ActorAdd>();
+            CreateMap<Country, CountryFull>();
+            CreateMap<Genre, GenreFull>(); 
+
 
             CreateMap<Role, RoleAdd>()
                 .ForMember((dest) => dest.Actor,

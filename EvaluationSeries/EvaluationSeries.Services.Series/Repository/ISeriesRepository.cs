@@ -19,7 +19,15 @@ namespace EvaluationSeries.Services.Series.Repository
         //Role
         Task<IEnumerable<Role>> GetRolesSeries(int id);
         Task<bool> AddRole(int id, Role role);
-        Task<bool> DeleteRole(int seriesId, int roleId); 
+        Task<bool> DeleteRole(int seriesId, int roleId);
+
+        //Genre 
+        Task<IEnumerable<Genre>> GetAllGenre();
+        //Country 
+        Task<IEnumerable<Country>> GetAllCountries();
+        //Roles
+        Task<IEnumerable<Role>> GetAllRoles();
+
 
 
 

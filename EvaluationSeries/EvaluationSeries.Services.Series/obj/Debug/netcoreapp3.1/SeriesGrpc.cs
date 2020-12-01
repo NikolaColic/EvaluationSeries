@@ -53,6 +53,8 @@ namespace EvaluationSeries.Grpc {
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesRoleId> __Marshaller_SeriesRoleId = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesRoleId.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.ActorAddSeries> __Marshaller_ActorAddSeries = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.ActorAddSeries.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> __Marshaller_GetActorsSeriesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetActorsSeriesResponse.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetGenresResponse> __Marshaller_GetGenresResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetGenresResponse.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetCountryResponse> __Marshaller_GetCountryResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetCountryResponse.Parser));
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetSeriesResponse> __Method_GetAllSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetSeriesResponse>(
         grpc::MethodType.Unary,
@@ -138,6 +140,27 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_SeriesEmpty,
         __Marshaller_GetActorsSeriesResponse);
 
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetGenresResponse> __Method_GetAllGenre = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetGenresResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllGenre",
+        __Marshaller_SeriesEmpty,
+        __Marshaller_GetGenresResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetCountryResponse> __Method_GetAllCountry = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetCountryResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllCountry",
+        __Marshaller_SeriesEmpty,
+        __Marshaller_GetCountryResponse);
+
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetRolesResponse> __Method_GetAllRoles = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetRolesResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllRoles",
+        __Marshaller_SeriesEmpty,
+        __Marshaller_GetRolesResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -208,6 +231,21 @@ namespace EvaluationSeries.Grpc {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.GetGenresResponse> GetAllGenre(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.GetCountryResponse> GetAllCountry(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.GetRolesResponse> GetAllRoles(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -226,7 +264,10 @@ namespace EvaluationSeries.Grpc {
           .AddMethod(__Method_PostActorSeries, serviceImpl.PostActorSeries)
           .AddMethod(__Method_PutActorSeries, serviceImpl.PutActorSeries)
           .AddMethod(__Method_DeleteActorSeries, serviceImpl.DeleteActorSeries)
-          .AddMethod(__Method_GetAllActors, serviceImpl.GetAllActors).Build();
+          .AddMethod(__Method_GetAllActors, serviceImpl.GetAllActors)
+          .AddMethod(__Method_GetAllGenre, serviceImpl.GetAllGenre)
+          .AddMethod(__Method_GetAllCountry, serviceImpl.GetAllCountry)
+          .AddMethod(__Method_GetAllRoles, serviceImpl.GetAllRoles).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -247,6 +288,9 @@ namespace EvaluationSeries.Grpc {
       serviceBinder.AddMethod(__Method_PutActorSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(serviceImpl.PutActorSeries));
       serviceBinder.AddMethod(__Method_DeleteActorSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesId, global::EvaluationSeries.Grpc.SeriesMessageResponse>(serviceImpl.DeleteActorSeries));
       serviceBinder.AddMethod(__Method_GetAllActors, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetActorsSeriesResponse>(serviceImpl.GetAllActors));
+      serviceBinder.AddMethod(__Method_GetAllGenre, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetGenresResponse>(serviceImpl.GetAllGenre));
+      serviceBinder.AddMethod(__Method_GetAllCountry, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetCountryResponse>(serviceImpl.GetAllCountry));
+      serviceBinder.AddMethod(__Method_GetAllRoles, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetRolesResponse>(serviceImpl.GetAllRoles));
     }
 
   }

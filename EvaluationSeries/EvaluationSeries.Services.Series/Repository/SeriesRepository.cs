@@ -215,5 +215,50 @@ namespace EvaluationSeries.Services.Series.Repository
                 return false;
             }
         }
+
+        public async Task<IEnumerable<Genre>> GetAllGenre()
+        {
+            try
+            {
+                var genres = await _db.Genre.ToListAsync();
+                return genres;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<Country>> GetAllCountries()
+        {
+            try
+            {
+                var countries = await _db.Country.ToListAsync();
+                return countries;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<Role>> GetAllRoles()
+        {
+            try
+            {
+                var roles = await _db.Role
+                                .Include((r) => r.Actor)
+                                .Include(r => r.Series)
+                                .Include(r => r.Series.Country)
+                                .Include(r => r.Series.Genre)
+                                .ToListAsync();
+                return roles;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
     }
 }
