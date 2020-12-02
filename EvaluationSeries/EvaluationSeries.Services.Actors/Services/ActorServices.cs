@@ -26,6 +26,7 @@ namespace EvaluationSeries.Services.Actors.Services
             try
             {
                 var actors = await _actor.GetAll();
+                if (actors is null) return new GetActorsResponse() { };
                 List<ActorAdd> actorsAdd = new List<ActorAdd>();
                 foreach (var actor in actors)
                 {
@@ -36,9 +37,7 @@ namespace EvaluationSeries.Services.Actors.Services
             }
             catch (Exception)
             {
-                List<ActorAdd> actorsException = null;
-                return new GetActorsResponse() { Actors = { actorsException } };
-
+                return new GetActorsResponse() { };
             }
         }
 
@@ -47,6 +46,7 @@ namespace EvaluationSeries.Services.Actors.Services
             try
             {
                 var actor = await _actor.GetActorId(actorId.Id);
+                if (actor is null) return new GetActorByIdResponse() { };
                 ActorAdd act = _mapper.Map<Actor, ActorAdd>(actor);
                 return new GetActorByIdResponse() { Actor = act };
             }

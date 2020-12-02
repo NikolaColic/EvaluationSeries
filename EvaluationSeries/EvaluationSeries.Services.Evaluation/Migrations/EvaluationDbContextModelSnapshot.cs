@@ -38,9 +38,14 @@ namespace EvaluationSeries.Services.Evaluation.Migrations
                     b.Property<int?>("Id")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SeriesId")
+                        .HasColumnType("int");
+
                     b.HasKey("EvaluationId");
 
                     b.HasIndex("Id");
+
+                    b.HasIndex("SeriesId");
 
                     b.ToTable("Evaluation");
                 });
@@ -126,13 +131,13 @@ namespace EvaluationSeries.Services.Evaluation.Migrations
 
             modelBuilder.Entity("EvaluationSeries.Services.Evaluation.Entities.Evaluation2", b =>
                 {
-                    b.HasOne("EvaluationSeries.Services.Evaluation.Entities.Series", "Series")
-                        .WithMany()
-                        .HasForeignKey("Id");
-
                     b.HasOne("EvaluationSeries.Services.Evaluation.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("Id");
+
+                    b.HasOne("EvaluationSeries.Services.Evaluation.Entities.Series", "Series")
+                        .WithMany()
+                        .HasForeignKey("SeriesId");
 
                     b.Navigation("Series");
 

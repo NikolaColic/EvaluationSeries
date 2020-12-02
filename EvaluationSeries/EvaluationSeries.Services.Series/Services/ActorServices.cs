@@ -49,6 +49,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 GetActorByIdResponse actor = await _actorService.GetActorsIdAsync(new ActorId() { Id = id });
+                if (actor.Actor is null) return null;
                 ActorCreate actorCreate = _mapper.Map<ActorAdd, ActorCreate>(actor.Actor);
                 return actorCreate;
             }
@@ -63,6 +64,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 GetActorsResponse response = await _actorService.GetActorsAsync(new ActorEmpty());
+                if (response.Actors is null || response.Actors.Count == 0) return null;
                 List<ActorCreate> listaActora = new List<ActorCreate>();
                 response.Actors.ToList().ForEach(actor =>
                 {

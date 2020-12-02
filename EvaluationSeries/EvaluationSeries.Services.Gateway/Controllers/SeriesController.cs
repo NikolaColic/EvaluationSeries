@@ -20,10 +20,12 @@ namespace EvaluationSeries.Services.Gateway.Controllers
     public class SeriesController : ControllerBase
     {
         private ISeriesServicesGateway _series;
+        private IEvaluationServicesGateway _evaluation;
 
-        public SeriesController(ISeriesServicesGateway series)
+        public SeriesController(ISeriesServicesGateway series, IEvaluationServicesGateway evaluation)
         {
             this._series = series;
+            this._evaluation = evaluation;
         }
 
         [HttpGet(Name = "GetSeries")]
@@ -47,25 +49,40 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         public async Task<ActionResult<IEnumerable<Series>>> AddSeries([FromBody] Series series)
         {
             var response = await _series.AddSeries(series);
-            if (response) return RedirectToRoute("GetSeries");
-            return NotFound();
+            if (!response)  return NotFound();
+            var response2 = await _evaluation.AddSeries(series);
+            if (!response2) return NotFound();
+            return RedirectToRoute("GetSeries");
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<Series>>> UpdateSeries(int id,[FromBody] Series series)
         {
+            var seriesUpdate = await _series.GetSeriesById(id);
+            if (seriesUpdate is null) return NotFound();
+
             series.Id = id;
             var response = await _series.UpdateSeries(series);
-            if (response) return RedirectToRoute("GetSeries");
-            return NotFound();
+            if (!response) return NotFound();
+
+            var response1 = await _evaluation.UpdateSeries(series, seriesUpdate);
+            if (!response1) return NotFound();
+
+            return RedirectToRoute("GetSeries");
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteSeries(int id)
         {
+            var seriesDelete = await _series.GetSeriesById(id);
+            if (seriesDelete is null) return NotFound();
+
             var response = await _series.DeleteSeries(id);
-            if (response) return NoContent();
-            return NotFound();
+            if (!response) return NotFound();
+
+            var response1 = await _evaluation.DeleteSeries(seriesDelete);
+            if (!response1) return NotFound();
+            return NoContent();
         }
 
         [HttpGet("{id}/roles", Name ="GetRoles")]

@@ -54,6 +54,7 @@ namespace EvaluationSeries.Services.Evaluation.Migrations
                     EvaluationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Id = table.Column<int>(type: "int", nullable: true),
+                    SeriesId = table.Column<int>(type: "int", nullable: true),
                     Advantage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Flaw = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Favourite = table.Column<bool>(type: "bit", nullable: false)
@@ -62,8 +63,8 @@ namespace EvaluationSeries.Services.Evaluation.Migrations
                 {
                     table.PrimaryKey("PK_Evaluation", x => x.EvaluationId);
                     table.ForeignKey(
-                        name: "FK_Evaluation_Series_Id",
-                        column: x => x.Id,
+                        name: "FK_Evaluation_Series_SeriesId",
+                        column: x => x.SeriesId,
                         principalTable: "Series",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -107,6 +108,11 @@ namespace EvaluationSeries.Services.Evaluation.Migrations
                 name: "IX_Evaluation_Id",
                 table: "Evaluation",
                 column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Evaluation_SeriesId",
+                table: "Evaluation",
+                column: "SeriesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mark_CriteriaId",

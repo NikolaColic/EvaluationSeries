@@ -27,13 +27,32 @@ namespace EvaluationSeries.Services.Gateway.Services
         }
         public async Task<bool> AddEvaluation(EvaluationCreate evaluationCreate)
         {
-            var evaluation = _mapper.Map<EvaluationCreate, Evaluation>(evaluationCreate);
-            var evaluationAdd = _mapper.Map<Evaluation, EvaluationAdd>(evaluation);
-            var response = await _evaluation.PostEvaluationAsync(evaluationAdd);
-            if (!response.Signal) return false;
+            try
+            {
+                var evaluation = _mapper.Map<EvaluationCreate, Evaluation>(evaluationCreate);
+                var evaluationAdd = _mapper.Map<Evaluation, EvaluationAdd>(evaluation);
+                var response = await _evaluation.PostEvaluationAsync(evaluationAdd);
+                if (!response.Signal) return false;
 
-            return true;
-            //ovo zavrsiti 
+                var evaluations = await _evaluation.GetAllEvaluationsAsync(new EvaluationEmpty());
+                var evaluationNew = evaluations.Evaluations.SingleOrDefault((e) => e.User.Id == evaluation.User.Id && e.Series.Id == evaluation.Series.Id);
+                if (evaluationNew is null) return false;
+                List<MarkAdd> marks = new List<MarkAdd>();
+                evaluationCreate.Marks.ForEach((mark) =>
+                {
+                    var markAdd = _mapper.Map<MarkCreate, MarkAdd>(mark);
+                    markAdd.Evaluation = evaluationNew;
+                    marks.Add(markAdd);
+
+                });
+                var response2 = await _evaluation.PostMarksAsync(new MarksResponse() { Marks = { marks } });
+                return response2.Signal;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
          }
 
         public async Task<bool> AddSeries(Series series)
@@ -123,7 +142,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             try
             {
                 var response = await _evaluation.GetAllCriteriaAsync(new EvaluationEmpty());
-                if (response is null) return null;
+                if (response.Criterions is null || response.Criterions.Count ==0 ) return null;
                 List<EvaluationCriterion> criterions = new List<EvaluationCriterion>();
                 response.Criterions.ToList().ForEach((criterion) =>
                 {
@@ -143,7 +162,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             try
             {
                 var response = await _evaluation.GetAllEvaluationsAsync(new EvaluationEmpty());
-                if (response is null) return null;
+                if (response.Evaluations is null || response.Evaluations.Count == 0) return null;
                 List<Evaluation> evaluations = new List<Evaluation>();
                 response.Evaluations.ToList().ForEach((evaluation) =>
                 {
@@ -163,7 +182,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             try
             {
                 var response = await _evaluation.GetAllMarksAsync(new EvaluationEmpty());
-                if (response is null) return null;
+                if (response.Marks is null || response.Marks.Count == 0) return null;
                 List<Mark> marks = new List<Mark>();
                 response.Marks.ToList().ForEach((mark) =>
                 {
@@ -212,12 +231,13 @@ namespace EvaluationSeries.Services.Gateway.Services
             }
         }
 
-        public async Task<bool> UpdateSeries(Series series)
+        public async Task<bool> UpdateSeries(Series series, Series update)
         {
             try
             {
+                var seriesUpdate = _mapper.Map<Series, SeriesEvaluationAdd>(update);
                 var seriesAdd = _mapper.Map<Series, SeriesEvaluationAdd>(series);
-                var response = await _evaluation.PutSeriesAsync(seriesAdd);
+                var response = await _evaluation.PutSeriesAsync(new SeriesEvaluationUpdate() { SeriesAdd = seriesAdd, SeriesUpdate = seriesUpdate});
                 return response.Signal;
             }
             catch (Exception)
@@ -226,12 +246,14 @@ namespace EvaluationSeries.Services.Gateway.Services
             }
         }
 
-        public async Task<bool> UpdateUser(User user)
+        public async Task<bool> UpdateUser(User user, User userUpdate)
         {
             try
             {
                 var userAdd = _mapper.Map<User, UserEvaluationAdd>(user);
-                var response = await _evaluation.PutUserAsync(userAdd);
+                var userUpd = _mapper.Map<User, UserEvaluationAdd>(userUpdate);
+
+                var response = await _evaluation.PutUserAsync(new UserEvaluationUpdate() { UserAdd = userAdd, UserUpdate = userUpd});
                 return response.Signal;
             }
             catch (Exception)

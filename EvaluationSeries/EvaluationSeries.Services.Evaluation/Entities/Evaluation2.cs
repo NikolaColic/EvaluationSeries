@@ -13,7 +13,7 @@ namespace EvaluationSeries.Services.Evaluation.Entities
         public int EvaluationId { get; set; }
         [Key, ForeignKey("Id")]
         public User User { get; set; }
-        [Key, ForeignKey("Id")]
+        [Key, ForeignKey("SeriesId")]
         public Series Series { get; set; }
         public string Advantage { get; set; }
         public string Flaw { get; set; }

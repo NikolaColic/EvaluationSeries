@@ -87,7 +87,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             try
             {
                 var response = await _user.GetUsersAsync(new UserEmpty());
-                if (response.Users is null) return null;
+                if (response.Users is null || response.Users.Count == 0) return null;
                 var users = new List<User>();
                 response.Users.ToList().ForEach((user) =>
                 {

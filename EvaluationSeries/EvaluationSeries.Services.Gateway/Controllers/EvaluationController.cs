@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EvaluationSeries.Services.Gateway.Entities;
+using EvaluationSeries.Services.Gateway.Models;
+using EvaluationSeries.Services.Gateway.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,31 +15,41 @@ namespace EvaluationSeries.Services.Gateway.Controllers
     [ApiController]
     public class EvaluationController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IEvaluationServicesGateway _evaluation;
+        public EvaluationController(IEvaluationServicesGateway evaluation)
         {
-            return new string[] { "value1", "value2" };
+            _evaluation = evaluation;
+        }
+        [HttpGet(Name ="GetEvaluations")]
+        public async Task<ActionResult<IEnumerable<Evaluation>>> GetEvaluations()
+        {
+            var evaluations = await _evaluation.GetAllEvaluations();
+            if (evaluations is null) return NotFound();
+            return Ok(evaluations);
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Evaluation>> GetEvaluationById(int id)
         {
-            return "value";
+            var evaluation = await _evaluation.GetEvaluationById(id);
+            if (evaluation is null) return NotFound();
+            return Ok(evaluation);
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<IEnumerable<Evaluation>>> PostEvaluation([FromBody] EvaluationCreate evaluation)
         {
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            var response = await _evaluation.AddEvaluation(evaluation);
+            if (!response) return NotFound();
+            return RedirectToRoute("GetEvaluations");
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> DeleteEvaluation(int id)
         {
+            var response = await _evaluation.DeleteEvaluation(id);
+            if (!response) return NotFound();
+            return NoContent();
         }
     }
 }

@@ -115,7 +115,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             try
             {
                 var response = await _series.GetAllActorsAsync(new SeriesEmpty());
-                if (response is null) return null;
+                if (response.Actors is null || response.Actors.Count == 0) return null;
                 List<Actor> actors = new List<Actor>();
                 response.Actors.ToList().ForEach((act) =>
                 {
@@ -136,7 +136,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             {
                 var response = await _series.GetAllCountryAsync(new SeriesEmpty());
 
-                if (response is null) return null;
+                if (response.Countries is null || response.Countries.Count == 0) return null;
                 List<Country> countries = new List<Country>();
                 response.Countries.ToList().ForEach((country) =>
                 {
@@ -158,7 +158,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             {
                 var response = await _series.GetAllGenreAsync(new SeriesEmpty());
 
-                if (response is null) return null;
+                if (response.Genres is null || response.Genres.Count == 0) return null;
                 List<Genre> genres = new List<Genre>();
                 response.Genres.ToList().ForEach((genre) =>
                 {
@@ -179,7 +179,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             {
                 var response = await _series.GetAllRolesAsync(new SeriesEmpty());
 
-                if (response is null) return null;
+                if (response.Roles is null || response.Roles.Count == 0) return null;
                 List<Role> roles = new List<Role>();
                 response.Roles.ToList().ForEach((role) =>
                 {
@@ -200,7 +200,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             {
                 var response = await _series.GetAllSeriesAsync(new SeriesEmpty());
                 
-                if (response is null) return null;
+                if (!response.Signal || response.Series.Count ==0) return null;
                 List<Series> series = new List<Series>();
                 response.Series.ToList().ForEach((ser) =>
                 {
@@ -220,7 +220,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             try
             {
                 var response = await _series.GerRolesSeriesAsync(new SeriesId() { Id = id });
-                if (response is null) return null;
+                if (response.Roles is null || response.Roles.Count == 0) return null;
                 List<Role> roles = new List<Role>();
                 response.Roles.ToList().ForEach((r) =>
                 {
@@ -240,7 +240,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             try
             {
                 var response = await _series.GetSeriesByIdAsync(new SeriesId() { Id = id });
-                if (response is null) return null;
+                if (response.Series is null) return null;
                 var series = _mapper.Map<SeriesFull, Series>(response.Series);
                 return series;
             }

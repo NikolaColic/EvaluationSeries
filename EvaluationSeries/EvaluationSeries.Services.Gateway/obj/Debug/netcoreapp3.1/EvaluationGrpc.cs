@@ -44,7 +44,9 @@ namespace EvaluationSeries.Grpc {
 
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesEvaluationAdd> __Marshaller_SeriesEvaluationAdd = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesEvaluationAdd.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Marshaller_EvaluationMessageResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationMessageResponse.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesEvaluationUpdate> __Marshaller_SeriesEvaluationUpdate = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesEvaluationUpdate.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.UserEvaluationAdd> __Marshaller_UserEvaluationAdd = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.UserEvaluationAdd.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.UserEvaluationUpdate> __Marshaller_UserEvaluationUpdate = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.UserEvaluationUpdate.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationEmpty> __Marshaller_EvaluationEmpty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationEmpty.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationsResponse> __Marshaller_EvaluationsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationsResponse.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationAddId> __Marshaller_EvaluationAddId = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationAddId.Parser));
@@ -59,11 +61,11 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_SeriesEvaluationAdd,
         __Marshaller_EvaluationMessageResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "PutSeries",
-        __Marshaller_SeriesEvaluationAdd,
+        __Marshaller_SeriesEvaluationUpdate,
         __Marshaller_EvaluationMessageResponse);
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_DeleteSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
@@ -80,11 +82,11 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_UserEvaluationAdd,
         __Marshaller_EvaluationMessageResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutUser = new grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutUser = new grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "PutUser",
-        __Marshaller_UserEvaluationAdd,
+        __Marshaller_UserEvaluationUpdate,
         __Marshaller_EvaluationMessageResponse);
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_DeleteUser = new grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
@@ -202,19 +204,19 @@ namespace EvaluationSeries.Grpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_PostSeries, null, options, request);
       }
-      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutSeries(global::EvaluationSeries.Grpc.SeriesEvaluationAdd request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutSeries(global::EvaluationSeries.Grpc.SeriesEvaluationUpdate request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PutSeries(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutSeries(global::EvaluationSeries.Grpc.SeriesEvaluationAdd request, grpc::CallOptions options)
+      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutSeries(global::EvaluationSeries.Grpc.SeriesEvaluationUpdate request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_PutSeries, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutSeriesAsync(global::EvaluationSeries.Grpc.SeriesEvaluationAdd request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutSeriesAsync(global::EvaluationSeries.Grpc.SeriesEvaluationUpdate request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PutSeriesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutSeriesAsync(global::EvaluationSeries.Grpc.SeriesEvaluationAdd request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutSeriesAsync(global::EvaluationSeries.Grpc.SeriesEvaluationUpdate request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_PutSeries, null, options, request);
       }
@@ -250,19 +252,19 @@ namespace EvaluationSeries.Grpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_PostUser, null, options, request);
       }
-      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutUser(global::EvaluationSeries.Grpc.UserEvaluationAdd request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutUser(global::EvaluationSeries.Grpc.UserEvaluationUpdate request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PutUser(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutUser(global::EvaluationSeries.Grpc.UserEvaluationAdd request, grpc::CallOptions options)
+      public virtual global::EvaluationSeries.Grpc.EvaluationMessageResponse PutUser(global::EvaluationSeries.Grpc.UserEvaluationUpdate request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_PutUser, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutUserAsync(global::EvaluationSeries.Grpc.UserEvaluationAdd request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutUserAsync(global::EvaluationSeries.Grpc.UserEvaluationUpdate request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PutUserAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutUserAsync(global::EvaluationSeries.Grpc.UserEvaluationAdd request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutUserAsync(global::EvaluationSeries.Grpc.UserEvaluationUpdate request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_PutUser, null, options, request);
       }

@@ -6,11 +6,11 @@ option csharp_namespace = "EvaluationSeries.Grpc";
 
 service EvaluationGrpc {
 	rpc PostSeries(SeriesEvaluationAdd) returns (EvaluationMessageResponse) {}
-	rpc PutSeries(SeriesEvaluationAdd) returns (EvaluationMessageResponse) {}
+	rpc PutSeries(SeriesEvaluationUpdate) returns (EvaluationMessageResponse) {}
 	rpc DeleteSeries(SeriesEvaluationAdd) returns (EvaluationMessageResponse) {}
 
 	rpc PostUser(UserEvaluationAdd) returns (EvaluationMessageResponse) {}
-	rpc PutUser(UserEvaluationAdd) returns (EvaluationMessageResponse) {}
+	rpc PutUser(UserEvaluationUpdate) returns (EvaluationMessageResponse) {}
 	rpc DeleteUser(UserEvaluationAdd) returns (EvaluationMessageResponse) {}
 
 	rpc GetAllEvaluations(EvaluationEmpty) returns (EvaluationsResponse) {}
@@ -80,8 +80,14 @@ message MarkAdd {
      string MarkDescription = 5;
 }
 
-
-
+message SeriesEvaluationUpdate {
+	SeriesEvaluationAdd SeriesUpdate =1; 
+	SeriesEvaluationAdd SeriesAdd = 2;
+}
+message UserEvaluationUpdate {
+	UserEvaluationAdd UserUpdate =1; 
+	UserEvaluationAdd UserAdd = 2;
+}
 
 
 

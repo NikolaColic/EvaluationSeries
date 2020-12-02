@@ -10,10 +10,10 @@ namespace EvaluationSeries.Services.Gateway.Services
     public interface IEvaluationServicesGateway
     {
         Task<bool> AddSeries(Series series);
-        Task<bool> UpdateSeries(Series series);
+        Task<bool> UpdateSeries(Series series, Series update);
         Task<bool> DeleteSeries(Series series);
         Task<bool> AddUser(User user);
-        Task<bool> UpdateUser(User user);
+        Task<bool> UpdateUser(User user, User userUpdate);
         Task<bool> DeleteUser(User user);
         Task<IEnumerable<Evaluation>> GetAllEvaluations();
         Task<Evaluation> GetEvaluationById(int id);

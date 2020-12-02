@@ -35,7 +35,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var series = await _series.GetAllSeries();
-                if (series is null) return new GetSeriesResponse() { Signal = false };
+                if (series is null || series.Count() == 0) return new GetSeriesResponse() { Signal = false };
                 List<SeriesFull> seriesFull = new List<SeriesFull>();
                 series.ToList().ForEach((ser) =>
                 {
@@ -168,9 +168,8 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _actor.GetAll();
-                List<ActorAddSeries> actors = null;
-                if (response is null) return new GetActorsSeriesResponse() { Actors = { actors } };
-                actors = new List<ActorAddSeries>();
+                if (response is null || response.Count() ==0) return new GetActorsSeriesResponse() { };
+                var actors = new List<ActorAddSeries>();
                 response.ToList().ForEach((act) =>
                 {
                     var nov = _mapper.Map<ActorCreate, ActorAddSeries>(act);
@@ -180,8 +179,7 @@ namespace EvaluationSeries.Services.Series.Services
             }
             catch (Exception)
             {
-                List<ActorAddSeries> actorError = null;
-                return new GetActorsSeriesResponse() { Actors = { actorError } };
+                return new GetActorsSeriesResponse() { };
             }
         }
 
@@ -271,9 +269,8 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _series.GetAllGenre();
-                List<GenreFull> full = null;
-                if (response is null) return new GetGenresResponse() { Genres = { full } };
-                full = new List<GenreFull>();
+                if (response is null || response.Count() == 0) return new GetGenresResponse() {};
+                var full = new List<GenreFull>();
                 response.ToList().ForEach((genre) =>
                 {
                     var coun = _mapper.Map<Genre, GenreFull>(genre);
@@ -283,8 +280,7 @@ namespace EvaluationSeries.Services.Series.Services
             }
             catch (Exception)
             {
-                List<GenreFull> full = null;
-                return new GetGenresResponse() { Genres = { full } };
+                return new GetGenresResponse() {};
             }
         }
 
@@ -293,9 +289,8 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _series.GetAllRoles();
-                List<RoleAdd> full = null;
-                if (response is null) return new GetRolesResponse() { Roles = { full } };
-                full = new List<RoleAdd>();
+                if (response is null || response.Count() ==0) return new GetRolesResponse() {};
+                var full = new List<RoleAdd>();
                 response.ToList().ForEach((role) =>
                 {
                     var r = _mapper.Map<Role, RoleAdd>(role);

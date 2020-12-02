@@ -44,7 +44,9 @@ namespace EvaluationSeries.Grpc {
 
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesEvaluationAdd> __Marshaller_SeriesEvaluationAdd = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesEvaluationAdd.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Marshaller_EvaluationMessageResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationMessageResponse.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesEvaluationUpdate> __Marshaller_SeriesEvaluationUpdate = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesEvaluationUpdate.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.UserEvaluationAdd> __Marshaller_UserEvaluationAdd = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.UserEvaluationAdd.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.UserEvaluationUpdate> __Marshaller_UserEvaluationUpdate = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.UserEvaluationUpdate.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationEmpty> __Marshaller_EvaluationEmpty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationEmpty.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationsResponse> __Marshaller_EvaluationsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationsResponse.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.EvaluationAddId> __Marshaller_EvaluationAddId = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.EvaluationAddId.Parser));
@@ -59,11 +61,11 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_SeriesEvaluationAdd,
         __Marshaller_EvaluationMessageResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "PutSeries",
-        __Marshaller_SeriesEvaluationAdd,
+        __Marshaller_SeriesEvaluationUpdate,
         __Marshaller_EvaluationMessageResponse);
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_DeleteSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
@@ -80,11 +82,11 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_UserEvaluationAdd,
         __Marshaller_EvaluationMessageResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutUser = new grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_PutUser = new grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "PutUser",
-        __Marshaller_UserEvaluationAdd,
+        __Marshaller_UserEvaluationUpdate,
         __Marshaller_EvaluationMessageResponse);
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse> __Method_DeleteUser = new grpc::Method<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(
@@ -172,7 +174,7 @@ namespace EvaluationSeries.Grpc {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutSeries(global::EvaluationSeries.Grpc.SeriesEvaluationAdd request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutSeries(global::EvaluationSeries.Grpc.SeriesEvaluationUpdate request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -187,7 +189,7 @@ namespace EvaluationSeries.Grpc {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutUser(global::EvaluationSeries.Grpc.UserEvaluationAdd request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::EvaluationSeries.Grpc.EvaluationMessageResponse> PutUser(global::EvaluationSeries.Grpc.UserEvaluationUpdate request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -273,10 +275,10 @@ namespace EvaluationSeries.Grpc {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, EvaluationGrpcBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_PostSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.PostSeries));
-      serviceBinder.AddMethod(__Method_PutSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.PutSeries));
+      serviceBinder.AddMethod(__Method_PutSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.PutSeries));
       serviceBinder.AddMethod(__Method_DeleteSeries, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.SeriesEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.DeleteSeries));
       serviceBinder.AddMethod(__Method_PostUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.PostUser));
-      serviceBinder.AddMethod(__Method_PutUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.PutUser));
+      serviceBinder.AddMethod(__Method_PutUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.UserEvaluationUpdate, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.PutUser));
       serviceBinder.AddMethod(__Method_DeleteUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.UserEvaluationAdd, global::EvaluationSeries.Grpc.EvaluationMessageResponse>(serviceImpl.DeleteUser));
       serviceBinder.AddMethod(__Method_GetAllEvaluations, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.EvaluationEmpty, global::EvaluationSeries.Grpc.EvaluationsResponse>(serviceImpl.GetAllEvaluations));
       serviceBinder.AddMethod(__Method_GetEvaluationById, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::EvaluationSeries.Grpc.EvaluationAddId, global::EvaluationSeries.Grpc.EvaluationAdd>(serviceImpl.GetEvaluationById));

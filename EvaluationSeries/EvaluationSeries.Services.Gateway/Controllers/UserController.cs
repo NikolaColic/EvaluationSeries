@@ -24,10 +24,14 @@ namespace EvaluationSeries.Services.Gateway.Controllers
     {
         private IUserServicesGateway _user;
         private readonly AppSettings _appSettings;
-        public UserController(IUserServicesGateway user, IOptions<AppSettings> appSettings)
+        private IEvaluationServicesGateway _evaluation;
+
+        public UserController(IUserServicesGateway user, IOptions<AppSettings> appSettings,
+            IEvaluationServicesGateway evaluation)
         {
             _user = user;
             _appSettings = appSettings.Value;
+            _evaluation = evaluation;
         }
        
         [HttpGet(Name = "GetUsers")]
@@ -43,8 +47,11 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         public async Task<ActionResult<IEnumerable<User>>> PostUser([FromBody] User user)
         {
             var response = await _user.AddUser(user);
-            if (response) return RedirectToRoute("GetUsers");
-            return NotFound();
+            if (!response) return NotFound();
+
+            var response2 = await _evaluation.AddUser(user);
+            if (!response2) return NotFound();
+            return RedirectToRoute("GetUsers");
         }
         [HttpPost("aut")]
         [AllowAnonymous]
@@ -89,18 +96,29 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<User>>> PutUser(int id, [FromBody] User user)
         {
+            var userUpdate = await _user.GetUserById(id);
+            if (userUpdate is null) return NotFound();
             user.Id = id;
             var response = await _user.UpdateUser(user);
-            if (response) return RedirectToRoute("GetUsers");
-            return NotFound();
+            if (!response) return NotFound();
+
+            var response2 = await _evaluation.UpdateUser(user, userUpdate);
+            if (!response2) return NotFound();
+            return RedirectToRoute("GetUsers");
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
+            var userDelete = await _user.GetUserById(id);
+            if (userDelete is null) return NotFound();
+
             var response = await _user.DeleteUser(id);
-            if (response) return NoContent();
-            return NotFound();
+            if (!response) return NotFound();
+
+            var response2 = await _evaluation.DeleteUser(userDelete);
+            if (!response2) return NotFound();
+            return NoContent();
         }
     }
 }

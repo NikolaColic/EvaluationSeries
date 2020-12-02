@@ -10,11 +10,11 @@ namespace EvaluationSeries.Services.Evaluation.Repository
     {
         //Series 
         Task<bool> PostSeries(Series s);
-        Task<bool> PutSeries(Series s);
+        Task<bool> PutSeries(Series s, Series update);
         Task<bool> DeleteSeries(Series s);
         //User
         Task<bool> PostUser(User u);
-        Task<bool> PutUser(User u);
+        Task<bool> PutUser(User u, User update);
         Task<bool> DeleteUser(User u);
         //Evaluation
         Task<IEnumerable<Evaluation2>> GetAllEvalutions();

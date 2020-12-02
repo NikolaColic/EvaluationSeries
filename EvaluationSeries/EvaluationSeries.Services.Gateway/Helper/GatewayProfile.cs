@@ -99,6 +99,8 @@ namespace EvaluationSeries.Services.Gateway.Help
 
             CreateMap<EvaluationCreate, Evaluation>();
             CreateMap<MarkCreate, Mark>();
+            CreateMap<MarkCreate, MarkAdd>();
+
         }
     }
 }

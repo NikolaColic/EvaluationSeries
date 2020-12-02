@@ -26,9 +26,8 @@ namespace EvaluationSeries.Services.Authentication.Services
             try
             {
                 var response = await _user.GetAllUsers();
-                List<UserAdd> usersAdd = null;
-                if (response is null) return new UsersResponse() { Users = { usersAdd } };
-                usersAdd = new List<UserAdd>();
+                if (response is null || response.Count() == 0) return new UsersResponse() {};
+                var usersAdd = new List<UserAdd>();
                 response.ToList().ForEach((user) =>
                 {
                     var userAdd = _mapper.Map<User, UserAdd>(user);
@@ -38,8 +37,7 @@ namespace EvaluationSeries.Services.Authentication.Services
             }
             catch (Exception)
             {
-                List<UserAdd> usersAdd = null;
-                return new UsersResponse() { Users = { usersAdd } };
+                return new UsersResponse() {};
             }
         }
         public override async Task<UserAuthenticationResponse> Authentication(UserAuthentication request, ServerCallContext context)

@@ -44,7 +44,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                 foreach(var mark in marks)
                 {
                     if (mark is null) return false;
-                    _db.Entry(marks).State = EntityState.Deleted;
+                    _db.Entry(mark).State = EntityState.Deleted;
                 }
                 await _db.SaveChangesAsync();
                 return true;
@@ -124,6 +124,8 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             {
                 var marks = await _db.Mark
                         .Include((e) => e.Evaluation)
+                        .Include((e) => e.Evaluation.Series)
+                        .Include((e) => e.Evaluation.User)
                         .Include((e) => e.Criterion)
                         .ToListAsync();
                 return marks;
@@ -248,12 +250,13 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
         }
 
-        public async Task<bool> PutSeries(Series s)
+        public async Task<bool> PutSeries(Series s, Series update)
         {
             try
             {
-                var seriesUpdate = await _db.Series.SingleOrDefaultAsync((ser) => ser.Id == s.Id);
+                var seriesUpdate = await _db.Series.SingleOrDefaultAsync((ser) => ser.Name == update.Name);
                 if (seriesUpdate is null) return false;
+                s.Id = seriesUpdate.Id;
                 _db.Entry(seriesUpdate).CurrentValues.SetValues(s);
                 await _db.SaveChangesAsync();
                 return true;
@@ -264,12 +267,13 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
         }
 
-        public async Task<bool> PutUser(User u)
+        public async Task<bool> PutUser(User u, User update)
         {
             try
             {
-                var userUpdate = await _db.User.SingleOrDefaultAsync((ser) => ser.Id == u.Id);
+                var userUpdate = await _db.User.SingleOrDefaultAsync((ser) => ser.Username == update.Username);
                 if (userUpdate is null) return false;
+                u.Id = userUpdate.Id;
                 _db.Entry(userUpdate).CurrentValues.SetValues(u);
                 await _db.SaveChangesAsync();
                 return true;
