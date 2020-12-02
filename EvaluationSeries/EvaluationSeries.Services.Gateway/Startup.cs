@@ -75,6 +75,8 @@ namespace EvaluationSeries.Services.Gateway
             services.AddScoped<IUserServicesGateway, UserServicesGateway>();
             services.AddGrpcClient<UserGrpc.UserGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:User:Uri"]));
             services.AddGrpcClient<SeriesGrpc.SeriesGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
+            services.AddGrpcClient<EvaluationGrpc.EvaluationGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Evaluation:Uri"]));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

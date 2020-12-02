@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+option csharp_namespace = "EvaluationSeries.Grpc";
+
+
+
+service EvaluationGrpc {
+	rpc PostSeries(SeriesEvaluationAdd) returns (EvaluationMessageResponse) {}
+	rpc PutSeries(SeriesEvaluationAdd) returns (EvaluationMessageResponse) {}
+	rpc DeleteSeries(SeriesEvaluationAdd) returns (EvaluationMessageResponse) {}
+
+	rpc PostUser(UserEvaluationAdd) returns (EvaluationMessageResponse) {}
+	rpc PutUser(UserEvaluationAdd) returns (EvaluationMessageResponse) {}
+	rpc DeleteUser(UserEvaluationAdd) returns (EvaluationMessageResponse) {}
+
+	rpc GetAllEvaluations(EvaluationEmpty) returns (EvaluationsResponse) {}
+	rpc GetEvaluationById(EvaluationAddId) returns (EvaluationAdd) {}
+	rpc PostEvaluation(EvaluationAdd) returns (EvaluationMessageResponse) {}
+	rpc DeleteEvaluation(EvaluationAddId) returns (EvaluationMessageResponse) {}
+
+	rpc GetAllCriteria(EvaluationEmpty) returns (CriterionsResponse) {}
+	
+	rpc GetAllMarks(EvaluationEmpty) returns (MarksResponse) {}
+	rpc PostMarks(MarksResponse) returns (EvaluationMessageResponse) {}
+	rpc PutMarks(MarksResponse) returns (EvaluationMessageResponse) {}
+	rpc DeleteMarks(EvaluationAddId) returns (EvaluationMessageResponse) {}
+}
+
+message SeriesEvaluationAdd {
+	int32 Id = 1;
+    string Name = 2;
+    string WebSiteUrl = 3;
+}
+
+message UserEvaluationAdd {
+	int32 Id = 1;
+    string Email = 2;
+    string Username = 3;
+}
+message EvaluationEmpty {}
+message EvaluationAddId {
+	int32 Id = 1;
+}
+
+message EvaluationAdd {
+	int32 EvaluationId = 1;
+    UserEvaluationAdd User = 2;
+    SeriesEvaluationAdd Series = 3;
+    string Advantage = 4; 
+    string Flaw = 5;
+    bool Favourite = 6;
+}
+
+message EvaluationMessageResponse {
+	bool Signal = 1; 
+}
+
+message EvaluationsResponse {
+	repeated EvaluationAdd Evaluations = 1;
+}
+
+message CriterionsResponse {
+	repeated CriterionAdd Criterions = 1;
+}
+
+message CriterionAdd {
+	 int32 CriteriaId = 1;
+     string CriteriaName = 2;
+}
+
+message MarksResponse {
+	repeated MarkAdd Marks = 1;
+}
+
+message MarkAdd {
+	 int32 MarkId = 1;
+     CriterionAdd Criterion = 2;
+     EvaluationAdd Evaluation = 3;
+     int32 MarkValue = 4;
+     string MarkDescription = 5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Gateway.Entities;
+using EvaluationSeries.Services.Gateway.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,42 @@ namespace EvaluationSeries.Services.Gateway.Help
                 opt => opt.MapFrom((s) => new CountryAdd() { CountryId = s.Country.CountryId, Name = s.Country.Name }));
             CreateMap<CountryFull, Country>();
             CreateMap<GenreFull, Genre>();
+
+            //EvaluationServices
+            CreateMap<SeriesEvaluationAdd, Series>();
+            CreateMap<Series, SeriesEvaluationAdd>();
+
+            CreateMap<User, UserEvaluationAdd>();
+            CreateMap<UserEvaluationAdd, User>();
+
+            CreateMap<CriterionAdd, EvaluationCriterion>();
+            CreateMap<EvaluationCriterion, CriterionAdd>();
+
+            CreateMap<Evaluation, EvaluationAdd>()
+                .ForMember((dest) => dest.User,
+                opt => opt.MapFrom((s) => s.User))
+                .ForMember((dest) => dest.Series,
+                opt => opt.MapFrom((s) => s.Series));
+            CreateMap<EvaluationAdd, Evaluation>()
+                .ForMember((dest) => dest.User,
+                opt => opt.MapFrom((s) => s.User))
+                .ForMember((dest) => dest.Series,
+                opt => opt.MapFrom((s) => s.Series));
+
+            CreateMap<Mark, MarkAdd>()
+               .ForMember((dest) => dest.Evaluation,
+               opt => opt.MapFrom((s) => s.Evaluation))
+               .ForMember((dest) => dest.Criterion,
+               opt => opt.MapFrom((s) => s.Criterion));
+
+            CreateMap<MarkAdd, Mark>()
+               .ForMember((dest) => dest.Evaluation,
+               opt => opt.MapFrom((s) => s.Evaluation))
+               .ForMember((dest) => dest.Criterion,
+               opt => opt.MapFrom((s) => s.Criterion));
+
+            CreateMap<EvaluationCreate, Evaluation>();
+            CreateMap<MarkCreate, Mark>();
         }
     }
 }
