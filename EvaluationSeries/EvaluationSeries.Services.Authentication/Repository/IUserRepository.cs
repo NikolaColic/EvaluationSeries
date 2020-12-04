@@ -13,7 +13,5 @@ namespace EvaluationSeries.Services.Authentication.Repository
         Task<bool> AddUser(User user);
         Task<bool> UpdateUser(User user);
         Task<bool> DeleteUser(int id);
-
-
     }
 }

@@ -80,7 +80,8 @@ namespace EvaluationSeries.Services.Actors.Repository
             {
                 var actorUpdate = await GetActorId(actor.ActorId);
                 if (actor is null) return false;
-                _db.Entry(actorUpdate).CurrentValues.SetValues(actor);
+                _db.Entry(actorUpdate).State = EntityState.Detached;
+                _db.Update(actor);
                 await _db.SaveChangesAsync();
                 return true;
             }

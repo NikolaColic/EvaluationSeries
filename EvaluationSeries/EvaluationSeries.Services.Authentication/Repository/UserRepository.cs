@@ -105,7 +105,8 @@ namespace EvaluationSeries.Services.Authentication.Repository
                 if (country is null) return false;
                 user.Country = country;
 
-                _db.Entry(userUpdate).CurrentValues.SetValues(user);
+                _db.Entry(userUpdate).State = EntityState.Detached;
+                _db.Update(user);
                 await _db.SaveChangesAsync();
                 return true;
             }

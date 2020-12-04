@@ -159,7 +159,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                 var series = await _db.Series.SingleOrDefaultAsync((s) => s.Id == evaluation.Series.Id);
                 var user = await _db.User.SingleOrDefaultAsync((s) => s.Id == evaluation.User.Id);
                 if (series is null || user is null) return false;
-
+                if(! await EvaluationExist(evaluation,0))
                 evaluation.Series = series;
                 evaluation.User = user;
 
@@ -173,6 +173,12 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
 
         }
+        private async Task<bool> EvaluationExist(Evaluation2 evaluation, int id)
+        {
+            var count = await _db.Evaluation.CountAsync(ev => ev.Series.Id == evaluation.Series.Id && ev.User.Id == evaluation.User.Id &&
+            ev.EvaluationId != id);
+            return count > 1 ? false : true;
+        }
 
         public async Task<bool> PostMarks(List<Mark> marks)
         {
@@ -183,7 +189,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                     var evaluation = await _db.Evaluation.SingleOrDefaultAsync((s) => s.EvaluationId == mark.Evaluation.EvaluationId);
                     var criterion = await _db.Criteria.SingleOrDefaultAsync((s) => s.CriteriaId == mark.Criterion.CriteriaId);
                     if (evaluation is null || criterion is null) return false;
-                    
+                    if (!await MarkExist(mark, 0)) return false;
                     mark.Evaluation = evaluation;
                     mark.Criterion = criterion;
                     await _db.AddAsync(mark);
@@ -196,6 +202,13 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                 return false;
             }
         }
+        private async Task<bool> MarkExist(Mark mark, int id)
+        {
+            var count = await _db.Mark.CountAsync(ev => ev.Criterion.CriteriaId == mark.Criterion.CriteriaId && ev.Evaluation.EvaluationId== mark.Evaluation.EvaluationId &&
+            ev.MarkId != id);
+            return count > 1 ? false : true;
+        }
+
 
         public async Task<bool> PostSeries(Series s)
         {
@@ -235,11 +248,16 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                     var evaluation = await _db.Evaluation.SingleOrDefaultAsync((s) => s.EvaluationId == mark.Evaluation.EvaluationId);
                     var criterion = await _db.Criteria.SingleOrDefaultAsync((s) => s.CriteriaId == mark.Criterion.CriteriaId);
                     if (evaluation is null || criterion is null) return false;
+                    if (!await MarkExist(mark, mark.MarkId)) return false;
                     mark.Evaluation = evaluation;
                     mark.Criterion = criterion;
 
                     if (markUpdate is null) await _db.AddAsync(mark);
-                    else _db.Entry(markUpdate).CurrentValues.SetValues(mark);
+                    else
+                    {
+                        _db.Entry(markUpdate).State = EntityState.Detached;
+                        _db.Update(mark);
+                    }
                 }
                 await _db.SaveChangesAsync();
                 return true;
@@ -257,7 +275,8 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                 var seriesUpdate = await _db.Series.SingleOrDefaultAsync((ser) => ser.Name == update.Name);
                 if (seriesUpdate is null) return false;
                 s.Id = seriesUpdate.Id;
-                _db.Entry(seriesUpdate).CurrentValues.SetValues(s);
+                _db.Entry(seriesUpdate).State = EntityState.Detached;
+                _db.Update(update);
                 await _db.SaveChangesAsync();
                 return true;
             }
@@ -274,7 +293,8 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                 var userUpdate = await _db.User.SingleOrDefaultAsync((ser) => ser.Username == update.Username);
                 if (userUpdate is null) return false;
                 u.Id = userUpdate.Id;
-                _db.Entry(userUpdate).CurrentValues.SetValues(u);
+                _db.Entry(userUpdate).State = EntityState.Detached;
+                _db.Update(update);
                 await _db.SaveChangesAsync();
                 return true;
             }

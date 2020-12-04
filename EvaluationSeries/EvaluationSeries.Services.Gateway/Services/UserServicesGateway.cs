@@ -101,7 +101,6 @@ namespace EvaluationSeries.Services.Gateway.Services
                 return null;
             }
         }
-
         public async Task<bool> UpdateUser(User user)
         {
             try

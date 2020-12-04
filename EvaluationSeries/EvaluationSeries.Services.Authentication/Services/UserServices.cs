@@ -96,6 +96,5 @@ namespace EvaluationSeries.Services.Authentication.Services
                 return new UserMessageResponse() { Poruka = "Greska", Signal = false };
             }
         }
-
     }
 }

@@ -21,6 +21,7 @@ namespace EvaluationSeries.Services.Series.Repository
             {
                 role = await SetObjectRole(id, role);
                 if (role is null) return false;
+                if (!await RoleExist(role, 0)) return false;
                 await _db.AddAsync(role);
                 await _db.SaveChangesAsync();
                 return true;
@@ -30,6 +31,13 @@ namespace EvaluationSeries.Services.Series.Repository
                 return false;
             }
 
+        }
+
+        private async Task<bool> RoleExist(Role role, int id)
+        {
+            var count = await _db.Role.CountAsync(r => r.Series.Id == role.Series.Id && r.Actor.ActorId == role.Actor.ActorId &&
+            r.RoleId != id);
+            return count >1 ? false : true;
         }
 
         private async Task<Role> SetObjectRole(int id, Role role)
@@ -206,7 +214,8 @@ namespace EvaluationSeries.Services.Series.Repository
                 if (seriesUpdate is null) return false;
                 s = await SetObjects(s);
                 if (s is null) return false;
-                _db.Entry(seriesUpdate).CurrentValues.SetValues(s);
+                _db.Entry(seriesUpdate).State = EntityState.Detached;
+                _db.Update(s);
                 await _db.SaveChangesAsync();
                 return true;
             }
