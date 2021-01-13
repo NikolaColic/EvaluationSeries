@@ -3,6 +3,7 @@ using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Authentication.Entities;
 using EvaluationSeries.Services.Authentication.Repository;
 using Grpc.Core;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,19 @@ namespace EvaluationSeries.Services.Authentication.Services
     {
         private IUserRepository _user;
         private IMapper _mapper;
-        public UserServices(IUserRepository user, IMapper mapper)
+        private readonly ILogger<UserServices> _logger;
+
+        public UserServices(IUserRepository user, IMapper mapper, ILogger<UserServices> logger)
         {
             _user = user;
             _mapper = mapper;
+            this._logger = logger;
         }
         public override async Task<UsersResponse> GetUsers(UserEmpty request, ServerCallContext context)
         {
             try
             {
+                throw new Exception();
                 var response = await _user.GetAllUsers();
                 if (response is null || response.Count() == 0) return new UsersResponse() {};
                 var usersAdd = new List<UserAdd>();
@@ -35,8 +40,9 @@ namespace EvaluationSeries.Services.Authentication.Services
                 });
                 return new UsersResponse() { Users = { usersAdd } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new UsersResponse() {};
             }
         }
@@ -49,8 +55,9 @@ namespace EvaluationSeries.Services.Authentication.Services
                 var user = _mapper.Map<User, UserAdd>(response);
                 return new UserAuthenticationResponse() { Signal = true, User = user };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new UserAuthenticationResponse() { Signal = false, User = null };
             }
         }
@@ -63,8 +70,9 @@ namespace EvaluationSeries.Services.Authentication.Services
                 if (response) return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
                 return new UserMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new UserMessageResponse() { Poruka = "Greska", Signal = false };
             } 
         }
@@ -77,8 +85,9 @@ namespace EvaluationSeries.Services.Authentication.Services
                 if (response) return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
                 return new UserMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new UserMessageResponse() { Poruka = "Greska", Signal = false };
             }
         }
@@ -91,8 +100,9 @@ namespace EvaluationSeries.Services.Authentication.Services
                 if (response) return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
                 return new UserMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new UserMessageResponse() { Poruka = "Greska", Signal = false };
             }
         }

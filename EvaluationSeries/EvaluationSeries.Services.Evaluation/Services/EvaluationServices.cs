@@ -3,6 +3,7 @@ using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Evaluation.Entities;
 using EvaluationSeries.Services.Evaluation.Repository;
 using Grpc.Core;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,13 @@ namespace EvaluationSeries.Services.Evaluation.Services
     {
         private IEvaluationRepository _evaluation;
         private IMapper _mapper;
-        public EvaluationServices(IEvaluationRepository evaluation, IMapper mapper)
+        private readonly ILogger<EvaluationServices> _logger;
+
+        public EvaluationServices(IEvaluationRepository evaluation, IMapper mapper, ILogger<EvaluationServices> logger)
         {
             _evaluation = evaluation;
             _mapper = mapper;
+            this._logger = logger;
         }
         public async override Task<EvaluationMessageResponse> DeleteEvaluation(EvaluationAddId request, ServerCallContext context)
         {
@@ -27,8 +31,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -40,8 +45,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -54,8 +60,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -68,8 +75,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -82,8 +90,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -96,8 +105,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -115,8 +125,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -129,8 +140,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -145,8 +157,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -164,8 +177,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -180,8 +194,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 if (response) return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationMessageResponse() { Signal = false };
             }
         }
@@ -199,8 +214,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 });
                 return new EvaluationsResponse() { Evaluations = { evaluationsAdd } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new EvaluationsResponse() { };
             }
         }
@@ -218,8 +234,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 });
                 return new CriterionsResponse() { Criterions = { criterions } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new CriterionsResponse() {};
             }
         }
@@ -237,8 +254,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 });
                 return new MarksResponse() { Marks = { marks } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new MarksResponse() {};
             }
         }
@@ -252,8 +270,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 var evaluation = _mapper.Map<Evaluation2, EvaluationAdd>(response);
                 return evaluation;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 EvaluationAdd evaluatioAdd = null;
                 return evaluatioAdd;
             }

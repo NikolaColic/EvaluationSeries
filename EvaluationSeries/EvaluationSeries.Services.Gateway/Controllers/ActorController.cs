@@ -17,7 +17,6 @@ namespace EvaluationSeries.Services.Gateway.Controllers
 {
     [Route("gateway/series/actors")]
     [ApiController]
-    [Authorize]
     public class ActorController : ControllerBase
     {
         private ISeriesServicesGateway _actor;

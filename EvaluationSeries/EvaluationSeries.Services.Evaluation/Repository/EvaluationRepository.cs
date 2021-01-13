@@ -29,7 +29,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
 
         }
@@ -51,7 +51,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -62,13 +62,18 @@ namespace EvaluationSeries.Services.Evaluation.Repository
                 //eventualno da obrisem sve evaluacije za ovu seriju
                 var series = await _db.Series.SingleOrDefaultAsync((ser) => ser.Name == s.Name);
                 if (series is null) return false;
+                var evaluations = await _db.Evaluation.Where((ev) => ev.Series.Id == s.Id).ToListAsync();
+                foreach(var evaluation in evaluations)
+                {
+                    await DeleteEvaluation(evaluation.EvaluationId);
+                }
                 _db.Entry(series).State = EntityState.Deleted;
                 await _db.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -85,7 +90,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -98,7 +103,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -114,7 +119,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -132,7 +137,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -148,7 +153,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -169,7 +174,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
 
         }
@@ -199,7 +204,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
         private async Task<bool> MarkExist(Mark mark, int id)
@@ -220,7 +225,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -234,7 +239,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -264,7 +269,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -282,7 +287,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -300,7 +305,7 @@ namespace EvaluationSeries.Services.Evaluation.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
     }

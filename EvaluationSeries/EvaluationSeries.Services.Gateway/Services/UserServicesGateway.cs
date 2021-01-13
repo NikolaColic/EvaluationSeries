@@ -2,6 +2,7 @@
 using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Gateway.Entities;
 using Grpc.Net.Client;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,9 @@ namespace EvaluationSeries.Services.Gateway.Services
         private UserGrpc.UserGrpcClient _user;
 
         private IMapper _mapper;
-        public UserServicesGateway(IMapper mapper)
+        private readonly ILogger<UserServicesGateway> _logger;
+
+        public UserServicesGateway(IMapper mapper,ILogger<UserServicesGateway> logger)
         {
             var httpHandler = new HttpClientHandler();
             httpHandler.ServerCertificateCustomValidationCallback =
@@ -23,6 +26,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             var channel = GrpcChannel.ForAddress("https://localhost:5002");
             this._user = new UserGrpc.UserGrpcClient(channel);
             _mapper = mapper;
+            this._logger = logger;
         }
         public async Task<bool> AddUser(User user)
         {
@@ -32,8 +36,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _user.PostUserAsync(userAdd);
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
 
@@ -48,8 +53,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var user = _mapper.Map<UserAdd, User>(response.User);
                 return user;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return null;
             }
 
@@ -62,8 +68,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _user.DeleteUserAsync(new UserId() { Id = id});
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -76,8 +83,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var user =  users.SingleOrDefault((s) => s.Id == id);
                 return user;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return null;
             }
         }
@@ -96,8 +104,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 });
                 return users;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return null;
             }
         }
@@ -109,8 +118,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _user.PutUserAsync(userAdd);
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }

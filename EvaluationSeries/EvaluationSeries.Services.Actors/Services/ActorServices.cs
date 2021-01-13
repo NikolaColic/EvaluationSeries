@@ -4,6 +4,7 @@ using EvaluationSeries.Services.Actors.Entities;
 using EvaluationSeries.Services.Actors.Help;
 using EvaluationSeries.Services.Actors.Repository;
 using Grpc.Core;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,10 +17,13 @@ namespace EvaluationSeries.Services.Actors.Services
     {
         private IActorsRepository _actor;
         private IMapper _mapper;
-        public ActorServices(IActorsRepository actor, IMapper mapper)
+        private readonly ILogger<ActorServices> _logger;
+
+        public ActorServices(IActorsRepository actor, IMapper mapper, ILogger<ActorServices> logger)
         {
             _actor = actor;
             this._mapper = mapper;
+            this._logger = logger;
         }
         public override async Task<GetActorsResponse> GetActors(ActorEmpty a, ServerCallContext context)
         {
@@ -35,8 +39,9 @@ namespace EvaluationSeries.Services.Actors.Services
                 }
                 return new GetActorsResponse() { Actors = { actorsAdd } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new GetActorsResponse() { };
             }
         }
@@ -50,8 +55,9 @@ namespace EvaluationSeries.Services.Actors.Services
                 ActorAdd act = _mapper.Map<Actor, ActorAdd>(actor);
                 return new GetActorByIdResponse() { Actor = act };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new GetActorByIdResponse() { Actor = null };
             }
         }
@@ -65,8 +71,9 @@ namespace EvaluationSeries.Services.Actors.Services
                 return response ? new ActorsMessageResponse() { Poruka = "Uspesno dodato", Signal = true } :
                     new ActorsMessageResponse() { Poruka = "Neuspesno dodato", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new ActorsMessageResponse() { Poruka = "Doslo je do greske", Signal = false };
             }
 
@@ -80,8 +87,9 @@ namespace EvaluationSeries.Services.Actors.Services
                 return response ? new ActorsMessageResponse() { Poruka = "Uspesno izmenjeno", Signal = true } :
                     new ActorsMessageResponse() { Poruka = "Neuspesno izmenjeno", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new ActorsMessageResponse() { Poruka = "Doslo je do greske", Signal = false };
             }
         }
@@ -93,8 +101,9 @@ namespace EvaluationSeries.Services.Actors.Services
                 return response ? new ActorsMessageResponse() { Poruka = "Uspesno obrisano", Signal = true } :
                     new ActorsMessageResponse() { Poruka = "Neuspesno obrisano", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new ActorsMessageResponse() { Poruka = "Doslo je do greske", Signal = false };
             }
         }

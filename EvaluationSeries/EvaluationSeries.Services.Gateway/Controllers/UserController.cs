@@ -19,7 +19,6 @@ namespace EvaluationSeries.Services.Gateway.Controllers
 {
     [Route("gateway/users")]
     [ApiController]
-    [Authorize]
     public class UserController : ControllerBase
     {
         private IUserServicesGateway _user;
@@ -55,7 +54,7 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         }
         [HttpPost("aut")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Actor>>> Authentication([FromBody] AuthenticateRequest request)
+        public async Task<ActionResult<IEnumerable<User>>> Authentication([FromBody] AuthenticateRequest request)
         {
             var response = await _user.Authenticatiion(request.Username, request.Password);
             if (response is null) return NotFound();

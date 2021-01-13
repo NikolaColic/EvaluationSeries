@@ -26,7 +26,7 @@ namespace EvaluationSeries.Services.Actors.Repository
             }
             catch (Exception)
             {
-                return false; 
+                throw; 
             }
         }
 
@@ -42,7 +42,7 @@ namespace EvaluationSeries.Services.Actors.Repository
             }
             catch (Exception)
             {
-                return false; 
+                throw; 
             }
 
         }
@@ -56,7 +56,7 @@ namespace EvaluationSeries.Services.Actors.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
                 
         }
@@ -70,7 +70,7 @@ namespace EvaluationSeries.Services.Actors.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -87,7 +87,7 @@ namespace EvaluationSeries.Services.Actors.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
     }

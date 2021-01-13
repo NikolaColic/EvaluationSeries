@@ -28,7 +28,7 @@ namespace EvaluationSeries.Services.Authentication.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
 
         }
@@ -43,9 +43,9 @@ namespace EvaluationSeries.Services.Authentication.Repository
                 if (user is null) return null;
                 return user;
             }
-            catch (Exception)
+            catch (Exception )
             {
-                return null;
+                throw ;
             }
         }
 
@@ -62,7 +62,7 @@ namespace EvaluationSeries.Services.Authentication.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -77,7 +77,7 @@ namespace EvaluationSeries.Services.Authentication.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
         public async Task<User> GetUserById(int id)
@@ -91,7 +91,7 @@ namespace EvaluationSeries.Services.Authentication.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -112,7 +112,7 @@ namespace EvaluationSeries.Services.Authentication.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
     }

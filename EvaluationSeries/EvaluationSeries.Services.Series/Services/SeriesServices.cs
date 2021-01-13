@@ -6,6 +6,7 @@ using EvaluationSeries.Services.Series.Models;
 using EvaluationSeries.Services.Series.Repository;
 using Grpc.Core;
 using Grpc.Net.Client;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +19,18 @@ namespace EvaluationSeries.Services.Series.Services
     {
         private ISeriesRepository _series;
         private IActorServices _actor;
+        private readonly ILogger<SeriesServices> _logger;
         private IActorRepository _actorRepository;
         private IMapper _mapper;
 
         public SeriesServices(ISeriesRepository series, IActorRepository actorRepository,
-            IMapper mapper, IActorServices actor)
+            IMapper mapper, IActorServices actor, ILogger<SeriesServices> logger)
         {
             this._actorRepository = actorRepository;
             this._series = series;
             this._mapper = mapper;
             this._actor = actor;
-
+            this._logger = logger;
         }
         public override async Task<GetSeriesResponse> GetAllSeries(SeriesEmpty request, ServerCallContext context)
         {
@@ -44,8 +46,9 @@ namespace EvaluationSeries.Services.Series.Services
                 });
                 return new GetSeriesResponse() { Series = { seriesFull }, Signal = true };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new GetSeriesResponse() { Signal = false };
             }
 
@@ -59,8 +62,9 @@ namespace EvaluationSeries.Services.Series.Services
                 var seriesFull = _mapper.Map<Series2, SeriesFull>(series);
                 return new GetSeriesByIdResponse() { Series = seriesFull, Signal = true };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new GetSeriesByIdResponse() { Series = null, Signal = false };
             }
 
@@ -75,8 +79,9 @@ namespace EvaluationSeries.Services.Series.Services
                 return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno sacuvano" } :
                     new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno sacuvnao" };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new SeriesMessageResponse() { Signal = false, Poruka = "Greska" };
             }
         }
@@ -89,9 +94,10 @@ namespace EvaluationSeries.Services.Series.Services
                 return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno izmenjeno" } :
                     new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno azurirano" };
             }
-            catch (Exception)
+            catch (Exception e)
             {
-               return new SeriesMessageResponse() { Signal = false, Poruka = "Greska" };
+                _logger.LogError(e, "ERROR");
+                return new SeriesMessageResponse() { Signal = false, Poruka = "Greska" };
             }
         }
         public override async Task<SeriesMessageResponse> DeleteSeries(SeriesId request, ServerCallContext context)
@@ -102,8 +108,9 @@ namespace EvaluationSeries.Services.Series.Services
                 return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno obrisano" } :
                         new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno obrisano" };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new SeriesMessageResponse() { Signal = false, Poruka = "Greska" };
             }
 
@@ -126,8 +133,9 @@ namespace EvaluationSeries.Services.Series.Services
                 });
                 return new GetRolesResponse() { Roles = { rolesAdd }, Signal = true };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new GetRolesResponse() { Signal = false };
             }
 
@@ -142,8 +150,9 @@ namespace EvaluationSeries.Services.Series.Services
                 return response ? new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true }
                 : new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new SeriesMessageResponse() { Poruka = "Greska", Signal = false };
             }
 
@@ -156,8 +165,9 @@ namespace EvaluationSeries.Services.Series.Services
                 return response ? new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true }
                     : new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new SeriesMessageResponse() { Poruka = "Greska", Signal = false };
             }
 
@@ -177,8 +187,9 @@ namespace EvaluationSeries.Services.Series.Services
                 });
                 return new GetActorsSeriesResponse() { Actors = { actors } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new GetActorsSeriesResponse() { };
             }
         }
@@ -196,8 +207,9 @@ namespace EvaluationSeries.Services.Series.Services
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
         }
@@ -212,14 +224,20 @@ namespace EvaluationSeries.Services.Series.Services
 
                 var response = await _actor.PutActor(actor);
                 if (!response) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-
+                //nije ovde 29id i zato puca kod 
                 var actorSeries = _mapper.Map<ActorCreate, Actor>(actor);
+                var actors = await _actorRepository.GetAllActors();
+                var actorOne = actors.SingleOrDefault((el) => el.Name == actorUpdate.Name && el.Surname == actorUpdate.Surname);
+                actorSeries.ActorId = actorOne.ActorId;
+                    
+                
                 if (await _actorRepository.UpdateActor(actorUpdate, actorSeries)) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
         }
@@ -237,8 +255,9 @@ namespace EvaluationSeries.Services.Series.Services
                 if (await _actorRepository.DeleteActor(actorDelete)) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
         }
@@ -258,8 +277,9 @@ namespace EvaluationSeries.Services.Series.Services
                 });
                 return new GetCountryResponse() { Countries = { full } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 List<CountryFull> full = null;
                 return new GetCountryResponse() { Countries = { full } };
             }
@@ -278,8 +298,9 @@ namespace EvaluationSeries.Services.Series.Services
                 });
                 return new GetGenresResponse() { Genres = { full } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return new GetGenresResponse() {};
             }
         }
@@ -298,8 +319,9 @@ namespace EvaluationSeries.Services.Series.Services
                 });
                 return new GetRolesResponse() { Roles = { full } };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 List<RoleAdd> full = null;
                 return new GetRolesResponse() { Roles = { full } };
             }

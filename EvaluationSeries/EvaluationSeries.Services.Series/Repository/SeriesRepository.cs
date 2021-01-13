@@ -28,7 +28,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
 
         }
@@ -53,7 +53,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
 
         }
@@ -71,7 +71,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
         private async Task<Series2> SetObjects(Series2 s)
@@ -87,7 +87,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -100,7 +100,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -113,7 +113,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -131,7 +131,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
 
         }
@@ -142,13 +142,19 @@ namespace EvaluationSeries.Services.Series.Repository
             {
                 var series = await GetSeriesById(id);
                 if (series is null) return false;
+
+                var roles = await _db.Role.Where((el) => el.Series.Id == id).ToListAsync();
+                foreach(var role in roles)
+                {
+                    _db.Entry(role).State = EntityState.Deleted;
+                }
                 _db.Entry(series).State = EntityState.Deleted;
                 await _db.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
             {
-                return false; 
+                throw;
             }
 
         }
@@ -165,7 +171,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -181,7 +187,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -202,7 +208,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
        
@@ -221,7 +227,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -234,7 +240,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -247,7 +253,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -265,7 +271,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
 
         }

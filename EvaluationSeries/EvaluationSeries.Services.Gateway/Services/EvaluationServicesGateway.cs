@@ -3,6 +3,7 @@ using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Gateway.Entities;
 using EvaluationSeries.Services.Gateway.Models;
 using Grpc.Net.Client;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace EvaluationSeries.Services.Gateway.Services
         private EvaluationGrpc.EvaluationGrpcClient _evaluation;
 
         private IMapper _mapper;
-        public EvaluationServicesGateway(IMapper mapper)
+        private readonly ILogger<EvaluationServicesGateway> _logger;
+
+        public EvaluationServicesGateway(IMapper mapper, ILogger<EvaluationServicesGateway> logger)
         {
             var httpHandler = new HttpClientHandler();
             httpHandler.ServerCertificateCustomValidationCallback =
@@ -24,6 +27,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             var channel = GrpcChannel.ForAddress("https://localhost:5003");
             this._evaluation = new EvaluationGrpc.EvaluationGrpcClient(channel);
             _mapper = mapper;
+            this._logger = logger;
         }
         public async Task<bool> AddEvaluation(EvaluationCreate evaluationCreate)
         {
@@ -48,8 +52,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response2 = await _evaluation.PostMarksAsync(new MarksResponse() { Marks = { marks } });
                 return response2.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
 
@@ -63,8 +68,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.PostSeriesAsync(seriesAdd);
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -77,8 +83,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.PostUserAsync(userAdd);
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -90,8 +97,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.DeleteEvaluationAsync(new EvaluationAddId() { Id = id });
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -103,8 +111,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.DeleteMarksAsync(new EvaluationAddId() { Id = evaluationId });
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -117,8 +126,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.DeleteSeriesAsync(seriesAdd);
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -131,8 +141,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.DeleteUserAsync(userAdd);
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -151,8 +162,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 });
                 return criterions;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return null;
             }
         }
@@ -171,8 +183,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 });
                 return evaluations;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return null;
             }
         }
@@ -191,8 +204,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 });
                 return marks;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return null;
             }
         }
@@ -206,8 +220,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var evaluation = _mapper.Map<EvaluationAdd, Evaluation>(response);
                 return evaluation;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return null;
             }
         }
@@ -225,8 +240,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.PutMarksAsync(new MarksResponse() { Marks = { marksAdd } });
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -240,8 +256,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.PutSeriesAsync(new SeriesEvaluationUpdate() { SeriesAdd = seriesAdd, SeriesUpdate = seriesUpdate});
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }
@@ -256,8 +273,9 @@ namespace EvaluationSeries.Services.Gateway.Services
                 var response = await _evaluation.PutUserAsync(new UserEvaluationUpdate() { UserAdd = userAdd, UserUpdate = userUpd});
                 return response.Signal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e, "ERROR");
                 return false;
             }
         }

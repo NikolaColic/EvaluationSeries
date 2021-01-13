@@ -85,13 +85,6 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_UserAuthentication,
         __Marshaller_UserAuthenticationResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.UserEmpty, global::EvaluationSeries.Grpc.UserMessageResponse> __Method_Save = new grpc::Method<global::EvaluationSeries.Grpc.UserEmpty, global::EvaluationSeries.Grpc.UserMessageResponse>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "Save",
-        __Marshaller_UserEmpty,
-        __Marshaller_UserMessageResponse);
-
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -200,22 +193,6 @@ namespace EvaluationSeries.Grpc {
       public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.UserAuthenticationResponse> AuthenticationAsync(global::EvaluationSeries.Grpc.UserAuthentication request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Authentication, null, options, request);
-      }
-      public virtual global::EvaluationSeries.Grpc.UserMessageResponse Save(global::EvaluationSeries.Grpc.UserEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return Save(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual global::EvaluationSeries.Grpc.UserMessageResponse Save(global::EvaluationSeries.Grpc.UserEmpty request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_Save, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.UserMessageResponse> SaveAsync(global::EvaluationSeries.Grpc.UserEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return SaveAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.UserMessageResponse> SaveAsync(global::EvaluationSeries.Grpc.UserEmpty request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_Save, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override UserGrpcClient NewInstance(ClientBaseConfiguration configuration)

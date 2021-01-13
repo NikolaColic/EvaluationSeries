@@ -27,12 +27,23 @@ namespace EvaluationSeries.Services.Gateway
         {
             Configuration = configuration;
         }
-
+        readonly string cors= "Policy";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(cors,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -91,6 +102,8 @@ namespace EvaluationSeries.Services.Gateway
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(cors);
+
             app.UseAuthentication();
 
             app.UseAuthorization();

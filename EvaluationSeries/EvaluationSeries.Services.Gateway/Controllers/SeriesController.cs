@@ -16,7 +16,6 @@ namespace EvaluationSeries.Services.Gateway.Controllers
 {
     [Route("gateway/series")]
     [ApiController]
-    [Authorize]
     public class SeriesController : ControllerBase
     {
         private ISeriesServicesGateway _series;
@@ -94,10 +93,13 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         }
         
         [HttpPost("{id}/roles")]
-        public async Task<ActionResult<IEnumerable<Role>>> AddRole(int id, [FromBody] Role role)
-        {
-            var response = await _series.AddRole(role);
-            if (!response ) return NotFound();
+        public async Task<ActionResult<IEnumerable<Role>>> AddRole(int id, [FromBody] List<Role> roles)
+        {   
+            foreach(var role in roles)
+            {
+                var response = await _series.AddRole(role);
+                if (!response ) return NotFound();
+            }
             return RedirectToRoute("GetRoles", new { id = $"{id}" });
         }
 

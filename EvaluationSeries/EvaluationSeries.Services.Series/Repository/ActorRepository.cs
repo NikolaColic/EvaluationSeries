@@ -26,7 +26,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -43,7 +43,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -56,7 +56,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -69,7 +69,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -88,7 +88,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return false; 
+                throw; 
             }
         }
         private async Task<Actor> GetActorByName(string name, string surname)
@@ -100,7 +100,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
     }
