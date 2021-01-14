@@ -1,5 +1,4 @@
 ﻿using EvaluationSeries.Services.Series.Entities;
-using EvaluationSeries.Services.Series.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace EvaluationSeries.Services.Series.Repository
         Task<IEnumerable<Actor>> GetAllActors();
         Task<Actor> GetActorById(int id);
         Task<bool> AddActor(Actor a);
-        Task<bool> UpdateActor(ActorCreate oldActor,Actor a);
-        Task<bool> DeleteActor(ActorCreate oldActor);
+        Task<bool> UpdateActor(Actor oldActor,Actor a);
+        Task<bool> DeleteActor(Actor oldActor);
     }
 }

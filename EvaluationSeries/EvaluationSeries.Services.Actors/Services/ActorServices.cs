@@ -30,7 +30,7 @@ namespace EvaluationSeries.Services.Actors.Services
             try
             {
                 var actors = await _actor.GetAll();
-                if (actors is null) return new GetActorsResponse() { };
+                if (actors is null) throw new Exception("Neuspesno uzeti glumci!");
                 List<ActorAdd> actorsAdd = new List<ActorAdd>();
                 foreach (var actor in actors)
                 {
@@ -51,7 +51,7 @@ namespace EvaluationSeries.Services.Actors.Services
             try
             {
                 var actor = await _actor.GetActorId(actorId.Id);
-                if (actor is null) return new GetActorByIdResponse() { };
+                if (actor is null) throw new Exception("Ne moze pronaci glumca");
                 ActorAdd act = _mapper.Map<Actor, ActorAdd>(actor);
                 return new GetActorByIdResponse() { Actor = act };
             }
@@ -68,8 +68,8 @@ namespace EvaluationSeries.Services.Actors.Services
             {
                 var actor = _mapper.Map<ActorAdd, Actor>(request);
                 var response = await _actor.AddActor(actor);
-                return response ? new ActorsMessageResponse() { Poruka = "Uspesno dodato", Signal = true } :
-                    new ActorsMessageResponse() { Poruka = "Neuspesno dodato", Signal = false };
+                if (!response) throw new Exception("Ne moze da doda glumca");
+                return new ActorsMessageResponse() { Poruka = "Uspesno dodato", Signal = true };
             }
             catch (Exception e)
             {
@@ -84,8 +84,8 @@ namespace EvaluationSeries.Services.Actors.Services
             {
                 var actor = _mapper.Map<ActorAdd, Actor>(request);
                 var response = await _actor.UpdateActor(actor);
-                return response ? new ActorsMessageResponse() { Poruka = "Uspesno izmenjeno", Signal = true } :
-                    new ActorsMessageResponse() { Poruka = "Neuspesno izmenjeno", Signal = false };
+                if (!response) throw new Exception("Ne moze da doda glumca");
+                return new ActorsMessageResponse() { Poruka = "Uspesno izmenjeno", Signal = true };
             }
             catch (Exception e)
             {
@@ -98,8 +98,8 @@ namespace EvaluationSeries.Services.Actors.Services
             try
             {
                 var response = await _actor.DeleteActor(request.Id);
-                return response ? new ActorsMessageResponse() { Poruka = "Uspesno obrisano", Signal = true } :
-                    new ActorsMessageResponse() { Poruka = "Neuspesno obrisano", Signal = false };
+                if (!response) throw new Exception("Ne moze da obrise glumca");
+                return new ActorsMessageResponse() { Poruka = "Uspesno obrisano", Signal = true };
             }
             catch (Exception e)
             {

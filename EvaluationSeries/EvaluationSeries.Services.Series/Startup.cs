@@ -35,10 +35,8 @@ namespace EvaluationSeries.Services.Series
             services.AddControllers();
             services.AddScoped<ISeriesRepository, SeriesRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
-            services.AddScoped<IActorServices, ActorServices>();
             services.AddGrpc();
             services.AddAutoMapper(typeof(SeriesProfile));
-            services.AddGrpcClient<ActorsGrpc.ActorsGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
             services.AddDbContext<SeriesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
         }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Series.Entities;
-using EvaluationSeries.Services.Series.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,11 +42,6 @@ namespace EvaluationSeries.Services.Series.Help
 
             CreateMap<ActorSeries, Actor>();
             CreateMap<Actor, ActorSeries>();
-            CreateMap<ActorCreate, ActorAddSeries>();
-            CreateMap<ActorAddSeries, ActorCreate>();
-            CreateMap<ActorCreate, Actor>();
-            CreateMap<ActorAdd, ActorCreate>();
-            CreateMap<ActorCreate, ActorAdd>();
             CreateMap<Country, CountryFull>();
             CreateMap<Genre, GenreFull>(); 
 

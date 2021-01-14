@@ -70,6 +70,7 @@ namespace EvaluationSeries.Services.Authentication.Repository
         {
             try
             {
+                return null;
                 var users = await _db.User
                         .Include((u) => u.Country)
                         .ToListAsync();

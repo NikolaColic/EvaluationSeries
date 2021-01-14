@@ -43,28 +43,26 @@ namespace EvaluationSeries.Grpc {
             "dWxsEg4KBnNpZ25hbBgCIAEoCCI7ChBHZXRSb2xlc1Jlc3BvbnNlEhcKBVJv",
             "bGVzGAEgAygLMgguUm9sZUFkZBIOCgZzaWduYWwYAiABKAgiPQoLQWN0b3JT",
             "ZXJpZXMSDwoHQWN0b3JJZBgBIAEoBRIMCgROYW1lGAIgASgJEg8KB1N1cm5h",
-            "bWUYAyABKAkidgoOQWN0b3JBZGRTZXJpZXMSDwoHQWN0b3JJZBgBIAEoBRIM",
-            "CgROYW1lGAIgASgJEg8KB1N1cm5hbWUYAyABKAkSEQoJQmlvZ3JhcGh5GAQg",
-            "ASgJEg8KB1dpa2lVcmwYBSABKAkSEAoISW1hZ2VVcmwYBiABKAkiOgoXR2V0",
-            "QWN0b3JzU2VyaWVzUmVzcG9uc2USHwoGQWN0b3JzGAEgAygLMg8uQWN0b3JB",
-            "ZGRTZXJpZXMiLwoRR2V0R2VucmVzUmVzcG9uc2USGgoGR2VucmVzGAEgAygL",
-            "MgouR2VucmVGdWxsIjUKEkdldENvdW50cnlSZXNwb25zZRIfCglDb3VudHJp",
-            "ZXMYASADKAsyDC5Db3VudHJ5RnVsbDK3BgoKU2VyaWVzR3JwYxIyCgxHZXRB",
-            "bGxTZXJpZXMSDC5TZXJpZXNFbXB0eRoSLkdldFNlcmllc1Jlc3BvbnNlIgAS",
-            "MwoKUG9zdFNlcmllcxILLlNlcmllc0Z1bGwaFi5TZXJpZXNNZXNzYWdlUmVz",
-            "cG9uc2UiABIyCglQdXRTZXJpZXMSCy5TZXJpZXNGdWxsGhYuU2VyaWVzTWVz",
-            "c2FnZVJlc3BvbnNlIgASMwoMRGVsZXRlU2VyaWVzEgkuU2VyaWVzSWQaFi5T",
-            "ZXJpZXNNZXNzYWdlUmVzcG9uc2UiABI0Cg1HZXRTZXJpZXNCeUlkEgkuU2Vy",
-            "aWVzSWQaFi5HZXRTZXJpZXNCeUlkUmVzcG9uc2UiABIwCg5HZXJSb2xlc1Nl",
-            "cmllcxIJLlNlcmllc0lkGhEuR2V0Um9sZXNSZXNwb25zZSIAEi4KCFBvc3RS",
-            "b2xlEgguUm9sZUFkZBoWLlNlcmllc01lc3NhZ2VSZXNwb25zZSIAEjUKCkRl",
-            "bGV0ZVJvbGUSDS5TZXJpZXNSb2xlSWQaFi5TZXJpZXNNZXNzYWdlUmVzcG9u",
-            "c2UiABI8Cg9Qb3N0QWN0b3JTZXJpZXMSDy5BY3RvckFkZFNlcmllcxoWLlNl",
-            "cmllc01lc3NhZ2VSZXNwb25zZSIAEjsKDlB1dEFjdG9yU2VyaWVzEg8uQWN0",
-            "b3JBZGRTZXJpZXMaFi5TZXJpZXNNZXNzYWdlUmVzcG9uc2UiABI4ChFEZWxl",
-            "dGVBY3RvclNlcmllcxIJLlNlcmllc0lkGhYuU2VyaWVzTWVzc2FnZVJlc3Bv",
-            "bnNlIgASOAoMR2V0QWxsQWN0b3JzEgwuU2VyaWVzRW1wdHkaGC5HZXRBY3Rv",
-            "cnNTZXJpZXNSZXNwb25zZSIAEjEKC0dldEFsbEdlbnJlEgwuU2VyaWVzRW1w",
+            "bWUYAyABKAkiVgoRQWN0b3JTZXJpZXNVcGRhdGUSHgoIQWN0b3JPbGQYASAB",
+            "KAsyDC5BY3RvclNlcmllcxIhCgtBY3RvclVwZGF0ZRgCIAEoCzIMLkFjdG9y",
+            "U2VyaWVzIjcKF0dldEFjdG9yc1Nlcmllc1Jlc3BvbnNlEhwKBkFjdG9ycxgB",
+            "IAMoCzIMLkFjdG9yU2VyaWVzIi8KEUdldEdlbnJlc1Jlc3BvbnNlEhoKBkdl",
+            "bnJlcxgBIAMoCzIKLkdlbnJlRnVsbCI1ChJHZXRDb3VudHJ5UmVzcG9uc2US",
+            "HwoJQ291bnRyaWVzGAEgAygLMgwuQ291bnRyeUZ1bGwygAYKClNlcmllc0dy",
+            "cGMSMgoMR2V0QWxsU2VyaWVzEgwuU2VyaWVzRW1wdHkaEi5HZXRTZXJpZXNS",
+            "ZXNwb25zZSIAEjMKClBvc3RTZXJpZXMSCy5TZXJpZXNGdWxsGhYuU2VyaWVz",
+            "TWVzc2FnZVJlc3BvbnNlIgASMgoJUHV0U2VyaWVzEgsuU2VyaWVzRnVsbBoW",
+            "LlNlcmllc01lc3NhZ2VSZXNwb25zZSIAEjMKDERlbGV0ZVNlcmllcxIJLlNl",
+            "cmllc0lkGhYuU2VyaWVzTWVzc2FnZVJlc3BvbnNlIgASNAoNR2V0U2VyaWVz",
+            "QnlJZBIJLlNlcmllc0lkGhYuR2V0U2VyaWVzQnlJZFJlc3BvbnNlIgASMAoO",
+            "R2VyUm9sZXNTZXJpZXMSCS5TZXJpZXNJZBoRLkdldFJvbGVzUmVzcG9uc2Ui",
+            "ABIuCghQb3N0Um9sZRIILlJvbGVBZGQaFi5TZXJpZXNNZXNzYWdlUmVzcG9u",
+            "c2UiABI1CgpEZWxldGVSb2xlEg0uU2VyaWVzUm9sZUlkGhYuU2VyaWVzTWVz",
+            "c2FnZVJlc3BvbnNlIgASOQoPUG9zdEFjdG9yU2VyaWVzEgwuQWN0b3JTZXJp",
+            "ZXMaFi5TZXJpZXNNZXNzYWdlUmVzcG9uc2UiABI+Cg5QdXRBY3RvclNlcmll",
+            "cxISLkFjdG9yU2VyaWVzVXBkYXRlGhYuU2VyaWVzTWVzc2FnZVJlc3BvbnNl",
+            "IgASOwoRRGVsZXRlQWN0b3JTZXJpZXMSDC5BY3RvclNlcmllcxoWLlNlcmll",
+            "c01lc3NhZ2VSZXNwb25zZSIAEjEKC0dldEFsbEdlbnJlEgwuU2VyaWVzRW1w",
             "dHkaEi5HZXRHZW5yZXNSZXNwb25zZSIAEjQKDUdldEFsbENvdW50cnkSDC5T",
             "ZXJpZXNFbXB0eRoTLkdldENvdW50cnlSZXNwb25zZSIAEjAKC0dldEFsbFJv",
             "bGVzEgwuU2VyaWVzRW1wdHkaES5HZXRSb2xlc1Jlc3BvbnNlIgBCGKoCFUV2",
@@ -84,7 +82,7 @@ namespace EvaluationSeries.Grpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetSeriesByIdResponse), global::EvaluationSeries.Grpc.GetSeriesByIdResponse.Parser, new[]{ "Series", "Signal" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetRolesResponse), global::EvaluationSeries.Grpc.GetRolesResponse.Parser, new[]{ "Roles", "Signal" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.ActorSeries), global::EvaluationSeries.Grpc.ActorSeries.Parser, new[]{ "ActorId", "Name", "Surname" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.ActorAddSeries), global::EvaluationSeries.Grpc.ActorAddSeries.Parser, new[]{ "ActorId", "Name", "Surname", "Biography", "WikiUrl", "ImageUrl" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.ActorSeriesUpdate), global::EvaluationSeries.Grpc.ActorSeriesUpdate.Parser, new[]{ "ActorOld", "ActorUpdate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetActorsSeriesResponse), global::EvaluationSeries.Grpc.GetActorsSeriesResponse.Parser, new[]{ "Actors" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetGenresResponse), global::EvaluationSeries.Grpc.GetGenresResponse.Parser, new[]{ "Genres" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EvaluationSeries.Grpc.GetCountryResponse), global::EvaluationSeries.Grpc.GetCountryResponse.Parser, new[]{ "Countries" }, null, null, null, null)
@@ -2937,15 +2935,15 @@ namespace EvaluationSeries.Grpc {
 
   }
 
-  public sealed partial class ActorAddSeries : pb::IMessage<ActorAddSeries>
+  public sealed partial class ActorSeriesUpdate : pb::IMessage<ActorSeriesUpdate>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<ActorAddSeries> _parser = new pb::MessageParser<ActorAddSeries>(() => new ActorAddSeries());
+    private static readonly pb::MessageParser<ActorSeriesUpdate> _parser = new pb::MessageParser<ActorSeriesUpdate>(() => new ActorSeriesUpdate());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ActorAddSeries> Parser { get { return _parser; } }
+    public static pb::MessageParser<ActorSeriesUpdate> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2958,125 +2956,69 @@ namespace EvaluationSeries.Grpc {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ActorAddSeries() {
+    public ActorSeriesUpdate() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ActorAddSeries(ActorAddSeries other) : this() {
-      actorId_ = other.actorId_;
-      name_ = other.name_;
-      surname_ = other.surname_;
-      biography_ = other.biography_;
-      wikiUrl_ = other.wikiUrl_;
-      imageUrl_ = other.imageUrl_;
+    public ActorSeriesUpdate(ActorSeriesUpdate other) : this() {
+      actorOld_ = other.actorOld_ != null ? other.actorOld_.Clone() : null;
+      actorUpdate_ = other.actorUpdate_ != null ? other.actorUpdate_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ActorAddSeries Clone() {
-      return new ActorAddSeries(this);
+    public ActorSeriesUpdate Clone() {
+      return new ActorSeriesUpdate(this);
     }
 
-    /// <summary>Field number for the "ActorId" field.</summary>
-    public const int ActorIdFieldNumber = 1;
-    private int actorId_;
+    /// <summary>Field number for the "ActorOld" field.</summary>
+    public const int ActorOldFieldNumber = 1;
+    private global::EvaluationSeries.Grpc.ActorSeries actorOld_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int ActorId {
-      get { return actorId_; }
+    public global::EvaluationSeries.Grpc.ActorSeries ActorOld {
+      get { return actorOld_; }
       set {
-        actorId_ = value;
+        actorOld_ = value;
       }
     }
 
-    /// <summary>Field number for the "Name" field.</summary>
-    public const int NameFieldNumber = 2;
-    private string name_ = "";
+    /// <summary>Field number for the "ActorUpdate" field.</summary>
+    public const int ActorUpdateFieldNumber = 2;
+    private global::EvaluationSeries.Grpc.ActorSeries actorUpdate_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Name {
-      get { return name_; }
+    public global::EvaluationSeries.Grpc.ActorSeries ActorUpdate {
+      get { return actorUpdate_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "Surname" field.</summary>
-    public const int SurnameFieldNumber = 3;
-    private string surname_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Surname {
-      get { return surname_; }
-      set {
-        surname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "Biography" field.</summary>
-    public const int BiographyFieldNumber = 4;
-    private string biography_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Biography {
-      get { return biography_; }
-      set {
-        biography_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "WikiUrl" field.</summary>
-    public const int WikiUrlFieldNumber = 5;
-    private string wikiUrl_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string WikiUrl {
-      get { return wikiUrl_; }
-      set {
-        wikiUrl_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "ImageUrl" field.</summary>
-    public const int ImageUrlFieldNumber = 6;
-    private string imageUrl_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ImageUrl {
-      get { return imageUrl_; }
-      set {
-        imageUrl_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        actorUpdate_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as ActorAddSeries);
+      return Equals(other as ActorSeriesUpdate);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ActorAddSeries other) {
+    public bool Equals(ActorSeriesUpdate other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ActorId != other.ActorId) return false;
-      if (Name != other.Name) return false;
-      if (Surname != other.Surname) return false;
-      if (Biography != other.Biography) return false;
-      if (WikiUrl != other.WikiUrl) return false;
-      if (ImageUrl != other.ImageUrl) return false;
+      if (!object.Equals(ActorOld, other.ActorOld)) return false;
+      if (!object.Equals(ActorUpdate, other.ActorUpdate)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ActorId != 0) hash ^= ActorId.GetHashCode();
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Surname.Length != 0) hash ^= Surname.GetHashCode();
-      if (Biography.Length != 0) hash ^= Biography.GetHashCode();
-      if (WikiUrl.Length != 0) hash ^= WikiUrl.GetHashCode();
-      if (ImageUrl.Length != 0) hash ^= ImageUrl.GetHashCode();
+      if (actorOld_ != null) hash ^= ActorOld.GetHashCode();
+      if (actorUpdate_ != null) hash ^= ActorUpdate.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3093,29 +3035,13 @@ namespace EvaluationSeries.Grpc {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ActorId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(ActorId);
+      if (actorOld_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ActorOld);
       }
-      if (Name.Length != 0) {
+      if (actorUpdate_ != null) {
         output.WriteRawTag(18);
-        output.WriteString(Name);
-      }
-      if (Surname.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Surname);
-      }
-      if (Biography.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Biography);
-      }
-      if (WikiUrl.Length != 0) {
-        output.WriteRawTag(42);
-        output.WriteString(WikiUrl);
-      }
-      if (ImageUrl.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteString(ImageUrl);
+        output.WriteMessage(ActorUpdate);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3126,29 +3052,13 @@ namespace EvaluationSeries.Grpc {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ActorId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(ActorId);
+      if (actorOld_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ActorOld);
       }
-      if (Name.Length != 0) {
+      if (actorUpdate_ != null) {
         output.WriteRawTag(18);
-        output.WriteString(Name);
-      }
-      if (Surname.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Surname);
-      }
-      if (Biography.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Biography);
-      }
-      if (WikiUrl.Length != 0) {
-        output.WriteRawTag(42);
-        output.WriteString(WikiUrl);
-      }
-      if (ImageUrl.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteString(ImageUrl);
+        output.WriteMessage(ActorUpdate);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -3159,23 +3069,11 @@ namespace EvaluationSeries.Grpc {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ActorId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ActorId);
+      if (actorOld_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ActorOld);
       }
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (Surname.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Surname);
-      }
-      if (Biography.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Biography);
-      }
-      if (WikiUrl.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(WikiUrl);
-      }
-      if (ImageUrl.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ImageUrl);
+      if (actorUpdate_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ActorUpdate);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3184,27 +3082,21 @@ namespace EvaluationSeries.Grpc {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ActorAddSeries other) {
+    public void MergeFrom(ActorSeriesUpdate other) {
       if (other == null) {
         return;
       }
-      if (other.ActorId != 0) {
-        ActorId = other.ActorId;
+      if (other.actorOld_ != null) {
+        if (actorOld_ == null) {
+          ActorOld = new global::EvaluationSeries.Grpc.ActorSeries();
+        }
+        ActorOld.MergeFrom(other.ActorOld);
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      if (other.Surname.Length != 0) {
-        Surname = other.Surname;
-      }
-      if (other.Biography.Length != 0) {
-        Biography = other.Biography;
-      }
-      if (other.WikiUrl.Length != 0) {
-        WikiUrl = other.WikiUrl;
-      }
-      if (other.ImageUrl.Length != 0) {
-        ImageUrl = other.ImageUrl;
+      if (other.actorUpdate_ != null) {
+        if (actorUpdate_ == null) {
+          ActorUpdate = new global::EvaluationSeries.Grpc.ActorSeries();
+        }
+        ActorUpdate.MergeFrom(other.ActorUpdate);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3220,28 +3112,18 @@ namespace EvaluationSeries.Grpc {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            ActorId = input.ReadInt32();
+          case 10: {
+            if (actorOld_ == null) {
+              ActorOld = new global::EvaluationSeries.Grpc.ActorSeries();
+            }
+            input.ReadMessage(ActorOld);
             break;
           }
           case 18: {
-            Name = input.ReadString();
-            break;
-          }
-          case 26: {
-            Surname = input.ReadString();
-            break;
-          }
-          case 34: {
-            Biography = input.ReadString();
-            break;
-          }
-          case 42: {
-            WikiUrl = input.ReadString();
-            break;
-          }
-          case 50: {
-            ImageUrl = input.ReadString();
+            if (actorUpdate_ == null) {
+              ActorUpdate = new global::EvaluationSeries.Grpc.ActorSeries();
+            }
+            input.ReadMessage(ActorUpdate);
             break;
           }
         }
@@ -3258,28 +3140,18 @@ namespace EvaluationSeries.Grpc {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            ActorId = input.ReadInt32();
+          case 10: {
+            if (actorOld_ == null) {
+              ActorOld = new global::EvaluationSeries.Grpc.ActorSeries();
+            }
+            input.ReadMessage(ActorOld);
             break;
           }
           case 18: {
-            Name = input.ReadString();
-            break;
-          }
-          case 26: {
-            Surname = input.ReadString();
-            break;
-          }
-          case 34: {
-            Biography = input.ReadString();
-            break;
-          }
-          case 42: {
-            WikiUrl = input.ReadString();
-            break;
-          }
-          case 50: {
-            ImageUrl = input.ReadString();
+            if (actorUpdate_ == null) {
+              ActorUpdate = new global::EvaluationSeries.Grpc.ActorSeries();
+            }
+            input.ReadMessage(ActorUpdate);
             break;
           }
         }
@@ -3329,11 +3201,11 @@ namespace EvaluationSeries.Grpc {
 
     /// <summary>Field number for the "Actors" field.</summary>
     public const int ActorsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::EvaluationSeries.Grpc.ActorAddSeries> _repeated_actors_codec
-        = pb::FieldCodec.ForMessage(10, global::EvaluationSeries.Grpc.ActorAddSeries.Parser);
-    private readonly pbc::RepeatedField<global::EvaluationSeries.Grpc.ActorAddSeries> actors_ = new pbc::RepeatedField<global::EvaluationSeries.Grpc.ActorAddSeries>();
+    private static readonly pb::FieldCodec<global::EvaluationSeries.Grpc.ActorSeries> _repeated_actors_codec
+        = pb::FieldCodec.ForMessage(10, global::EvaluationSeries.Grpc.ActorSeries.Parser);
+    private readonly pbc::RepeatedField<global::EvaluationSeries.Grpc.ActorSeries> actors_ = new pbc::RepeatedField<global::EvaluationSeries.Grpc.ActorSeries>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::EvaluationSeries.Grpc.ActorAddSeries> Actors {
+    public pbc::RepeatedField<global::EvaluationSeries.Grpc.ActorSeries> Actors {
       get { return actors_; }
     }
 

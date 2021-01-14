@@ -33,7 +33,7 @@ namespace EvaluationSeries.Services.Gateway.Services
         {
             try
             {
-                ActorAddSeries actorAdd = _mapper.Map<Actor, ActorAddSeries>(actor);
+                ActorSeries actorAdd = _mapper.Map<Actor, ActorSeries>(actor);
                 var response = await _series.PostActorSeriesAsync(actorAdd);
                 return response.Signal;
             }
@@ -76,11 +76,12 @@ namespace EvaluationSeries.Services.Gateway.Services
             }
         }
 
-        public async Task<bool> DeleteActor(int actorId)
+        public async Task<bool> DeleteActor(Actor actor)
         {
             try
             {
-                var response = await _series.DeleteActorSeriesAsync(new SeriesId() { Id = actorId });
+                var actorAdd = _mapper.Map<Actor, ActorSeries>(actor);
+                var response = await _series.DeleteActorSeriesAsync(actorAdd);
                 return response.Signal;
             }
             catch (Exception e)
@@ -119,26 +120,7 @@ namespace EvaluationSeries.Services.Gateway.Services
             }
         }
 
-        public async Task<IEnumerable<Actor>> GetActors()
-        {
-            try
-            {
-                var response = await _series.GetAllActorsAsync(new SeriesEmpty());
-                if (response.Actors is null || response.Actors.Count == 0) return null;
-                List<Actor> actors = new List<Actor>();
-                response.Actors.ToList().ForEach((act) =>
-                {
-                    var actor = _mapper.Map<ActorAddSeries, Actor>(act);
-                    actors.Add(actor);
-                });
-                return actors;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "ERROR");
-                return null;
-            }
-        }
+        
 
         public async Task<IEnumerable<Country>> GetAllCountries()
         {
@@ -266,12 +248,14 @@ namespace EvaluationSeries.Services.Gateway.Services
             }
         }
 
-        public async Task<bool> UpdateActor(Actor actor)
+        public async Task<bool> UpdateActor(Actor actorOld, Actor actorUpdate)
         {
             try
             {
-                var actorAdd = _mapper.Map<Actor, ActorAddSeries>(actor);
-                var response = await _series.PutActorSeriesAsync(actorAdd);
+                var actor1 = _mapper.Map<Actor, ActorSeries>(actorOld);
+                var actor2 = _mapper.Map<Actor, ActorSeries>(actorUpdate);
+
+                var response = await _series.PutActorSeriesAsync(new ActorSeriesUpdate() { ActorOld = actor1,ActorUpdate = actor2});
                 return response.Signal;
             }
             catch (Exception e)

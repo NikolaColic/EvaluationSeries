@@ -21,9 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\actor.proto" GrpcServices="Client">
-      <Link>Protos\actor.proto</Link>
-    </Protobuf>
     <Protobuf Include="..\series.proto" GrpcServices="Server">
       <Link>Protos\series.proto</Link>
     </Protobuf>
@@ -31,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 

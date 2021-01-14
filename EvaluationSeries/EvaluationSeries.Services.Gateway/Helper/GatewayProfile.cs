@@ -43,9 +43,9 @@ namespace EvaluationSeries.Services.Gateway.Help
 
             CreateMap<ActorSeries, Actor>();
             CreateMap<Actor, ActorSeries>();
+            CreateMap<Actor, ActorAdd>();
+            CreateMap<ActorAdd, Actor>();
             CreateMap<Actor, ActorSeries>();
-            CreateMap<Actor, ActorAddSeries>();
-            CreateMap<ActorAddSeries, Actor>();
 
             CreateMap<Role, RoleAdd>()
                 .ForMember((dest) => dest.Actor,

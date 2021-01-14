@@ -13,10 +13,9 @@ service SeriesGrpc {
 	rpc GerRolesSeries(SeriesId) returns (GetRolesResponse) {}
 	rpc PostRole(RoleAdd) returns (SeriesMessageResponse) {}
 	rpc DeleteRole(SeriesRoleId) returns (SeriesMessageResponse) {}
-	rpc PostActorSeries(ActorAddSeries) returns (SeriesMessageResponse) {}
-	rpc PutActorSeries(ActorAddSeries) returns (SeriesMessageResponse) {}
-	rpc DeleteActorSeries(SeriesId) returns (SeriesMessageResponse) {}
-	rpc GetAllActors(SeriesEmpty) returns (GetActorsSeriesResponse) {}
+	rpc PostActorSeries(ActorSeries) returns (SeriesMessageResponse) {}
+	rpc PutActorSeries(ActorSeriesUpdate) returns (SeriesMessageResponse) {}
+	rpc DeleteActorSeries(ActorSeries) returns (SeriesMessageResponse) {}
 	rpc GetAllGenre(SeriesEmpty) returns (GetGenresResponse) {}
 	rpc GetAllCountry(SeriesEmpty) returns (GetCountryResponse) {}
 	rpc GetAllRoles(SeriesEmpty) returns (GetRolesResponse) {}
@@ -88,18 +87,13 @@ message ActorSeries {
     string Name = 2;
     string Surname =3;
 }
-
-message ActorAddSeries {
-	int32 ActorId =1;
-    string Name =2;
-    string Surname =3;
-    string Biography =4;
-    string WikiUrl =5;
-    string ImageUrl =6;
+message ActorSeriesUpdate {
+	ActorSeries ActorOld = 1;
+	ActorSeries ActorUpdate = 2;
 }
 
 message GetActorsSeriesResponse {
-	repeated ActorAddSeries Actors= 1;
+	repeated ActorSeries Actors= 1;
 }
 
 message GetGenresResponse {

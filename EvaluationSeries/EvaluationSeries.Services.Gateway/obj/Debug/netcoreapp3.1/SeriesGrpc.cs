@@ -51,8 +51,8 @@ namespace EvaluationSeries.Grpc {
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetRolesResponse> __Marshaller_GetRolesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetRolesResponse.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.RoleAdd> __Marshaller_RoleAdd = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.RoleAdd.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.SeriesRoleId> __Marshaller_SeriesRoleId = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.SeriesRoleId.Parser));
-    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.ActorAddSeries> __Marshaller_ActorAddSeries = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.ActorAddSeries.Parser));
-    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> __Marshaller_GetActorsSeriesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetActorsSeriesResponse.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.ActorSeries> __Marshaller_ActorSeries = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.ActorSeries.Parser));
+    static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.ActorSeriesUpdate> __Marshaller_ActorSeriesUpdate = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.ActorSeriesUpdate.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetGenresResponse> __Marshaller_GetGenresResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetGenresResponse.Parser));
     static readonly grpc::Marshaller<global::EvaluationSeries.Grpc.GetCountryResponse> __Marshaller_GetCountryResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::EvaluationSeries.Grpc.GetCountryResponse.Parser));
 
@@ -112,33 +112,26 @@ namespace EvaluationSeries.Grpc {
         __Marshaller_SeriesRoleId,
         __Marshaller_SeriesMessageResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_PostActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.ActorSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_PostActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.ActorSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "PostActorSeries",
-        __Marshaller_ActorAddSeries,
+        __Marshaller_ActorSeries,
         __Marshaller_SeriesMessageResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_PutActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.ActorAddSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.ActorSeriesUpdate, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_PutActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.ActorSeriesUpdate, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "PutActorSeries",
-        __Marshaller_ActorAddSeries,
+        __Marshaller_ActorSeriesUpdate,
         __Marshaller_SeriesMessageResponse);
 
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesId, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_DeleteActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.SeriesId, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
+    static readonly grpc::Method<global::EvaluationSeries.Grpc.ActorSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse> __Method_DeleteActorSeries = new grpc::Method<global::EvaluationSeries.Grpc.ActorSeries, global::EvaluationSeries.Grpc.SeriesMessageResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteActorSeries",
-        __Marshaller_SeriesId,
+        __Marshaller_ActorSeries,
         __Marshaller_SeriesMessageResponse);
-
-    static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetActorsSeriesResponse> __Method_GetAllActors = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetActorsSeriesResponse>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "GetAllActors",
-        __Marshaller_SeriesEmpty,
-        __Marshaller_GetActorsSeriesResponse);
 
     static readonly grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetGenresResponse> __Method_GetAllGenre = new grpc::Method<global::EvaluationSeries.Grpc.SeriesEmpty, global::EvaluationSeries.Grpc.GetGenresResponse>(
         grpc::MethodType.Unary,
@@ -318,69 +311,53 @@ namespace EvaluationSeries.Grpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteRole, null, options, request);
       }
-      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PostActorSeries(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PostActorSeries(global::EvaluationSeries.Grpc.ActorSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PostActorSeries(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PostActorSeries(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::CallOptions options)
+      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PostActorSeries(global::EvaluationSeries.Grpc.ActorSeries request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_PostActorSeries, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PostActorSeriesAsync(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PostActorSeriesAsync(global::EvaluationSeries.Grpc.ActorSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PostActorSeriesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PostActorSeriesAsync(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PostActorSeriesAsync(global::EvaluationSeries.Grpc.ActorSeries request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_PostActorSeries, null, options, request);
       }
-      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PutActorSeries(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PutActorSeries(global::EvaluationSeries.Grpc.ActorSeriesUpdate request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PutActorSeries(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PutActorSeries(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::CallOptions options)
+      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse PutActorSeries(global::EvaluationSeries.Grpc.ActorSeriesUpdate request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_PutActorSeries, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PutActorSeriesAsync(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PutActorSeriesAsync(global::EvaluationSeries.Grpc.ActorSeriesUpdate request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PutActorSeriesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PutActorSeriesAsync(global::EvaluationSeries.Grpc.ActorAddSeries request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> PutActorSeriesAsync(global::EvaluationSeries.Grpc.ActorSeriesUpdate request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_PutActorSeries, null, options, request);
       }
-      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse DeleteActorSeries(global::EvaluationSeries.Grpc.SeriesId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse DeleteActorSeries(global::EvaluationSeries.Grpc.ActorSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteActorSeries(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse DeleteActorSeries(global::EvaluationSeries.Grpc.SeriesId request, grpc::CallOptions options)
+      public virtual global::EvaluationSeries.Grpc.SeriesMessageResponse DeleteActorSeries(global::EvaluationSeries.Grpc.ActorSeries request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteActorSeries, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> DeleteActorSeriesAsync(global::EvaluationSeries.Grpc.SeriesId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> DeleteActorSeriesAsync(global::EvaluationSeries.Grpc.ActorSeries request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteActorSeriesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> DeleteActorSeriesAsync(global::EvaluationSeries.Grpc.SeriesId request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.SeriesMessageResponse> DeleteActorSeriesAsync(global::EvaluationSeries.Grpc.ActorSeries request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteActorSeries, null, options, request);
-      }
-      public virtual global::EvaluationSeries.Grpc.GetActorsSeriesResponse GetAllActors(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return GetAllActors(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual global::EvaluationSeries.Grpc.GetActorsSeriesResponse GetAllActors(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_GetAllActors, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> GetAllActorsAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return GetAllActorsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::EvaluationSeries.Grpc.GetActorsSeriesResponse> GetAllActorsAsync(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_GetAllActors, null, options, request);
       }
       public virtual global::EvaluationSeries.Grpc.GetGenresResponse GetAllGenre(global::EvaluationSeries.Grpc.SeriesEmpty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {

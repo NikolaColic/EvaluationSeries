@@ -85,9 +85,13 @@ namespace EvaluationSeries.Services.Gateway
             services.AddScoped<ISeriesServicesGateway, SeriesServicesGateway>();
             services.AddScoped<IUserServicesGateway, UserServicesGateway>();
             services.AddScoped<IEvaluationServicesGateway, EvaluationServicesGateway>();
+            services.AddScoped<IActorServicesGateway, ActorServicesGateway>();
+
             services.AddGrpcClient<UserGrpc.UserGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:User:Uri"]));
-            services.AddGrpcClient<SeriesGrpc.SeriesGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
+            services.AddGrpcClient<SeriesGrpc.SeriesGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Series:Uri"]));
             services.AddGrpcClient<EvaluationGrpc.EvaluationGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Evaluation:Uri"]));
+            services.AddGrpcClient<ActorsGrpc.ActorsGrpcClient>(o => o.Address = new Uri(Configuration["ApiConfigs:Actor:Uri"]));
+
 
         }
 

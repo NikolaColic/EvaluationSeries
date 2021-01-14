@@ -2,7 +2,6 @@
 using EvaluationSeries.Grpc;
 using EvaluationSeries.Services.Series.Entities;
 using EvaluationSeries.Services.Series.Help;
-using EvaluationSeries.Services.Series.Models;
 using EvaluationSeries.Services.Series.Repository;
 using Grpc.Core;
 using Grpc.Net.Client;
@@ -18,18 +17,16 @@ namespace EvaluationSeries.Services.Series.Services
     public class SeriesServices : SeriesGrpc.SeriesGrpcBase
     {
         private ISeriesRepository _series;
-        private IActorServices _actor;
         private readonly ILogger<SeriesServices> _logger;
         private IActorRepository _actorRepository;
         private IMapper _mapper;
 
         public SeriesServices(ISeriesRepository series, IActorRepository actorRepository,
-            IMapper mapper, IActorServices actor, ILogger<SeriesServices> logger)
+            IMapper mapper, ILogger<SeriesServices> logger)
         {
             this._actorRepository = actorRepository;
             this._series = series;
             this._mapper = mapper;
-            this._actor = actor;
             this._logger = logger;
         }
         public override async Task<GetSeriesResponse> GetAllSeries(SeriesEmpty request, ServerCallContext context)
@@ -37,7 +34,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var series = await _series.GetAllSeries();
-                if (series is null || series.Count() == 0) return new GetSeriesResponse() { Signal = false };
+                if (series is null || series.Count() == 0) throw new Exception("SeriesRep - GetSeries");
                 List<SeriesFull> seriesFull = new List<SeriesFull>();
                 series.ToList().ForEach((ser) =>
                 {
@@ -58,7 +55,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var series = await _series.GetSeriesById(request.Id);
-                if (series is null) return  new GetSeriesByIdResponse() { Series = null, Signal = false };
+                if (series is null) throw new Exception("SeriesRep - GetSeriesById");
                 var seriesFull = _mapper.Map<Series2, SeriesFull>(series);
                 return new GetSeriesByIdResponse() { Series = seriesFull, Signal = true };
             }
@@ -76,8 +73,8 @@ namespace EvaluationSeries.Services.Series.Services
             {
                 var series = _mapper.Map<SeriesFull, Series2>(request);
                 var response = await _series.AddSeries(series);
-                return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno sacuvano" } :
-                    new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno sacuvnao" };
+                if (!response) throw new Exception("SeriesRep - PostSeries");
+                return new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno sacuvano" };
             }
             catch (Exception e)
             {
@@ -91,8 +88,8 @@ namespace EvaluationSeries.Services.Series.Services
             {
                 var series = _mapper.Map<SeriesFull, Series2>(request);
                 var response = await _series.UpdateSeries(series);
-                return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno izmenjeno" } :
-                    new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno azurirano" };
+                if (!response) throw new Exception("SeriesRep - PostSeries");
+                return new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno izmenjeno" };
             }
             catch (Exception e)
             {
@@ -105,8 +102,8 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _series.DeleteSeries(request.Id);
-                return response ? new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno obrisano" } :
-                        new SeriesMessageResponse() { Signal = false, Poruka = "Neuspesno obrisano" };
+                if (!response) throw new Exception("SeriesRep - PostSeries");
+                return new SeriesMessageResponse() { Signal = true, Poruka = "Uspesno obrisano" };
             }
             catch (Exception e)
             {
@@ -121,7 +118,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var roles = await _series.GetRolesSeries(request.Id);
-                if (roles is null) return new GetRolesResponse() { Signal = false };
+                if (roles is null) throw new Exception("SeriesRep - GetRoles");
                 List<RoleAdd> rolesAdd = new List<RoleAdd>();
                 await Task.Run(() =>
                 {
@@ -147,8 +144,8 @@ namespace EvaluationSeries.Services.Series.Services
             {
                 var role = _mapper.Map<RoleAdd, Role>(request);
                 var response = await _series.AddRole(role.Series.Id, role);
-                return response ? new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true }
-                : new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
+                if (!response) throw new Exception("SeriesRep - PostRole");
+                return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
@@ -162,8 +159,8 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _series.DeleteRole(request.IdSeries, request.RoleId);
-                return response ? new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true }
-                    : new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
+                if (!response) throw new Exception("SeriesRep - DeleteRole");
+                return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
@@ -173,39 +170,14 @@ namespace EvaluationSeries.Services.Series.Services
 
         }
 
-        public override async Task<GetActorsSeriesResponse> GetAllActors(SeriesEmpty request, ServerCallContext context)
+        public override async Task<SeriesMessageResponse> PostActorSeries(ActorSeries request, ServerCallContext context)
         {
             try
             {
-                var response = await _actor.GetAll();
-                if (response is null || response.Count() ==0) return new GetActorsSeriesResponse() { };
-                var actors = new List<ActorAddSeries>();
-                response.ToList().ForEach((act) =>
-                {
-                    var nov = _mapper.Map<ActorCreate, ActorAddSeries>(act);
-                    actors.Add(nov);
-                });
-                return new GetActorsSeriesResponse() { Actors = { actors } };
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "ERROR");
-                return new GetActorsSeriesResponse() { };
-            }
-        }
-
-        public override async Task<SeriesMessageResponse> PostActorSeries(ActorAddSeries request, ServerCallContext context)
-        {
-            try
-            {
-                var actor = _mapper.Map<ActorAddSeries, ActorCreate>(request);
-                var response = await _actor.PostActor(actor);
-                if (!response) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-
-                var actorSeries = _mapper.Map<ActorCreate, Actor>(actor);
-                if (await _actorRepository.AddActor(actorSeries)) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
-                return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-
+                var actorSeries = _mapper.Map<ActorSeries, Actor>(request);
+                var response = await _actorRepository.AddActor(actorSeries);
+                if (!response) throw new Exception("SeriesRep - PostActorSeries");
+                return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
@@ -213,27 +185,15 @@ namespace EvaluationSeries.Services.Series.Services
                 return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
             }
         }
-        public override async Task<SeriesMessageResponse> PutActorSeries(ActorAddSeries request, ServerCallContext context)
+        public override async Task<SeriesMessageResponse> PutActorSeries(ActorSeriesUpdate request, ServerCallContext context)
         {
             try
             {
-                var actorUpdate = await _actor.GetActorById(request.ActorId);
-                if (actorUpdate is null) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-
-                var actor = _mapper.Map<ActorAddSeries, ActorCreate>(request);
-
-                var response = await _actor.PutActor(actor);
-                if (!response) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-                //nije ovde 29id i zato puca kod 
-                var actorSeries = _mapper.Map<ActorCreate, Actor>(actor);
-                var actors = await _actorRepository.GetAllActors();
-                var actorOne = actors.SingleOrDefault((el) => el.Name == actorUpdate.Name && el.Surname == actorUpdate.Surname);
-                actorSeries.ActorId = actorOne.ActorId;
-                    
-                
-                if (await _actorRepository.UpdateActor(actorUpdate, actorSeries)) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
-                return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-
+                var old = _mapper.Map<ActorSeries, Actor>(request.ActorOld);
+                var update = _mapper.Map<ActorSeries, Actor>(request.ActorUpdate);
+                var response = await _actorRepository.UpdateActor(old, update);
+                if (!response) throw new Exception("SeriesRep - PutActorSeries");
+                return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
@@ -242,18 +202,14 @@ namespace EvaluationSeries.Services.Series.Services
             }
         }
 
-        public override async Task<SeriesMessageResponse> DeleteActorSeries(SeriesId request, ServerCallContext context)
+        public override async Task<SeriesMessageResponse> DeleteActorSeries(ActorSeries request, ServerCallContext context)
         {
             try
             {
-                var actorDelete = await _actor.GetActorById(request.Id);
-                if (actorDelete is null) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-
-                var response = await _actor.DeleteActor(request.Id);
-                if (!response) return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
-
-                if (await _actorRepository.DeleteActor(actorDelete)) return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
-                return new SeriesMessageResponse() { Poruka = "Neuspesno", Signal = false };
+                var actor = _mapper.Map<ActorSeries, Actor>(request);
+                var response  = await _actorRepository.DeleteActor(actor);
+                if (!response) throw new Exception("SeriesRep - DeleteActorSeries");
+                return new SeriesMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
@@ -267,9 +223,8 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _series.GetAllCountries();
-                List<CountryFull> full = null;
-                if (response is null) return new GetCountryResponse() { Countries = { full } };
-                full = new List<CountryFull>();
+                if (response is null) throw new Exception("SeriesRep - GetAllRoles");
+                var full = new List<CountryFull>();
                 response.ToList().ForEach((country) =>
                 {
                     var coun = _mapper.Map<Country, CountryFull>(country);
@@ -289,7 +244,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _series.GetAllGenre();
-                if (response is null || response.Count() == 0) return new GetGenresResponse() {};
+                if (response is null || response.Count() == 0) throw new Exception("SeriesRep - GetAllGenre");
                 var full = new List<GenreFull>();
                 response.ToList().ForEach((genre) =>
                 {
@@ -310,7 +265,7 @@ namespace EvaluationSeries.Services.Series.Services
             try
             {
                 var response = await _series.GetAllRoles();
-                if (response is null || response.Count() ==0) return new GetRolesResponse() {};
+                if (response is null || response.Count() ==0) throw new Exception("SeriesRep - GetAllRoles");
                 var full = new List<RoleAdd>();
                 response.ToList().ForEach((role) =>
                 {

@@ -19,10 +19,12 @@ namespace EvaluationSeries.Services.Gateway.Controllers
     [ApiController]
     public class ActorController : ControllerBase
     {
-        private ISeriesServicesGateway _actor;
+        private ISeriesServicesGateway _series;
+        private IActorServicesGateway _actor;
 
-        public ActorController(ISeriesServicesGateway actor)
+        public ActorController(ISeriesServicesGateway series,IActorServicesGateway actor)
         {
+            this._series = series;
             this._actor = actor;
         }
 
@@ -39,7 +41,9 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<Actor>>> AddActor([FromBody] Actor actor)
         {
-            var response = await _actor.AddActor(actor);
+            var responseActor = await _actor.AddActor(actor);
+            if (!responseActor) return NotFound();
+            var response = await _series.AddActor(actor);
             if (response) return RedirectToRoute("GetActors");
             return NotFound();
         }
@@ -48,8 +52,14 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<Actor>>> UpdateActor(int id, [FromBody] Actor actor)
         {
+            var actorOld = await _actor.GetActorById(id);
+            if (actorOld is null) return NotFound();
             actor.ActorId = id;
-            var response = await _actor.UpdateActor(actor);
+
+            var response1 = await _actor.UpdateActor(actor);
+            if (!response1) return NotFound();
+
+            var response = await _series.UpdateActor(actorOld,actor);
             if (response) return RedirectToRoute("GetActors");
             return NotFound();
         }
@@ -57,7 +67,13 @@ namespace EvaluationSeries.Services.Gateway.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteActor(int id)
         {
-            var response = await _actor.DeleteActor(id);
+            var actorOld = await _actor.GetActorById(id);
+            if (actorOld is null) return NotFound();
+
+            var response1 = await _actor.DeleteActor(id);
+            if (!response1) return NotFound();
+
+            var response = await _series.DeleteActor(actorOld);
             if (response) return NoContent();
             return NotFound();
         }

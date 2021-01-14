@@ -28,8 +28,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
             try
             {
                 var response = await _evaluation.DeleteEvaluation(request.Id);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (!response) throw new Exception("Ne moze da obrise evaluaciju");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -42,8 +42,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
             try
             {
                 var response = await _evaluation.DeleteMarks(request.Id);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("Ne moze ocene da obrise");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -57,8 +57,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
             {
                 var series = _mapper.Map<SeriesEvaluationAdd, Series>(request);
                 var response = await _evaluation.DeleteSeries(series);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("Ne moze serija da obrise");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -72,7 +72,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
             {
                 var user = _mapper.Map<UserEvaluationAdd, User>(request);
                 var response = await _evaluation.DeleteUser(user);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
+                if (response) throw new Exception("Ne moze korisnika da obrise");
+                return new EvaluationMessageResponse() { Signal = true };
                 return new EvaluationMessageResponse() { Signal = false };
             }
             catch (Exception e)
@@ -87,8 +88,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
             {
                 var evaluation = _mapper.Map<EvaluationAdd, Evaluation2>(request);
                 var response = await _evaluation.PostEvaluation(evaluation);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("EvaluationRepository - PostEvaluation");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -102,8 +103,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
             {
                 var series = _mapper.Map<SeriesEvaluationAdd, Series>(request);
                 var response = await _evaluation.PostSeries(series);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("EvaluationRepository - PostSeries");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -122,8 +123,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
                     marks.Add(mark);
                 }
                 var response = await _evaluation.PostMarks(marks);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("EvaluationRep - PostMarks");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -137,8 +138,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
             {
                 var user = _mapper.Map<UserEvaluationAdd, User>(request);
                 var response = await _evaluation.PostUser(user);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("EvaluationRep - PostUser");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -154,8 +155,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 var series = _mapper.Map<SeriesEvaluationAdd, Series>(request.SeriesAdd);
                 var seriesUpdate = _mapper.Map<SeriesEvaluationAdd, Series>(request.SeriesUpdate);
                 var response = await _evaluation.PutSeries(series, seriesUpdate);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("EvaluationRep - PutSeries");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -174,8 +175,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
                     marks.Add(mark);
                 }
                 var response = await _evaluation.PutMarks(marks);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("EvaluationRep - PutMarks");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -191,8 +192,8 @@ namespace EvaluationSeries.Services.Evaluation.Services
                 var userUpdate = _mapper.Map<UserEvaluationAdd, User>(request.UserUpdate);
 
                 var response = await _evaluation.PutUser(userAdd, userUpdate);
-                if (response) return new EvaluationMessageResponse() { Signal = true };
-                return new EvaluationMessageResponse() { Signal = false };
+                if (response) throw new Exception("EvaluationRep - PutUser");
+                return new EvaluationMessageResponse() { Signal = true };
             }
             catch (Exception e)
             {
@@ -205,7 +206,7 @@ namespace EvaluationSeries.Services.Evaluation.Services
             try
             {
                 var response = await _evaluation.GetAllEvalutions();
-                if (response is null || response.Count() ==0) return new EvaluationsResponse() {  };
+                if (response is null || response.Count() == 0) throw new Exception("EvaluationR - GetEvaluations");
                 var evaluationsAdd = new List<EvaluationAdd>();
                 response.ToList().ForEach((evaluation) =>
                 {
@@ -225,7 +226,7 @@ namespace EvaluationSeries.Services.Evaluation.Services
             try
             {
                 var response = await _evaluation.GetAllCriterions();
-                if (response is null || response.Count() ==0) return new CriterionsResponse() { };
+                if (response is null || response.Count() ==0) throw new Exception("EvaluationR - GetCriteria");
                 var criterions = new List<CriterionAdd>();
                 response.ToList().ForEach((criterion) =>
                 {
@@ -245,7 +246,7 @@ namespace EvaluationSeries.Services.Evaluation.Services
             try
             {
                 var response = await _evaluation.GetAllMarks();
-                if (response is null || response.Count() ==0) return new MarksResponse() {  };
+                if (response is null || response.Count() == 0) throw new Exception("EvaluationR - GetMarks");
                 var marks = new List<MarkAdd>();
                 response.ToList().ForEach((mark) =>
                 {
@@ -266,9 +267,9 @@ namespace EvaluationSeries.Services.Evaluation.Services
             {
                 var response = await _evaluation.GetEvaluationById(request.Id);
                 EvaluationAdd evaluatioAdd = null;
-                if (response is null) return evaluatioAdd;
+                if (response is null) throw new Exception("EvaluationR - GetEvaluId");
                 var evaluation = _mapper.Map<Evaluation2, EvaluationAdd>(response);
-                return evaluation;
+                return evaluatioAdd;
             }
             catch (Exception e)
             {

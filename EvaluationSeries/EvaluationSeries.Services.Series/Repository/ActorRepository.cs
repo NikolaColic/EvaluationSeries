@@ -1,6 +1,5 @@
 ﻿using EvaluationSeries.Services.Series.Context;
 using EvaluationSeries.Services.Series.Entities;
-using EvaluationSeries.Services.Series.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
         }
 
-        public async Task<bool> DeleteActor(ActorCreate oldActor)
+        public async Task<bool> DeleteActor(Actor oldActor)
         {
             try
             {
@@ -73,7 +72,7 @@ namespace EvaluationSeries.Services.Series.Repository
             }
         }
 
-        public async Task<bool> UpdateActor(ActorCreate oldActor,Actor a)
+        public async Task<bool> UpdateActor(Actor oldActor,Actor a)
         {
             try
             {

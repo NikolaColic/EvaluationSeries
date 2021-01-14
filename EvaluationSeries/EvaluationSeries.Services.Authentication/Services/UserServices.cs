@@ -29,9 +29,8 @@ namespace EvaluationSeries.Services.Authentication.Services
         {
             try
             {
-                throw new Exception();
                 var response = await _user.GetAllUsers();
-                if (response is null || response.Count() == 0) return new UsersResponse() {};
+                if (response is null || response.Count() == 0) throw new Exception("Prazna lista");
                 var usersAdd = new List<UserAdd>();
                 response.ToList().ForEach((user) =>
                 {
@@ -43,7 +42,7 @@ namespace EvaluationSeries.Services.Authentication.Services
             catch (Exception e)
             {
                 _logger.LogError(e, "ERROR");
-                return new UsersResponse() {};
+                return new UsersResponse() { };
             }
         }
         public override async Task<UserAuthenticationResponse> Authentication(UserAuthentication request, ServerCallContext context)
@@ -51,7 +50,7 @@ namespace EvaluationSeries.Services.Authentication.Services
             try
             {
                 var response = await _user.Authentication(request.Username, request.Password);
-                if (response is null) return new UserAuthenticationResponse() { Signal = false, User = null };
+                if (response is null) throw new Exception("Nije pronasao korisnika!");
                 var user = _mapper.Map<User, UserAdd>(response);
                 return new UserAuthenticationResponse() { Signal = true, User = user };
             }
@@ -67,8 +66,8 @@ namespace EvaluationSeries.Services.Authentication.Services
             {
                 var user = _mapper.Map<UserAdd, User>(request);
                 var response = await _user.AddUser(user);
-                if (response) return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
-                return new UserMessageResponse() { Poruka = "Neuspesno", Signal = false };
+                if (!response) throw new Exception("Nije uspesno dodao korisnika");
+                return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
@@ -82,8 +81,8 @@ namespace EvaluationSeries.Services.Authentication.Services
             {
                 var user = _mapper.Map<UserAdd, User>(request);
                 var response = await _user.UpdateUser(user);
-                if (response) return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
-                return new UserMessageResponse() { Poruka = "Neuspesno", Signal = false };
+                if (response) throw new Exception("Neuspesna izmena");
+                return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
@@ -97,8 +96,8 @@ namespace EvaluationSeries.Services.Authentication.Services
             try
             {
                 var response = await _user.DeleteUser(request.Id);
-                if (response) return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
-                return new UserMessageResponse() { Poruka = "Neuspesno", Signal = false };
+                if (!response) throw new Exception("Nije uspeo da obrise korisnika!");
+                return new UserMessageResponse() { Poruka = "Uspesno", Signal = true };
             }
             catch (Exception e)
             {
